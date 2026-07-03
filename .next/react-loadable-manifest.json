@@ -1,0 +1,68 @@
+{
+  "app\\page.js -> @/components/CityReveal": {
+    "id": "app\\page.js -> @/components/CityReveal",
+    "files": [
+      "static/chunks/_app-pages-browser_components_CityReveal_jsx.js"
+    ]
+  },
+  "app\\page.js -> @/components/ColdBoot": {
+    "id": "app\\page.js -> @/components/ColdBoot",
+    "files": [
+      "static/chunks/_app-pages-browser_components_ColdBoot_jsx.js"
+    ]
+  },
+  "app\\page.js -> @/components/DecisionPhase": {
+    "id": "app\\page.js -> @/components/DecisionPhase",
+    "files": [
+      "static/chunks/_app-pages-browser_components_DecisionPhase_jsx.js"
+    ]
+  },
+  "app\\page.js -> @/components/LandingPage": {
+    "id": "app\\page.js -> @/components/LandingPage",
+    "files": [
+      "static/chunks/_app-pages-browser_components_LandingPage_jsx.js"
+    ]
+  },
+  "app\\page.js -> @/components/LoadingFlow": {
+    "id": "app\\page.js -> @/components/LoadingFlow",
+    "files": [
+      "static/chunks/_app-pages-browser_components_LoadingFlow_jsx.js"
+    ]
+  },
+  "app\\page.js -> @/components/MissionResult": {
+    "id": "app\\page.js -> @/components/MissionResult",
+    "files": [
+      "static/chunks/_app-pages-browser_components_MissionResult_jsx.js"
+    ]
+  },
+  "app\\page.js -> @/components/PoliceChaseEnergy": {
+    "id": "app\\page.js -> @/components/PoliceChaseEnergy",
+    "files": [
+      "static/chunks/_app-pages-browser_components_PoliceChaseEnergy_jsx.js"
+    ]
+  },
+  "app\\page.js -> @/components/WantedStars": {
+    "id": "app\\page.js -> @/components/WantedStars",
+    "files": [
+      "static/chunks/_app-pages-browser_components_WantedStars_jsx.js"
+    ]
+  },
+  "app\\page.js -> @/components/WarningScreen": {
+    "id": "app\\page.js -> @/components/WarningScreen",
+    "files": [
+      "static/chunks/_app-pages-browser_components_WarningScreen_jsx.js"
+    ]
+  },
+  "app\\page.js -> howler": {
+    "id": "app\\page.js -> howler",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_howler_dist_howler_js.js"
+    ]
+  },
+  "node_modules\\next\\dist\\client\\components\\react-dev-overlay\\internal\\helpers\\use-websocket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts": {
+    "id": "node_modules\\next\\dist\\client\\components\\react-dev-overlay\\internal\\helpers\\use-websocket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js"
+    ]
+  }
+}
