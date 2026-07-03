@@ -37,7 +37,7 @@ export default function LandingPage() {
             loop: true,
             volume: 0.4
         })
-        ambiance.play()
+        ambience.play()
 
         // HUD Time
         const updateTime = () => setTime(new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }))
@@ -65,7 +65,7 @@ export default function LandingPage() {
         return () => {
             clearInterval(tInterval)
             window.removeEventListener('keydown', handleKeyDown)
-            ambiance.stop()
+            ambience.stop()
         }
     }, [])
 
