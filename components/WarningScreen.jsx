@@ -6,30 +6,48 @@ export default function WarningScreen({ onComplete, sounds }) {
     const flashRef = useRef(null)
 
     useEffect(() => {
+        let triggered = false
+
+        const proceed = () => {
+            if (triggered) return
+            triggered = true
+
+            if (sounds?.ambience) {
+                sounds.ambience.loop(true)
+                sounds.ambience.play()
+            }
+
+            // Fast white flash
+            gsap.to(flashRef.current, {
+                opacity: 1,
+                duration: 0.08,
+                onComplete: () => {
+                    gsap.to(flashRef.current, {
+                        opacity: 0,
+                        duration: 0.15,
+                        onComplete,
+                    })
+                },
+            })
+        }
+
         const handleKey = (e) => {
             if (e.key === 'Enter') {
-                document.removeEventListener('keydown', handleKey)
-                if (sounds?.ambience) {
-                    sounds.ambience.loop(true)
-                    sounds.ambience.play()
-                }
-
-                // Fast white flash
-                gsap.to(flashRef.current, {
-                    opacity: 1,
-                    duration: 0.08,
-                    onComplete: () => {
-                        gsap.to(flashRef.current, {
-                            opacity: 0,
-                            duration: 0.15,
-                            onComplete,
-                        })
-                    },
-                })
+                proceed()
             }
         }
+
+        const handleClick = () => {
+            proceed()
+        }
+
         document.addEventListener('keydown', handleKey)
-        return () => document.removeEventListener('keydown', handleKey)
+        document.addEventListener('click', handleClick)
+
+        return () => {
+            document.removeEventListener('keydown', handleKey)
+            document.removeEventListener('click', handleClick)
+        }
     }, [onComplete, sounds])
 
     return (
@@ -43,10 +61,12 @@ export default function WarningScreen({ onComplete, sounds }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 zIndex: 100,
+                cursor: 'pointer',
             }}
         >
             <div className="noise-overlay" />
             <div
+                className="warning-content-container"
                 style={{
                     maxWidth: 740,
                     textAlign: 'center',
@@ -55,6 +75,7 @@ export default function WarningScreen({ onComplete, sounds }) {
                 }}
             >
                 <p
+                    className="warning-title"
                     style={{
                         fontFamily: 'ChaletComprime1960, sans-serif',
                         fontSize: '0.75rem',
@@ -70,7 +91,7 @@ export default function WarningScreen({ onComplete, sounds }) {
                     INSPIRED BY CINEMATIC OPEN-WORLD DESIGN
                 </p>
                 <p
-                    className="blink"
+                    className="blink warning-blink"
                     style={{
                         fontFamily: 'ChaletComprime1960, sans-serif',
                         fontSize: '0.85rem',
@@ -79,7 +100,7 @@ export default function WarningScreen({ onComplete, sounds }) {
                         color: '#fff',
                     }}
                 >
-                    PRESS ENTER TO CONTINUE
+                    PRESS ENTER OR CLICK TO CONTINUE
                 </p>
             </div>
             <div

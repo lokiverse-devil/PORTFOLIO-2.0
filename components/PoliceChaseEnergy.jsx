@@ -4,14 +4,14 @@ import gsap from 'gsap'
 import { Howler } from 'howler'
 import { getSounds } from '@/lib/sounds'
 
-export default function PoliceChaseEnergy({ onComplete }) {
+export default function PoliceChaseEnergy({ onComplete, sounds }) {
     const containerRef = useRef(null)
     const redRef = useRef(null)
     const blueRef = useRef(null)
     const flickerRef = useRef(null)
 
     useEffect(() => {
-        const { siren } = getSounds()
+        const siren = sounds?.siren || getSounds().siren
 
         // 🚨 HARD RESET + SAFE PLAY
         const startAudio = async () => {
@@ -20,10 +20,12 @@ export default function PoliceChaseEnergy({ onComplete }) {
                     await Howler.ctx.resume()
                 }
 
-                siren.stop()          // prevents "plays once only"
-                siren.volume(0.15)
-                siren.loop(true)
-                siren.play()
+                if (siren) {
+                    siren.stop()          // prevents "plays once only"
+                    siren.volume(0.15)
+                    siren.loop(true)
+                    siren.play()
+                }
             } catch (err) {
                 console.log('Audio error:', err)
             }
@@ -34,7 +36,9 @@ export default function PoliceChaseEnergy({ onComplete }) {
         // 🎬 Main cinematic timeline
         const tl = gsap.timeline({
             onComplete: () => {
-                siren.fade(0.15, 0, 1)   // smooth siren fade out
+                if (siren) {
+                    siren.fade(0.15, 0, 1000)   // smooth siren fade out (1s)
+                }
                 setTimeout(onComplete, 500)
             }
         })

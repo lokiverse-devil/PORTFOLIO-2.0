@@ -103,9 +103,9 @@ export default function MissionResult({ type, onComplete, sounds }) {
             <div style={{ textAlign: 'center', zIndex: 9002 }}>
                 <h1
                     ref={headlineRef}
+                    className="mission-headline"
                     style={{
                         fontFamily: 'ChaletLondon1960, sans-serif',
-                        fontSize: '5rem',
                         letterSpacing: '0.06em',
                         textTransform: 'uppercase',
                         color: '#fff',
@@ -118,9 +118,9 @@ export default function MissionResult({ type, onComplete, sounds }) {
                 </h1>
                 <p
                     ref={subtitleRef}
+                    className="mission-subtitle"
                     style={{
                         fontFamily: 'ChaletComprime1960, sans-serif',
-                        fontSize: '1.4rem',
                         letterSpacing: '0.4em',
                         textTransform: 'uppercase',
                         color: cfg.isPassed ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.7)',

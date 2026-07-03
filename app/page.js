@@ -29,6 +29,8 @@ export default function Home() {
                 ambience: new Howl({ src: ['/sounds/loading_ambience.mp3'], loop: true, volume: 0.45 }),
                 passed: new Howl({ src: ['/sounds/mission_passed.mp3'], volume: 1.0 }),
                 failed: new Howl({ src: ['/sounds/mission_failed.mp3'], volume: 1.0 }),
+                starPing: new Howl({ src: ['/sounds/star_ping.mp3'], volume: 1.0 }),
+                starFinal: new Howl({ src: ['/sounds/star_final_hit.mp3'], volume: 1.0 }),
             }
             // Start siren immediately on cold boot - Distant, echoing
             soundsRef.current.siren.play()

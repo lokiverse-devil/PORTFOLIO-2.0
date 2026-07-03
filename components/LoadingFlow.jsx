@@ -26,19 +26,25 @@ export default function LoadingFlow({ onComplete, sounds }) {
             }
         }
 
-        // Camera Drift
-        gsap.to(containerRef.current, {
-            scale: 1.05,
-            duration: 15,
-            ease: 'none'
-        })
+        // Start zoom/fade on first image immediately
+        if (imgs.current[0]) {
+            gsap.fromTo(imgs.current[0],
+                { scale: 1.0, opacity: 1 },
+                { scale: 1.06, duration: 4, ease: 'sine.out' }
+            )
+        }
 
         // Image Cycle
         let current = 0
         const cycleImages = () => {
             const next = (current + 1) % IMAGES.length
             gsap.to(imgs.current[current], { opacity: 0, duration: 1 })
-            gsap.to(imgs.current[next], { opacity: 1, duration: 1 })
+            if (imgs.current[next]) {
+                gsap.fromTo(imgs.current[next],
+                    { opacity: 0, scale: 1.0 },
+                    { opacity: 1, scale: 1.06, duration: 4, ease: 'sine.out' }
+                )
+            }
             current = next
         }
         const imgInterval = setInterval(cycleImages, 4000)
@@ -88,9 +94,10 @@ export default function LoadingFlow({ onComplete, sounds }) {
                         inset: 0,
                         width: '100%',
                         height: '100%',
-                        objectFit: 'cover',
+                        objectFit: 'contain',
                         opacity: i === 0 ? 1 : 0,
-                        filter: 'brightness(0.8) contrast(1.1)'
+                        filter: 'brightness(0.8) contrast(1.1)',
+                        transformOrigin: 'center center',
                     }}
                 />
             ))}
@@ -100,6 +107,7 @@ export default function LoadingFlow({ onComplete, sounds }) {
 
             {/* Tip text */}
             <div
+                className="loading-tip-container"
                 style={{
                     position: 'absolute',
                     bottom: 120,
@@ -108,7 +116,7 @@ export default function LoadingFlow({ onComplete, sounds }) {
                 }}
             >
                 <p
-                    className="glitch-flicker"
+                    className="glitch-flicker loading-tip-text"
                     key={tipIdx}
                     style={{
                         fontFamily: 'ChaletComprime1960, sans-serif',
@@ -124,6 +132,7 @@ export default function LoadingFlow({ onComplete, sounds }) {
 
             {/* Loading bar container */}
             <div
+                className="loading-bar-container"
                 style={{
                     position: 'absolute',
                     bottom: 60,

@@ -5,10 +5,8 @@ import gsap from 'gsap'
 const StarIcon = forwardRef(({ className, style }, ref) => (
     <svg
         ref={ref}
-        className={className}
+        className={`${className} wanted-star-svg`}
         style={style}
-        width="72"
-        height="72"
         viewBox="0 0 72 72"
     >
         <polygon
@@ -88,7 +86,7 @@ export default function WantedStars({ onComplete, sounds }) {
         <div style={styles.wrapper}>
             <div ref={flashRef} style={styles.flash} />
 
-            <div ref={containerRef} style={styles.stars}>
+            <div ref={containerRef} className="wanted-stars-container" style={styles.stars}>
                 {[0, 1, 2, 3, 4].map((i) => (
                     <StarIcon
                         key={i}

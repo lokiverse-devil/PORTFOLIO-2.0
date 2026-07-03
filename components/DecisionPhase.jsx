@@ -66,38 +66,18 @@ export default function DecisionPhase({ question = 1, onResult, sounds }) {
             }}
         >
             <div className="noise-overlay" />
-            <div ref={qRef} className="decision-card" style={{ zIndex: 110 }}>
-                <p
-                    style={{
-                        fontFamily: 'ChaletComprime1960, sans-serif',
-                        fontSize: '0.8rem',
-                        letterSpacing: '0.3em',
-                        color: 'rgba(255,255,255,0.4)',
-                        textTransform: 'uppercase',
-                        marginBottom: 20,
-                    }}
-                >
+            <div ref={qRef} className="decision-card">
+                <p className="decision-question-sub">
                     QUESTION 0{question} / 02
                 </p>
-                <h2
-                    style={{
-                        fontFamily: 'ChaletLondon1960, sans-serif',
-                        fontSize: isQ1 ? '2.8rem' : '2.4rem',
-                        letterSpacing: '0.04em',
-                        textTransform: 'uppercase',
-                        color: '#fff',
-                        marginBottom: 60,
-                        lineHeight: 1.1,
-                        textShadow: '0 4px 10px rgba(0,0,0,0.5)'
-                    }}
-                >
+                <h2 className={isQ1 ? "decision-question-title q1-title" : "decision-question-title q2-title"}>
                     {isQ1 ? (
                         <>ARE YOU A<br />PROGRAMMER?</>
                     ) : (
                         <>ARE YOU INTERESTED<br />IN MY PROFILE?</>
                     )}
                 </h2>
-                <div style={{ display: 'flex', gap: 40, justifyContent: 'center' }}>
+                <div className="decision-buttons-container">
                     <button
                         ref={el => buttonsRef.current[0] = el}
                         className="decision-btn"

@@ -76,7 +76,7 @@ export default function CityReveal({ onComplete }) {
 
             {/* HUD Jittering */}
             <div
-                className="hud-jitter"
+                className="hud-jitter city-reveal-hud"
                 style={{
                     position: 'absolute',
                     top: 32,
