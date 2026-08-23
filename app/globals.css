@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Bebas+Neue&family=Montserrat:wght@600;700;800;900&family=Chango&family=Russo+One&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,18 +9,35 @@
    ============================================= */
 @font-face {
   font-family: 'ChaletLondon1960';
-  src: url('/fonts/ChaletLondon1960.woff2') format('woff2');
+  src: url('/fonts/ChaletLondon1960.woff2') format('woff2'),
+       local('Chalet London 1960'),
+       local('Bebas Neue'),
+       local('Montserrat');
   font-weight: normal;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'ChaletComprime1960';
-  src: url('/fonts/ChaletComprime1960.woff2') format('woff2');
+  src: url('/fonts/ChaletComprime1960.woff2') format('woff2'),
+       local('Chalet Comprime 1960'),
+       local('Barlow Condensed'),
+       local('Arial Narrow');
   font-weight: normal;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pricedown';
+  src: url('/fonts/Pricedown.woff2') format('woff2'),
+       local('Pricedown'),
+       local('Russo One'),
+       local('Bebas Neue');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* =============================================
@@ -40,7 +59,7 @@ body {
   overflow: hidden;
   background: #000;
   color: #fff;
-  font-family: 'ChaletLondon1960', sans-serif;
+  font-family: 'ChaletLondon1960', 'Bebas Neue', Montserrat, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: default;
@@ -48,7 +67,7 @@ body {
 }
 
 /* =============================================
-   CINEMATIC OVERLAYS
+   CINEMATIC OVERLAYS & SCANLINES
    ============================================= */
 .noise-overlay {
   position: fixed;
@@ -56,56 +75,37 @@ body {
   width: 400%;
   height: 400%;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.04;
+  opacity: 0.045;
   pointer-events: none;
   z-index: 9999;
   animation: noise-move 0.2s steps(2) infinite;
 }
 
 @keyframes noise-move {
-  0% {
-    transform: translate(0, 0);
-  }
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 2%); }
+  30% { transform: translate(-2%, -1%); }
+  40% { transform: translate(1%, -2%); }
+  50% { transform: translate(-1%, 2%); }
+  60% { transform: translate(-2%, -2%); }
+  70% { transform: translate(1%, 1%); }
+  80% { transform: translate(-2%, 1%); }
+  90% { transform: translate(2%, -1%); }
+  100% { transform: translate(0, 0); }
+}
 
-  10% {
-    transform: translate(-1%, -1%);
-  }
-
-  20% {
-    transform: translate(1%, 2%);
-  }
-
-  30% {
-    transform: translate(-2%, -1%);
-  }
-
-  40% {
-    transform: translate(1%, -2%);
-  }
-
-  50% {
-    transform: translate(-1%, 2%);
-  }
-
-  60% {
-    transform: translate(-2%, -2%);
-  }
-
-  70% {
-    transform: translate(1%, 1%);
-  }
-
-  80% {
-    transform: translate(-2%, 1%);
-  }
-
-  90% {
-    transform: translate(2%, -1%);
-  }
-
-  100% {
-    transform: translate(0, 0);
-  }
+.crt-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9995;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.3) 50%
+  );
+  background-size: 100% 4px;
+  opacity: 0.45;
 }
 
 .heavy-vignette {
@@ -113,367 +113,261 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 9990;
-  background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.95) 100%);
+  background: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.45) 65%, rgba(0, 0, 0, 0.96) 100%);
 }
 
 /* =============================================
-   POLICE ENERGY EFFECTS
+   GTA WANTED STARS & GLOWS
    ============================================= */
-.police-glow-red {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 15% 50%, rgba(255, 0, 0, 0.4) 0%, rgba(255, 0, 0, 0.1) 40%, transparent 70%);
-  mix-blend-mode: screen;
-  filter: blur(40px);
+.gta-star-filled {
+  fill: #ffffff;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 18px rgba(255, 255, 255, 0.6));
 }
 
-.police-glow-blue {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 85% 50%, rgba(0, 50, 255, 0.4) 0%, rgba(0, 50, 255, 0.1) 40%, transparent 70%);
-  mix-blend-mode: screen;
-  filter: blur(40px);
+.gta-star-empty {
+  fill: rgba(40, 40, 40, 0.6);
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 2px;
 }
 
-/* =============================================
-   ANIMATION CLASSES
-   ============================================= */
-.glitch-flicker {
-  animation: flicker 0.15s infinite;
+.gta-star-gold {
+  fill: #f5a623;
+  filter: drop-shadow(0 0 6px rgba(245, 166, 35, 0.9)) drop-shadow(0 0 14px rgba(245, 166, 35, 0.5));
 }
 
-@keyframes flicker {
-  0% {
-    opacity: 0.8;
+.gta-wanted-flash {
+  animation: wanted-star-flash 0.5s step-end infinite;
+}
+
+@keyframes wanted-star-flash {
+  0%, 100% {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
   }
+  50% {
+    fill: #ff3333;
+    filter: drop-shadow(0 0 10px rgba(255, 50, 50, 1));
+  }
+}
 
+.smooth-pulse {
+  animation: smooth-pulse-anim 2.4s ease-in-out infinite;
+}
+
+@keyframes smooth-pulse-anim {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(0.985);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  }
   50% {
     opacity: 1;
-  }
-
-  100% {
-    opacity: 0.9;
-  }
-}
-
-.blink {
-  animation: blink-anim 1s step-end infinite;
-}
-
-@keyframes blink-anim {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-}
-
-/* =============================================
-   UI UTILS
-   ============================================= */
-.gta-button-idle {
-  animation: breathe 2s ease-in-out infinite;
-}
-
-@keyframes breathe {
-
-  0%,
-  100% {
-    opacity: 0.6;
     transform: scale(1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.02);
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4);
   }
 }
-.wanted-star {
-    filter:
-        drop-shadow(0 0 6px rgba(255,255,255,0.45))
-        drop-shadow(0 0 16px rgba(255,255,255,0.18));
-}
-.gta-button-hover {
-  background: #fff !important;
-  color: #000 !important;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-}
 
-/* =============================================
-   LANDING PAGE DEPTH
-   ============================================= */
 .hud-jitter {
-  animation: jitter 5s ease-in-out infinite;
+  animation: jitter 6s ease-in-out infinite;
 }
 
 @keyframes jitter {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(0.5px, -0.5px); }
+  40% { transform: translate(-0.5px, 0.5px); }
+  60% { transform: translate(0.5px, 0.5px); }
+  80% { transform: translate(-0.5px, -0.5px); }
+}
 
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
+.glitch-flicker {
+  animation: flicker 0.18s infinite;
+}
 
-  25% {
-    transform: translate(1px, -1px);
-  }
-
-  50% {
-    transform: translate(-1px, 1px);
-  }
-
-  75% {
-    transform: translate(1px, 1px);
-  }
+@keyframes flicker {
+  0% { opacity: 0.85; }
+  50% { opacity: 1; }
+  100% { opacity: 0.92; }
 }
 
 :root {
-  --green: #66CC66;
-  --red: #8a0000;
+  --gta-green: #66CC66;
+  --gta-red: #cc0000;
+  --gta-gold: #f5a623;
 }
 
 /* =============================================
-   MOBILE RESPONSIVENESS AND CUSTOM STYLES
+   GTA MISSION CARDS & PANELS
    ============================================= */
-
-/* Wanted Stars styling */
-.wanted-star-svg {
-  width: 72px;
-  height: 72px;
-}
-
-/* Warning styling */
-.warning-title {
-  font-size: 0.75rem;
-}
-.warning-blink {
-  font-size: 0.85rem;
-}
-
-/* Loading Flow styling */
-.loading-tip-container {
-  position: absolute;
-  bottom: 120px;
-  left: 60px;
-  z-index: 110;
-}
-.loading-tip-text {
-  font-size: 0.85rem;
-  letter-spacing: 0.25em;
-}
-.loading-bar-container {
-  position: absolute;
-  bottom: 60px;
-  left: 60px;
-  right: 60px;
-  height: 4px;
-}
-
-/* Decision Cards & Buttons */
 .decision-card {
-  background: rgba(0, 0, 0, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 40px 60px;
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 3px solid #f5a623;
+  padding: 44px 64px;
   text-align: center;
-  max-width: 600px;
-  width: 90%;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+  max-width: 640px;
+  width: 92%;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(245, 166, 35, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 110;
 }
+
 .decision-question-sub {
-  font-family: 'ChaletComprime1960', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
-  color: rgba(255, 255, 255, 0.4);
+  font-family: 'ChaletComprime1960', 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.35em;
+  color: #f5a623;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
+
 .decision-question-title {
-  font-family: 'ChaletLondon1960', sans-serif;
-  font-size: 2.8rem;
+  font-family: 'ChaletLondon1960', 'Bebas Neue', Montserrat, sans-serif;
+  font-size: clamp(2.2rem, 5.5vw, 3.2rem);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #fff;
-  margin-bottom: 60px;
-  line-height: 1.1;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 50px;
+  line-height: 1.05;
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
 }
-.decision-question-title.q2-title {
-  font-size: 2.4rem;
-}
+
 .decision-buttons-container {
   display: flex;
   gap: 40px;
   justify-content: center;
 }
+
 .decision-btn {
-  font-family: 'ChaletLondon1960', sans-serif;
-  background: transparent;
-  border: none;
+  font-family: 'ChaletLondon1960', 'Bebas Neue', Montserrat, sans-serif;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.25);
   color: #fff;
-  font-size: 1.8rem;
-  letter-spacing: 0.1em;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  letter-spacing: 0.15em;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 12px 36px;
   outline: none;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Mission Result */
-.mission-headline {
-  font-size: 5rem;
+.decision-btn:hover {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
+  border-color: #fff;
+  transform: scale(1.05);
 }
+
+/* Mission Passed / Failed */
+.mission-headline {
+  font-size: clamp(3.2rem, 10vw, 6.5rem);
+}
+
 .mission-subtitle {
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 3.8vw, 1.8rem);
 }
 
 /* Landing Page navigation and panels */
 .landing-nav {
   position: absolute;
-  left: 80px;
-  bottom: 80px;
+  left: 70px;
+  bottom: 70px;
   z-index: 120;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
+
 .landing-menu-item {
-  font-family: 'ChaletComprime1960', sans-serif;
-  font-size: 1.8rem;
+  font-family: 'ChaletComprime1960', 'Barlow Condensed', sans-serif;
+  font-size: 1.85rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  transition: transform 220ms cubic-bezier(0.19, 1, 0.22, 1), color 220ms ease;
+  transition: transform 240ms cubic-bezier(0.2, 0.9, 0.3, 1), color 240ms ease;
   transform: translateX(0);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
+
 .landing-menu-item:hover,
 .landing-menu-item.active {
   color: #fff !important;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
 }
+
 .landing-menu-item.active {
-  transform: translateX(12px);
+  transform: translateX(16px);
 }
+
 .landing-content-panel {
-  width: 60%;
-  max-width: 1000px;
-  max-height: 75vh;
+  width: 72%;
+  max-width: 1080px;
+  max-height: 78vh;
   overflow-y: auto;
+}
+
+.landing-content-panel::-webkit-scrollbar {
+  width: 5px;
+}
+.landing-content-panel::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.6);
+}
+.landing-content-panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
 }
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {
-  /* Stars */
   .wanted-star-svg {
-    width: 42px !important;
-    height: 42px !important;
+    width: 44px !important;
+    height: 44px !important;
   }
   .wanted-stars-container {
     gap: 12px !important;
-    transform: translateY(-60px) !important;
+    transform: translateY(-40px) !important;
   }
 
-  /* HUD */
   .city-reveal-hud,
   .landing-page-hud {
     font-size: 0.75rem !important;
-    top: 20px !important;
-    left: 20px !important;
+    top: 16px !important;
+    left: 16px !important;
   }
 
-  /* Title on landing screen */
-  .landing-main-title h1 {
-    font-size: 2.8rem !important;
-  }
-
-  /* Warning Screen */
-  .warning-content-container {
-    padding: 0 20px !important;
-  }
-  .warning-title {
-    font-size: 0.65rem !important;
-    margin-bottom: 40px !important;
-  }
-  .warning-blink {
-    font-size: 0.75rem !important;
-  }
-
-  /* Loading screen */
-  .loading-tip-container {
-    bottom: 80px !important;
-    left: 20px !important;
-    right: 20px !important;
-  }
-  .loading-tip-text {
-    font-size: 0.75rem !important;
-    letter-spacing: 0.15em !important;
-  }
-  .loading-bar-container {
-    bottom: 40px !important;
-    left: 20px !important;
-    right: 20px !important;
-  }
-
-  /* Decision cards */
   .decision-card {
-    padding: 24px 16px !important;
-  }
-  .decision-question-sub {
-    font-size: 0.7rem !important;
-    margin-bottom: 12px !important;
-  }
-  .decision-question-title {
-    font-size: 1.8rem !important;
-    margin-bottom: 30px !important;
-  }
-  .decision-question-title.q2-title {
-    font-size: 1.5rem !important;
+    padding: 28px 20px !important;
   }
   .decision-buttons-container {
     gap: 20px !important;
   }
-  .decision-btn {
-    font-size: 1.4rem !important;
-  }
 
-  /* Mission Results */
-  .mission-headline {
-    font-size: 3rem !important;
-  }
-  .mission-subtitle {
-    font-size: 1rem !important;
-    letter-spacing: 0.2em !important;
-  }
-
-  /* Landing Page Nav */
   .landing-nav {
     left: 0 !important;
     right: 0 !important;
-    bottom: 24px !important;
+    bottom: 20px !important;
     flex-direction: row !important;
     justify-content: center !important;
     flex-wrap: wrap !important;
-    gap: 16px !important;
-    padding: 0 16px !important;
+    gap: 14px !important;
+    padding: 0 14px !important;
   }
   .landing-menu-item {
-    font-size: 1.1rem !important;
+    font-size: 1.15rem !important;
     letter-spacing: 0.15em !important;
   }
   .landing-menu-item.active {
     transform: translateY(-4px) !important;
   }
 
-  /* Landing Content Panel */
   .landing-content-panel {
-    width: 90% !important;
-    max-width: 90% !important;
-    max-height: 55vh !important;
-    padding-bottom: 70px !important; /* spacing for bottom navbar */
+    width: 94% !important;
+    max-width: 94% !important;
+    max-height: 56vh !important;
+    padding-bottom: 80px !important;
   }
 }
