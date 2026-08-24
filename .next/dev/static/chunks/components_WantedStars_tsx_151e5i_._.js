@@ -7,6 +7,7 @@ __turbopack_context__.s([
     ()=>WantedStars
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/styled-jsx/style.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/gsap/index.js [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$howler$2f$dist$2f$howler$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/howler/dist/howler.js [app-client] (ecmascript)");
@@ -16,27 +17,30 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function StarIcon({ className, style, filled = false, flashing = false }) {
+;
+function StarIcon({ className, style, flashing = false }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-        className: `${className || ''} wanted-star-svg ${flashing && filled ? 'gta-wanted-flash' : ''}`,
+        className: `${className || ''} wanted-star-svg ${flashing ? 'gta-wanted-flash' : ''}`,
         style: style,
         viewBox: "0 0 72 72",
+        width: "56",
+        height: "56",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("polygon", {
             points: "36,4 44,28 70,28 49,44 57,68 36,52 15,68 23,44 2,28 28,28",
-            fill: filled ? '#ffffff' : 'rgba(255, 255, 255, 0.08)',
-            stroke: filled ? '#ffffff' : 'rgba(255, 255, 255, 0.45)',
+            fill: "#ffffff",
+            stroke: "#ffffff",
             strokeWidth: "2.5",
             style: {
-                filter: filled ? 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6))' : 'none'
+                filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.7))'
             }
         }, void 0, false, {
             fileName: "[project]/components/WantedStars.tsx",
-            lineNumber: 21,
+            lineNumber: 22,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/WantedStars.tsx",
-        lineNumber: 16,
+        lineNumber: 15,
         columnNumber: 9
     }, this);
 }
@@ -49,13 +53,13 @@ function WantedStars({ onComplete, sounds }) {
     const sweepRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const starsContainerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const flashRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const [showStars, setShowStars] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [filledCount, setFilledCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
+    // starCount starts at 0 (no stars during 0.0s - 8.0s police buildup)
+    const [starCount, setStarCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const [isMaxWanted, setIsMaxWanted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "WantedStars.useEffect": ()=>{
             const siren = sounds?.siren;
-            // Start 17-second siren_loop.mp3 cleanly
+            // Start siren_loop.mp3 (17 seconds total)
             const startAudio = {
                 "WantedStars.useEffect.startAudio": async ()=>{
                     try {
@@ -64,7 +68,7 @@ function WantedStars({ onComplete, sounds }) {
                         }
                         if (siren) {
                             siren.stop();
-                            siren.volume(0.5);
+                            siren.volume(0.55);
                             siren.play();
                         }
                     } catch (err) {
@@ -73,17 +77,17 @@ function WantedStars({ onComplete, sounds }) {
                 }
             }["WantedStars.useEffect.startAudio"];
             startAudio();
-            // Sweeping spotlight
+            // Sweeping helicopter spotlight
             if (sweepRef.current) {
                 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].to(sweepRef.current, {
-                    x: '100%',
-                    duration: 2.4,
+                    x: '120%',
+                    duration: 2.2,
                     repeat: -1,
                     ease: 'power1.inOut',
                     yoyo: true
                 });
             }
-            // Alternating Police Strobes (0s to 17s)
+            // Alternating Police Strobes
             const strobeTl = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].timeline({
                 repeat: -1
             });
@@ -117,7 +121,9 @@ function WantedStars({ onComplete, sounds }) {
                     duration: 0.14
                 });
             }
-            // Master Timeline synced with the 17-second audio track
+            // Master Timeline synced with siren_loop.mp3 (17s total duration)
+            // 0.0s - 8.0s: Pure Police Chase buildup
+            // 8.0s - 17.0s: Star audio in siren_loop.mp3 (Stars appear 1+1+1+1+1 = 5)
             const masterTl = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].timeline({
                 onComplete: {
                     "WantedStars.useEffect.masterTl": ()=>{
@@ -125,66 +131,53 @@ function WantedStars({ onComplete, sounds }) {
                     }
                 }["WantedStars.useEffect.masterTl"]
             });
-            // --- 0.0s to 8.0s: Chase Energy buildup ---
-            // At 8.0s: Stars reveal on screen
+            // Star 1 appears at 8.0s
             masterTl.to({}, {
                 duration: 0.1,
                 onStart: {
                     "WantedStars.useEffect": ()=>{
-                        setShowStars(true);
-                        setFilledCount(1);
-                        if (starsContainerRef.current) {
-                            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].fromTo(starsContainerRef.current, {
-                                opacity: 0,
-                                scale: 0.85
-                            }, {
-                                opacity: 1,
-                                scale: 1,
-                                duration: 0.4,
-                                ease: 'power2.out'
-                            });
-                        }
+                        setStarCount(1);
                     }
                 }["WantedStars.useEffect"]
             }, 8.0);
-            // At 9.6s: Star 2
+            // Star 2 appears at 9.8s
             masterTl.to({}, {
                 duration: 0.1,
                 onStart: {
                     "WantedStars.useEffect": ()=>{
-                        setFilledCount(2);
+                        setStarCount(2);
                     }
                 }["WantedStars.useEffect"]
-            }, 9.6);
-            // At 11.2s: Star 3
+            }, 9.8);
+            // Star 3 appears at 11.6s
             masterTl.to({}, {
                 duration: 0.1,
                 onStart: {
                     "WantedStars.useEffect": ()=>{
-                        setFilledCount(3);
+                        setStarCount(3);
                     }
                 }["WantedStars.useEffect"]
-            }, 11.2);
-            // At 12.8s: Star 4
+            }, 11.6);
+            // Star 4 appears at 13.4s
             masterTl.to({}, {
                 duration: 0.1,
                 onStart: {
                     "WantedStars.useEffect": ()=>{
-                        setFilledCount(4);
+                        setStarCount(4);
                     }
                 }["WantedStars.useEffect"]
-            }, 12.8);
-            // At 14.4s: Star 5 (Full 5 Stars Climax + Flash + Screen rumble)
+            }, 13.4);
+            // Star 5 appears at 15.2s (Max Wanted!)
             masterTl.to({}, {
                 duration: 0.1,
                 onStart: {
                     "WantedStars.useEffect": ()=>{
-                        setFilledCount(5);
+                        setStarCount(5);
                         setIsMaxWanted(true);
                         if (flashRef.current) {
                             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].fromTo(flashRef.current, {
                                 opacity: 0,
-                                scale: 0.6
+                                scale: 0.5
                             }, {
                                 opacity: 1,
                                 scale: 5,
@@ -201,8 +194,8 @@ function WantedStars({ onComplete, sounds }) {
                             }, {
                                 x: 10,
                                 y: 6,
-                                duration: 0.05,
-                                repeat: 6,
+                                duration: 0.04,
+                                repeat: 10,
                                 yoyo: true,
                                 ease: 'power2.inOut',
                                 onComplete: {
@@ -219,18 +212,27 @@ function WantedStars({ onComplete, sounds }) {
                         }
                     }
                 }["WantedStars.useEffect"]
-            }, 14.4);
-            // Total duration: 17.0s (matches user's siren_loop.mp3)
+            }, 15.2);
+            // Hold until 17.0s (end of siren_loop.mp3)
             masterTl.to({}, {
-                duration: 2.6
-            }, 14.4);
+                duration: 1.8
+            }, 15.2);
+            // Key handler to skip
+            const handleKeyDown = {
+                "WantedStars.useEffect.handleKeyDown": (e)=>{
+                    if (e.code === 'Space' || e.code === 'Enter') {
+                        onComplete();
+                    }
+                }
+            }["WantedStars.useEffect.handleKeyDown"];
+            window.addEventListener('keydown', handleKeyDown);
             return ({
                 "WantedStars.useEffect": ()=>{
                     masterTl.kill();
                     strobeTl.kill();
+                    window.removeEventListener('keydown', handleKeyDown);
                     if (sweepRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(sweepRef.current);
                     if (containerRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(containerRef.current);
-                    if (starsContainerRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(starsContainerRef.current);
                     if (flashRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(flashRef.current);
                 }
             })["WantedStars.useEffect"];
@@ -241,44 +243,34 @@ function WantedStars({ onComplete, sounds }) {
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: containerRef,
+        onClick: onComplete,
         style: {
             position: 'fixed',
             inset: 0,
-            background: '#000',
+            background: '#000000',
             zIndex: 95,
             overflow: 'hidden',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            userSelect: 'none'
+            userSelect: 'none',
+            cursor: 'pointer'
         },
+        className: "jsx-c698cf9c2d4e361",
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "noise-overlay"
-            }, void 0, false, {
-                fileName: "[project]/components/WantedStars.tsx",
-                lineNumber: 236,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "crt-scanlines"
-            }, void 0, false, {
-                fileName: "[project]/components/WantedStars.tsx",
-                lineNumber: 237,
-                columnNumber: 13
-            }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 ref: redRef,
                 style: {
                     position: 'absolute',
                     inset: 0,
-                    background: 'radial-gradient(ellipse at 15% 50%, rgba(255,0,0,0.65) 0%, rgba(200,0,0,0.2) 45%, transparent 70%)',
+                    background: 'radial-gradient(ellipse at 15% 50%, rgba(255, 0, 0, 0.7) 0%, rgba(200, 0, 0, 0.25) 45%, transparent 70%)',
                     opacity: 0,
                     mixBlendMode: 'screen'
-                }
+                },
+                className: "jsx-c698cf9c2d4e361"
             }, void 0, false, {
                 fileName: "[project]/components/WantedStars.tsx",
-                lineNumber: 240,
+                lineNumber: 239,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -286,13 +278,14 @@ function WantedStars({ onComplete, sounds }) {
                 style: {
                     position: 'absolute',
                     inset: 0,
-                    background: 'radial-gradient(ellipse at 85% 50%, rgba(0,100,255,0.65) 0%, rgba(0,70,220,0.2) 45%, transparent 70%)',
+                    background: 'radial-gradient(ellipse at 85% 50%, rgba(0, 102, 255, 0.7) 0%, rgba(0, 70, 220, 0.25) 45%, transparent 70%)',
                     opacity: 0,
                     mixBlendMode: 'screen'
-                }
+                },
+                className: "jsx-c698cf9c2d4e361"
             }, void 0, false, {
                 fileName: "[project]/components/WantedStars.tsx",
-                lineNumber: 253,
+                lineNumber: 252,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -303,21 +296,22 @@ function WantedStars({ onComplete, sounds }) {
                     left: '-30%',
                     width: '60%',
                     height: '140%',
-                    background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.12) 0%, transparent 60%)',
+                    background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, transparent 60%)',
                     transform: 'rotate(-25deg)',
                     pointerEvents: 'none',
                     mixBlendMode: 'screen'
-                }
+                },
+                className: "jsx-c698cf9c2d4e361"
             }, void 0, false, {
                 fileName: "[project]/components/WantedStars.tsx",
-                lineNumber: 266,
+                lineNumber: 265,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "heavy-vignette"
+                className: "jsx-c698cf9c2d4e361" + " " + "heavy-vignette"
             }, void 0, false, {
                 fileName: "[project]/components/WantedStars.tsx",
-                lineNumber: 282,
+                lineNumber: 281,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -326,51 +320,60 @@ function WantedStars({ onComplete, sounds }) {
                     position: 'absolute',
                     width: '320px',
                     height: '320px',
-                    background: 'radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.85) 30%, transparent 70%)',
+                    background: 'radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.85) 30%, transparent 70%)',
                     opacity: 0,
                     filter: 'blur(20px)',
                     pointerEvents: 'none',
                     zIndex: 115
-                }
+                },
+                className: "jsx-c698cf9c2d4e361"
             }, void 0, false, {
                 fileName: "[project]/components/WantedStars.tsx",
                 lineNumber: 284,
                 columnNumber: 13
             }, this),
-            showStars && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            starCount > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 ref: starsContainerRef,
                 style: {
                     display: 'flex',
-                    gap: '24px',
+                    gap: '22px',
                     alignItems: 'center',
-                    zIndex: 110
+                    justifyContent: 'center',
+                    zIndex: 110,
+                    padding: '20px'
                 },
-                children: [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4
-                ].map((i)=>{
-                    const isFilled = i < filledCount;
-                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(StarIcon, {
-                        filled: isFilled,
-                        flashing: isMaxWanted,
+                className: "jsx-c698cf9c2d4e361",
+                children: Array.from({
+                    length: starCount
+                }).map((_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            transition: 'transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)',
-                            transform: isFilled ? 'scale(1.18)' : 'scale(1)'
-                        }
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            animation: 'starPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                        },
+                        className: "jsx-c698cf9c2d4e361",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(StarIcon, {
+                            flashing: isMaxWanted
+                        }, void 0, false, {
+                            fileName: "[project]/components/WantedStars.tsx",
+                            lineNumber: 321,
+                            columnNumber: 29
+                        }, this)
                     }, i, false, {
                         fileName: "[project]/components/WantedStars.tsx",
                         lineNumber: 312,
-                        columnNumber: 29
-                    }, this);
-                })
+                        columnNumber: 25
+                    }, this))
             }, void 0, false, {
                 fileName: "[project]/components/WantedStars.tsx",
                 lineNumber: 300,
                 columnNumber: 17
-            }, this)
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                id: "c698cf9c2d4e361",
+                children: "@keyframes starPop{0%{opacity:0;transform:scale(.3)}70%{transform:scale(1.3)}to{opacity:1;transform:scale(1)}}"
+            }, void 0, false, void 0, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/WantedStars.tsx",
@@ -378,7 +381,7 @@ function WantedStars({ onComplete, sounds }) {
         columnNumber: 9
     }, this);
 }
-_s(WantedStars, "PIDcMhCM0FJrkF99DdgYWLPxoZ0=");
+_s(WantedStars, "qJYF0ZKB/RGOzkArBO+ZRXYcwo0=");
 _c1 = WantedStars;
 var _c, _c1;
 __turbopack_context__.k.register(_c, "StarIcon");

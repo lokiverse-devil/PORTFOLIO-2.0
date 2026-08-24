@@ -86,7 +86,7 @@ export default function ColdBoot({ onComplete }: ColdBootProps) {
                             textTransform: 'uppercase',
                         }}
                     >
-                        LOS SANTOS PROTOCOL // SYSTEM INITIALIZATION
+                        PORTFOLIO 2.0 // SYSTEM INITIALIZATION
                     </div>
 
                     <p

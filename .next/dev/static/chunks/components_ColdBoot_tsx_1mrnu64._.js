@@ -109,7 +109,7 @@ function ColdBoot({ onComplete }) {
                             color: 'rgba(255,255,255,0.4)',
                             textTransform: 'uppercase'
                         },
-                        children: "LOS SANTOS PROTOCOL // SYSTEM INITIALIZATION"
+                        children: "PORTFOLIO 2.0 // SYSTEM INITIALIZATION"
                     }, void 0, false, {
                         fileName: "[project]/components/ColdBoot.tsx",
                         lineNumber: 80,

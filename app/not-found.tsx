@@ -42,7 +42,7 @@ export default function NotFound() {
                     marginBottom: '36px',
                 }}
             >
-                THE REQUESTED DISTRICT CANNOT BE LOCATED IN LOS SANTOS
+                THE REQUESTED SECTOR CANNOT BE LOCATED
             </p>
             <Link
                 href="/"

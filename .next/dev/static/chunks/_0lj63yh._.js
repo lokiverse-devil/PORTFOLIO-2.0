@@ -58,7 +58,7 @@ function NotFound() {
                     color: 'rgba(255,255,255,0.7)',
                     marginBottom: '36px'
                 },
-                children: "THE REQUESTED DISTRICT CANNOT BE LOCATED IN LOS SANTOS"
+                children: "THE REQUESTED SECTOR CANNOT BE LOCATED"
             }, void 0, false, {
                 fileName: "[project]/app/not-found.tsx",
                 lineNumber: 36,

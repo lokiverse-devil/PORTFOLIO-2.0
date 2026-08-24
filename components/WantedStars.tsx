@@ -7,26 +7,25 @@ import { BasePhaseProps } from '@/lib/types'
 interface StarIconProps {
     className?: string
     style?: React.CSSProperties
-    filled?: boolean
     flashing?: boolean
 }
 
-function StarIcon({ className, style, filled = false, flashing = false }: StarIconProps) {
+function StarIcon({ className, style, flashing = false }: StarIconProps) {
     return (
         <svg
-            className={`${className || ''} wanted-star-svg ${flashing && filled ? 'gta-wanted-flash' : ''}`}
+            className={`${className || ''} wanted-star-svg ${flashing ? 'gta-wanted-flash' : ''}`}
             style={style}
             viewBox="0 0 72 72"
+            width="56"
+            height="56"
         >
             <polygon
                 points="36,4 44,28 70,28 49,44 57,68 36,52 15,68 23,44 2,28 28,28"
-                fill={filled ? '#ffffff' : 'rgba(255, 255, 255, 0.08)'}
-                stroke={filled ? '#ffffff' : 'rgba(255, 255, 255, 0.45)'}
+                fill="#ffffff"
+                stroke="#ffffff"
                 strokeWidth="2.5"
                 style={{
-                    filter: filled
-                        ? 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6))'
-                        : 'none',
+                    filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.7))',
                 }}
             />
         </svg>
@@ -41,14 +40,14 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
     const starsContainerRef = useRef<HTMLDivElement | null>(null)
     const flashRef = useRef<HTMLDivElement | null>(null)
 
-    const [showStars, setShowStars] = useState<boolean>(false)
-    const [filledCount, setFilledCount] = useState<number>(0)
+    // starCount starts at 0 (no stars during 0.0s - 8.0s police buildup)
+    const [starCount, setStarCount] = useState<number>(0)
     const [isMaxWanted, setIsMaxWanted] = useState<boolean>(false)
 
     useEffect(() => {
         const siren = sounds?.siren
 
-        // Start 17-second siren_loop.mp3 cleanly
+        // Start siren_loop.mp3 (17 seconds total)
         const startAudio = async () => {
             try {
                 if (Howler && Howler.ctx && Howler.ctx.state !== 'running') {
@@ -56,7 +55,7 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                 }
                 if (siren) {
                     siren.stop()
-                    siren.volume(0.5)
+                    siren.volume(0.55)
                     siren.play()
                 }
             } catch (err) {
@@ -65,18 +64,18 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
         }
         startAudio()
 
-        // Sweeping spotlight
+        // Sweeping helicopter spotlight
         if (sweepRef.current) {
             gsap.to(sweepRef.current, {
-                x: '100%',
-                duration: 2.4,
+                x: '120%',
+                duration: 2.2,
                 repeat: -1,
                 ease: 'power1.inOut',
                 yoyo: true,
             })
         }
 
-        // Alternating Police Strobes (0s to 17s)
+        // Alternating Police Strobes
         const strobeTl = gsap.timeline({ repeat: -1 })
         if (redRef.current) {
             strobeTl
@@ -93,83 +92,76 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                 .to(blueRef.current, { opacity: 0, duration: 0.14 })
         }
 
-        // Master Timeline synced with the 17-second audio track
+        // Master Timeline synced with siren_loop.mp3 (17s total duration)
+        // 0.0s - 8.0s: Pure Police Chase buildup
+        // 8.0s - 17.0s: Star audio in siren_loop.mp3 (Stars appear 1+1+1+1+1 = 5)
         const masterTl = gsap.timeline({
             onComplete: () => {
                 onComplete()
             },
         })
 
-        // --- 0.0s to 8.0s: Chase Energy buildup ---
-        // At 8.0s: Stars reveal on screen
+        // Star 1 appears at 8.0s
         masterTl.to(
             {},
             {
                 duration: 0.1,
                 onStart: () => {
-                    setShowStars(true)
-                    setFilledCount(1)
-                    if (starsContainerRef.current) {
-                        gsap.fromTo(
-                            starsContainerRef.current,
-                            { opacity: 0, scale: 0.85 },
-                            { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }
-                        )
-                    }
+                    setStarCount(1)
                 },
             },
             8.0
         )
 
-        // At 9.6s: Star 2
+        // Star 2 appears at 9.8s
         masterTl.to(
             {},
             {
                 duration: 0.1,
                 onStart: () => {
-                    setFilledCount(2)
+                    setStarCount(2)
                 },
             },
-            9.6
+            9.8
         )
 
-        // At 11.2s: Star 3
+        // Star 3 appears at 11.6s
         masterTl.to(
             {},
             {
                 duration: 0.1,
                 onStart: () => {
-                    setFilledCount(3)
+                    setStarCount(3)
                 },
             },
-            11.2
+            11.6
         )
 
-        // At 12.8s: Star 4
+        // Star 4 appears at 13.4s
         masterTl.to(
             {},
             {
                 duration: 0.1,
                 onStart: () => {
-                    setFilledCount(4)
+                    setStarCount(4)
                 },
             },
-            12.8
+            13.4
         )
 
-        // At 14.4s: Star 5 (Full 5 Stars Climax + Flash + Screen rumble)
+        // Star 5 appears at 15.2s (Max Wanted!)
         masterTl.to(
             {},
             {
                 duration: 0.1,
                 onStart: () => {
-                    setFilledCount(5)
+                    setStarCount(5)
                     setIsMaxWanted(true)
 
                     if (flashRef.current) {
                         gsap.fromTo(
                             flashRef.current,
-                            { opacity: 0, scale: 0.6 },
+                            { opacity: 0, scale: 0.5 },
                             {
                                 opacity: 1,
                                 scale: 5,
@@ -188,8 +180,8 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                             {
                                 x: 10,
                                 y: 6,
-                                duration: 0.05,
-                                repeat: 6,
+                                duration: 0.04,
+                                repeat: 10,
                                 yoyo: true,
                                 ease: 'power2.inOut',
                                 onComplete: () => {
@@ -202,18 +194,26 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                     }
                 },
             },
-            14.4
+            15.2
         )
 
-        // Total duration: 17.0s (matches user's siren_loop.mp3)
-        masterTl.to({}, { duration: 2.6 }, 14.4)
+        // Hold until 17.0s (end of siren_loop.mp3)
+        masterTl.to({}, { duration: 1.8 }, 15.2)
+
+        // Key handler to skip
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.code === 'Space' || e.code === 'Enter') {
+                onComplete()
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown)
 
         return () => {
             masterTl.kill()
             strobeTl.kill()
+            window.removeEventListener('keydown', handleKeyDown)
             if (sweepRef.current) gsap.killTweensOf(sweepRef.current)
             if (containerRef.current) gsap.killTweensOf(containerRef.current)
-            if (starsContainerRef.current) gsap.killTweensOf(starsContainerRef.current)
             if (flashRef.current) gsap.killTweensOf(flashRef.current)
         }
     }, [onComplete, sounds])
@@ -221,21 +221,20 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
     return (
         <div
             ref={containerRef}
+            onClick={onComplete}
             style={{
                 position: 'fixed',
                 inset: 0,
-                background: '#000',
+                background: '#000000',
                 zIndex: 95,
                 overflow: 'hidden',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 userSelect: 'none',
+                cursor: 'pointer',
             }}
         >
-            <div className="noise-overlay" />
-            <div className="crt-scanlines" />
-
             {/* Red Police Strobe */}
             <div
                 ref={redRef}
@@ -243,7 +242,7 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                     position: 'absolute',
                     inset: 0,
                     background:
-                        'radial-gradient(ellipse at 15% 50%, rgba(255,0,0,0.65) 0%, rgba(200,0,0,0.2) 45%, transparent 70%)',
+                        'radial-gradient(ellipse at 15% 50%, rgba(255, 0, 0, 0.7) 0%, rgba(200, 0, 0, 0.25) 45%, transparent 70%)',
                     opacity: 0,
                     mixBlendMode: 'screen',
                 }}
@@ -256,13 +255,13 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                     position: 'absolute',
                     inset: 0,
                     background:
-                        'radial-gradient(ellipse at 85% 50%, rgba(0,100,255,0.65) 0%, rgba(0,70,220,0.2) 45%, transparent 70%)',
+                        'radial-gradient(ellipse at 85% 50%, rgba(0, 102, 255, 0.7) 0%, rgba(0, 70, 220, 0.25) 45%, transparent 70%)',
                     opacity: 0,
                     mixBlendMode: 'screen',
                 }}
             />
 
-            {/* Searchlight Beam */}
+            {/* Helicopter Searchlight Beam */}
             <div
                 ref={sweepRef}
                 style={{
@@ -272,7 +271,7 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                     width: '60%',
                     height: '140%',
                     background:
-                        'radial-gradient(ellipse at center, rgba(255,255,255,0.12) 0%, transparent 60%)',
+                        'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, transparent 60%)',
                     transform: 'rotate(-25deg)',
                     pointerEvents: 'none',
                     mixBlendMode: 'screen',
@@ -281,13 +280,14 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
 
             <div className="heavy-vignette" />
 
+            {/* Screen Flash on Max Wanted */}
             <div
                 ref={flashRef}
                 style={{
                     position: 'absolute',
                     width: '320px',
                     height: '320px',
-                    background: 'radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.85) 30%, transparent 70%)',
+                    background: 'radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.85) 30%, transparent 70%)',
                     opacity: 0,
                     filter: 'blur(20px)',
                     pointerEvents: 'none',
@@ -295,33 +295,50 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                 }}
             />
 
-            {/* Center Actual Wanted Stars - synced from 8.0s to 17.0s */}
-            {showStars && (
+            {/* STARS APPEAR SEQUENTIALLY: 1+1+1+1+1=5 (Clean, pure visual without any text clutter) */}
+            {starCount > 0 && (
                 <div
                     ref={starsContainerRef}
                     style={{
                         display: 'flex',
-                        gap: '24px',
+                        gap: '22px',
                         alignItems: 'center',
+                        justifyContent: 'center',
                         zIndex: 110,
+                        padding: '20px',
                     }}
                 >
-                    {[0, 1, 2, 3, 4].map((i) => {
-                        const isFilled = i < filledCount
-                        return (
-                            <StarIcon
-                                key={i}
-                                filled={isFilled}
-                                flashing={isMaxWanted}
-                                style={{
-                                    transition: 'transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)',
-                                    transform: isFilled ? 'scale(1.18)' : 'scale(1)',
-                                }}
-                            />
-                        )
-                    })}
+                    {Array.from({ length: starCount }).map((_, i) => (
+                        <div
+                            key={i}
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                animation: 'starPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                            }}
+                        >
+                            <StarIcon flashing={isMaxWanted} />
+                        </div>
+                    ))}
                 </div>
             )}
+
+            <style jsx>{`
+                @keyframes starPop {
+                    0% {
+                        transform: scale(0.3);
+                        opacity: 0;
+                    }
+                    70% {
+                        transform: scale(1.3);
+                    }
+                    100% {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+            `}</style>
         </div>
     )
 }

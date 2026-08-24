@@ -15,7 +15,7 @@ __turbopack_context__.v((parentImport) => {
 
 __turbopack_context__.v((parentImport) => {
     return Promise.all([
-  "static/chunks/node_modules_gsap_04cg7u0._.js",
+  "static/chunks/node_modules_0s3vpy8._.js",
   "static/chunks/components_WantedStars_tsx_151e5i_._.js",
   "static/chunks/components_WantedStars_tsx_19k9-ht._.js"
 ].map((chunk) => __turbopack_context__.l(chunk))).then(() => {
@@ -87,8 +87,8 @@ __turbopack_context__.v((parentImport) => {
 
 __turbopack_context__.v((parentImport) => {
     return Promise.all([
+  "static/chunks/components_14tx82m._.js",
   "static/chunks/node_modules_gsap_04cg7u0._.js",
-  "static/chunks/components_LandingPage_tsx_10e12zl._.js",
   "static/chunks/components_LandingPage_tsx_19k9-ht._.js"
 ].map((chunk) => __turbopack_context__.l(chunk))).then(() => {
         return parentImport("[project]/components/LandingPage.tsx [app-client] (ecmascript, next/dynamic entry)");

@@ -9,6 +9,7 @@ export interface SoundEffects {
 
 export type Phase =
     | 'COLD_BOOT'
+    | 'STARS'
     | 'CHASE_AND_STARS'
     | 'CITY'
     | 'WARNING'

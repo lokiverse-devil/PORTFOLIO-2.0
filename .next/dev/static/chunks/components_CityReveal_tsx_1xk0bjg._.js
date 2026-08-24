@@ -133,7 +133,7 @@ function CityReveal({ onComplete }) {
                             letterSpacing: '0.2em',
                             color: '#ffffff'
                         },
-                        children: "LOS SANTOS // SAN ANDREAS"
+                        children: "PORTFOLIO 2.0 // DEPLOYMENT"
                     }, void 0, false, {
                         fileName: "[project]/components/CityReveal.tsx",
                         lineNumber: 102,

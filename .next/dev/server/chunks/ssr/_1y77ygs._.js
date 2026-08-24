@@ -52,8 +52,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$AudioUnlock$2e
 ;
 ;
 const metadata = {
-    title: 'OM PANDEY // LOS SANTOS PROTOCOL',
-    description: 'GTA V-style cinematic interactive developer portfolio by Om Pandey',
+    title: 'OM PANDEY // PORTFOLIO 2.0',
+    description: 'AAA-style cinematic interactive developer portfolio by Om Pandey',
     authors: [
         {
             name: 'Om Pandey'

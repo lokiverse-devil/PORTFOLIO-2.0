@@ -100,7 +100,7 @@ export default function CityReveal({ onComplete }: CityRevealProps) {
                 }}
             >
                 <div style={{ fontSize: '1.05rem', letterSpacing: '0.2em', color: '#ffffff' }}>
-                    LOS SANTOS // SAN ANDREAS
+                    PORTFOLIO 2.0 // DEPLOYMENT
                 </div>
                 <div style={{ fontSize: '0.85rem', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.65)' }}>
                     {time}
