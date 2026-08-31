@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 export interface StudyWaypoint {
     id: string
@@ -83,113 +83,321 @@ export const STUDY_WAYPOINTS: StudyWaypoint[] = [
     },
 ]
 
+const TYPE_COLORS: Record<string, string> = {
+    SCHOOL: '#7eb8f7',
+    SECONDARY: '#c084fc',
+    DIPLOMA: '#f5a623',
+    BTECH: '#66CC66',
+    FUTURE: '#34d399',
+}
+
 export default function MapSection() {
     const [selectedId, setSelectedId] = useState<string>('dehradun')
+    const [radarAngle, setRadarAngle] = useState(0)
+    const radarRef = useRef<number>(0)
+    const animRef = useRef<number | null>(null)
+
     const activePoint = STUDY_WAYPOINTS.find((w) => w.id === selectedId) || STUDY_WAYPOINTS[3]
+    const accentColor = TYPE_COLORS[activePoint.type] || '#f5a623'
+
+    // Radar sweep animation
+    useEffect(() => {
+        let last = performance.now()
+        const animate = (now: number) => {
+            const delta = now - last
+            last = now
+            radarRef.current = (radarRef.current + delta * 0.12) % 360
+            setRadarAngle(radarRef.current)
+            animRef.current = requestAnimationFrame(animate)
+        }
+        animRef.current = requestAnimationFrame(animate)
+        return () => { if (animRef.current) cancelAnimationFrame(animRef.current) }
+    }, [])
 
     return (
         <div className="flex flex-col gap-4 w-full">
             {/* Top Bar Header */}
-            <div className="flex flex-wrap items-center justify-between border-b border-white/20 pb-3 gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-3"
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
                 <div>
-                    <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 bg-[#f5a623] inline-block shadow-[0_0_8px_#f5a623]" />
-                        <h3 className="font-chalet text-[1.3rem] sm:text-[1.6rem] text-white tracking-wider uppercase">
+                    <div className="flex items-center gap-2.5">
+                        <div style={{
+                            width: '10px', height: '10px',
+                            background: '#f5a623',
+                            boxShadow: '0 0 10px rgba(245,166,35,0.9), 0 0 20px rgba(245,166,35,0.5)',
+                            animation: 'gold-pulse 2.8s ease-in-out infinite',
+                        }} />
+                        <h3 style={{
+                            fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
+                            fontSize: 'clamp(1.1rem, 2.2vw, 1.55rem)',
+                            letterSpacing: '0.12em',
+                            color: '#fff',
+                            textTransform: 'uppercase',
+                            textShadow: '0 0 20px rgba(255,255,255,0.1)',
+                        }}>
                             TERRITORY RADAR // ACADEMIC EXPEDITIONS
                         </h3>
                     </div>
-                    <p className="font-chalet-condensed text-[0.8rem] sm:text-[0.9rem] text-white/70 uppercase tracking-widest mt-0.5">
+                    <p style={{
+                        fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                        fontSize: '0.78rem',
+                        color: 'rgba(255,255,255,0.55)',
+                        letterSpacing: '0.25em',
+                        textTransform: 'uppercase',
+                        marginTop: '3px',
+                    }}>
                         UTTARAKHAND (INDIA) TO GLOBAL HORIZON // SELECT A WAYPOINT FOR DOSSIER
                     </p>
                 </div>
 
-                <div className="flex items-center gap-2">
-                    <span className="bg-[#f5a623]/20 border border-[#f5a623] text-[#f5a623] px-3 py-1 text-[0.72rem] font-chalet-condensed tracking-widest uppercase">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{
+                        width: '6px', height: '6px',
+                        background: '#f5a623',
+                        boxShadow: '0 0 6px rgba(245,166,35,0.9)',
+                        animation: 'live-pulse 1.5s ease-in-out infinite',
+                    }} />
+                    <span style={{
+                        fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                        fontSize: '0.72rem',
+                        color: '#f5a623',
+                        background: 'rgba(245,166,35,0.08)',
+                        border: '1px solid rgba(245,166,35,0.35)',
+                        padding: '4px 12px',
+                        letterSpacing: '0.2em',
+                        textTransform: 'uppercase',
+                        fontWeight: 700,
+                        textShadow: '0 0 8px rgba(245,166,35,0.5)',
+                    }}>
                         GPS GRID ACTIVE
                     </span>
                 </div>
             </div>
 
-            {/* Main Map + Intel Split Layout (4K Clean Solid Theme) */}
+            {/* Main Map + Intel Split Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-                {/* Tactical Radar Map Screen (7 cols) */}
-                <div className="lg:col-span-7 bg-[#0b0b0e] border border-white/25 relative min-h-[340px] sm:min-h-[380px] p-4 flex flex-col justify-between overflow-hidden">
-                    {/* High-Contrast Crisp Grid Overlay */}
+                {/* Tactical Radar Map (7 cols) */}
+                <div
+                    className="lg:col-span-7 relative overflow-hidden"
+                    style={{
+                        background: 'linear-gradient(135deg, #080c0b 0%, #050a08 100%)',
+                        border: '1px solid rgba(255,255,255,0.12)',
+                        minHeight: '340px',
+                        padding: '16px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    {/* Tactical Grid Background */}
                     <div
-                        className="absolute inset-0 pointer-events-none opacity-20"
+                        className="absolute inset-0 pointer-events-none"
                         style={{
                             backgroundImage: `
-                                linear-gradient(to right, rgba(255,255,255,0.18) 1px, transparent 1px),
-                                linear-gradient(to bottom, rgba(255,255,255,0.18) 1px, transparent 1px)
+                                linear-gradient(to right, rgba(102,204,102,0.07) 1px, transparent 1px),
+                                linear-gradient(to bottom, rgba(102,204,102,0.07) 1px, transparent 1px)
                             `,
                             backgroundSize: '40px 40px',
+                            opacity: 0.8,
                         }}
                     />
 
-                    {/* Radar Concentric Circles */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] rounded-full border border-white/15 pointer-events-none" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[460px] h-[460px] rounded-full border border-white/10 pointer-events-none" />
-
-                    {/* Top HUD inside map */}
-                    <div className="relative z-10 flex justify-between items-center text-[0.75rem] font-chalet-condensed text-white/70 tracking-widest uppercase">
-                        <div>SAT_NAV // SECTOR 05: UTTARAKHAND</div>
-                        <div className="text-[#66CC66] font-bold">SIGNAL: 100% LOCK</div>
+                    {/* Diagonal accent lines (map terrain feel) */}
+                    <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.04 }}>
+                        <div style={{
+                            position: 'absolute',
+                            inset: 0,
+                            backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 1px, transparent 1px, transparent 30px)',
+                        }} />
                     </div>
 
-                    {/* SVG Route Lines connecting waypoints */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+                    {/* Radar Sweep Conic */}
+                    <div className="absolute pointer-events-none" style={{
+                        top: '50%', left: '50%',
+                        width: '300px', height: '300px',
+                        marginLeft: '-150px', marginTop: '-150px',
+                        borderRadius: '50% !important',
+                        background: `conic-gradient(
+                            from ${radarAngle}deg,
+                            rgba(102,204,102,0.18) 0deg,
+                            rgba(102,204,102,0.06) 20deg,
+                            transparent 60deg,
+                            transparent 360deg
+                        )`,
+                        zIndex: 1,
+                    }} />
+
+                    {/* Radar Concentric Rings */}
+                    <div className="absolute pointer-events-none" style={{
+                        top: '50%', left: '50%',
+                        width: '200px', height: '200px',
+                        marginLeft: '-100px', marginTop: '-100px',
+                        borderRadius: '50% !important',
+                        border: '1px solid rgba(102,204,102,0.15)',
+                        zIndex: 1,
+                    }} />
+                    <div className="absolute pointer-events-none" style={{
+                        top: '50%', left: '50%',
+                        width: '350px', height: '350px',
+                        marginLeft: '-175px', marginTop: '-175px',
+                        borderRadius: '50% !important',
+                        border: '1px solid rgba(102,204,102,0.08)',
+                        zIndex: 1,
+                    }} />
+                    <div className="absolute pointer-events-none" style={{
+                        top: '50%', left: '50%',
+                        width: '500px', height: '500px',
+                        marginLeft: '-250px', marginTop: '-250px',
+                        borderRadius: '50% !important',
+                        border: '1px solid rgba(102,204,102,0.05)',
+                        zIndex: 1,
+                    }} />
+
+                    {/* Radar sweep arm */}
+                    <div className="absolute pointer-events-none" style={{
+                        top: '50%', left: '50%',
+                        width: '160px', height: '1px',
+                        transformOrigin: '0 50%',
+                        transform: `rotate(${radarAngle}deg)`,
+                        background: 'linear-gradient(to right, rgba(102,204,102,0.9), transparent)',
+                        boxShadow: '0 0 4px rgba(102,204,102,0.5)',
+                        zIndex: 2,
+                    }} />
+
+                    {/* Top HUD inside map */}
+                    <div className="relative flex justify-between items-center" style={{
+                        fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                        fontSize: '0.7rem',
+                        color: 'rgba(102,204,102,0.7)',
+                        letterSpacing: '0.22em',
+                        textTransform: 'uppercase',
+                        zIndex: 10,
+                    }}>
+                        <div>SAT_NAV // SECTOR 05: UTTARAKHAND</div>
+                        <div style={{
+                            color: '#66CC66',
+                            fontWeight: 700,
+                            textShadow: '0 0 8px rgba(102,204,102,0.6)',
+                        }}>
+                            SIGNAL: 100% LOCK
+                        </div>
+                    </div>
+
+                    {/* SVG Route Lines (animated dash) */}
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 3 }}>
+                        <defs>
+                            <filter id="glow-gold">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                                <feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                            </filter>
+                            <filter id="glow-green">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                                <feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                            </filter>
+                        </defs>
+                        {/* Education path — gold dashes */}
                         <polyline
                             points="72%,55% 65%,68% 50%,72% 28%,38%"
                             fill="none"
-                            stroke="rgba(245, 166, 35, 0.6)"
-                            strokeWidth="2.5"
-                            strokeDasharray="6 4"
+                            stroke="rgba(245, 166, 35, 0.65)"
+                            strokeWidth="2"
+                            strokeDasharray="6 5"
+                            filter="url(#glow-gold)"
+                            style={{ animation: 'dash-march 0.7s linear infinite' }}
                         />
+                        {/* Future path — green dashes */}
                         <polyline
                             points="28%,38% 88%,22%"
                             fill="none"
-                            stroke="rgba(102, 204, 102, 0.5)"
-                            strokeWidth="2.5"
-                            strokeDasharray="4 4"
+                            stroke="rgba(52, 211, 153, 0.7)"
+                            strokeWidth="2"
+                            strokeDasharray="4 5"
+                            filter="url(#glow-green)"
+                            style={{ animation: 'dash-march 0.5s linear infinite' }}
                         />
                     </svg>
 
                     {/* Waypoint Blips */}
                     {STUDY_WAYPOINTS.map((wp, idx) => {
                         const isSelected = wp.id === selectedId
+                        const color = TYPE_COLORS[wp.type] || '#f5a623'
                         return (
                             <button
                                 key={wp.id}
                                 onClick={() => setSelectedId(wp.id)}
                                 style={{
+                                    position: 'absolute',
                                     left: `${wp.coordinates.x}%`,
                                     top: `${wp.coordinates.y}%`,
+                                    transform: 'translate(-50%, -50%)',
+                                    zIndex: 20,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    padding: '4px',
+                                    outline: 'none',
+                                    transition: 'transform 0.2s ease',
                                 }}
-                                className={`absolute -translate-x-1/2 -translate-y-1/2 z-20 flex items-center gap-1.5 p-1.5 transition-all duration-200 outline-none cursor-pointer ${
-                                    isSelected ? 'scale-110' : 'hover:scale-105 opacity-85 hover:opacity-100'
-                                }`}
                             >
+                                {/* Ping ring on selected */}
+                                {isSelected && (
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '12px',
+                                        width: '24px',
+                                        height: '24px',
+                                        border: `1px solid ${color}`,
+                                        borderRadius: '50% !important',
+                                        animation: 'ping-ring 1.6s cubic-bezier(0, 0, 0.2, 1) infinite',
+                                        pointerEvents: 'none',
+                                        boxShadow: `0 0 8px ${color}50`,
+                                    }} />
+                                )}
+
                                 {/* Blip Icon */}
-                                <div
-                                    className={`w-6 h-6 flex items-center justify-center font-chalet text-[0.72rem] font-bold border transition-all ${
-                                        isSelected
-                                            ? 'bg-[#f5a623] text-black border-white shadow-[0_0_12px_#f5a623]'
-                                            : wp.type === 'FUTURE'
-                                            ? 'bg-[#66CC66]/30 text-[#66CC66] border-[#66CC66]'
-                                            : 'bg-[#15151a] text-white border-white/60 hover:border-white'
-                                    }`}
-                                >
+                                <div style={{
+                                    width: '24px',
+                                    height: '24px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontFamily: 'ChaletLondon1960,"Bebas Neue",sans-serif',
+                                    fontSize: '0.72rem',
+                                    fontWeight: 700,
+                                    background: isSelected
+                                        ? color
+                                        : wp.type === 'FUTURE'
+                                            ? `${color}25`
+                                            : 'rgba(15,15,20,0.92)',
+                                    color: isSelected ? '#000' : color,
+                                    border: `1px solid ${color}`,
+                                    boxShadow: isSelected
+                                        ? `0 0 14px ${color}, 0 0 28px ${color}50`
+                                        : `0 0 6px ${color}50`,
+                                    transition: 'all 0.2s ease',
+                                    flexShrink: 0,
+                                }}>
                                     {idx + 1}
                                 </div>
 
                                 {/* Label tag */}
-                                <div
-                                    className={`px-2 py-0.5 text-[0.68rem] sm:text-[0.72rem] font-chalet-condensed uppercase tracking-wider whitespace-nowrap border ${
-                                        isSelected
-                                            ? 'bg-white text-black border-white font-bold'
-                                            : 'bg-[#15151a] text-white/90 border-white/30'
-                                    }`}
-                                >
+                                <div style={{
+                                    padding: '2px 8px',
+                                    fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                    fontSize: '0.68rem',
+                                    letterSpacing: '0.15em',
+                                    textTransform: 'uppercase',
+                                    whiteSpace: 'nowrap',
+                                    background: isSelected ? color : 'rgba(8,10,9,0.88)',
+                                    color: isSelected ? '#000' : 'rgba(255,255,255,0.85)',
+                                    border: `1px solid ${isSelected ? color : `${color}50`}`,
+                                    boxShadow: isSelected ? `0 0 10px ${color}60` : 'none',
+                                    fontWeight: isSelected ? 700 : 400,
+                                }}>
                                     {wp.institution.split(' ')[0]}
                                 </div>
                             </button>
@@ -197,54 +405,148 @@ export default function MapSection() {
                     })}
 
                     {/* Bottom HUD inside map */}
-                    <div className="relative z-10 flex justify-between items-end text-[0.72rem] font-chalet-condensed text-white/60 tracking-wider uppercase mt-auto pt-4 border-t border-white/15">
+                    <div className="relative flex justify-between items-end pt-3 mt-auto" style={{
+                        borderTop: '1px solid rgba(102,204,102,0.12)',
+                        fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                        fontSize: '0.68rem',
+                        color: 'rgba(255,255,255,0.4)',
+                        letterSpacing: '0.18em',
+                        textTransform: 'uppercase',
+                        zIndex: 10,
+                    }}>
                         <div>
-                            LAT: <span className="text-white font-bold">{activePoint.coordinates.lat}</span> // LONG:{' '}
-                            <span className="text-white font-bold">{activePoint.coordinates.long}</span>
+                            LAT: <span style={{ color: '#66CC66', fontWeight: 700 }}>{activePoint.coordinates.lat}</span>
+                            {' '}// LONG:{' '}
+                            <span style={{ color: '#66CC66', fontWeight: 700 }}>{activePoint.coordinates.long}</span>
                         </div>
-                        <div>CLICK WAYPOINTS 1-5 TO INSPECT</div>
+                        <div>CLICK WAYPOINTS 1–5 TO INSPECT</div>
                     </div>
                 </div>
 
                 {/* Waypoint Intel Dossier (5 cols) */}
-                <div className="lg:col-span-5 bg-[#0e0e12] border-l-4 border-[#f5a623] border-y border-r border-white/20 p-5 flex flex-col justify-between">
+                <div
+                    className="lg:col-span-5 flex flex-col justify-between"
+                    style={{
+                        background: 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)',
+                        borderTop: '1px solid rgba(255,255,255,0.1)',
+                        borderRight: '1px solid rgba(255,255,255,0.1)',
+                        borderBottom: '1px solid rgba(255,255,255,0.1)',
+                        borderLeft: `3px solid ${accentColor}`,
+                        padding: '18px 20px',
+                        boxShadow: `inset 3px 0 20px ${accentColor}08`,
+                        transition: 'border-left-color 0.3s ease, box-shadow 0.3s ease',
+                    }}
+                >
                     <div className="flex flex-col gap-3">
-                        <div className="flex justify-between items-start">
-                            <div>
-                                <span className="font-chalet-condensed text-[0.75rem] text-[#f5a623] uppercase tracking-widest font-bold">
-                                    [ WAYPOINT {STUDY_WAYPOINTS.findIndex((w) => w.id === activePoint.id) + 1} OF 5 ]
-                                </span>
-                                <h4 className="font-chalet text-[1.4rem] sm:text-[1.6rem] text-white uppercase leading-tight mt-0.5">
-                                    {activePoint.institution}
-                                </h4>
-                                <p className="font-chalet-condensed text-[0.88rem] text-white/80 uppercase tracking-wider">
-                                    {activePoint.location}
-                                </p>
-                            </div>
+                        {/* Waypoint number + institution */}
+                        <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '12px' }}>
+                            <span style={{
+                                fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                fontSize: '0.7rem',
+                                color: accentColor,
+                                letterSpacing: '0.3em',
+                                textTransform: 'uppercase',
+                                fontWeight: 700,
+                                textShadow: `0 0 8px ${accentColor}80`,
+                                display: 'block',
+                                marginBottom: '6px',
+                            }}>
+                                [ WAYPOINT {STUDY_WAYPOINTS.findIndex((w) => w.id === activePoint.id) + 1} OF 5 ]
+                            </span>
+                            <h4 style={{
+                                fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
+                                fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
+                                color: '#fff',
+                                letterSpacing: '0.08em',
+                                textTransform: 'uppercase',
+                                lineHeight: 1.1,
+                                textShadow: '0 0 20px rgba(255,255,255,0.1)',
+                            }}>
+                                {activePoint.institution}
+                            </h4>
+                            <p style={{
+                                fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                fontSize: '0.82rem',
+                                color: 'rgba(255,255,255,0.6)',
+                                letterSpacing: '0.2em',
+                                textTransform: 'uppercase',
+                                marginTop: '4px',
+                            }}>
+                                {activePoint.location}
+                            </p>
                         </div>
 
-                        <div className="flex items-center gap-2">
-                            <span className="bg-white/10 border border-white/30 text-white text-[0.72rem] font-chalet-condensed px-2.5 py-0.5 uppercase tracking-wider">
+                        {/* Status badges */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                            <span style={{
+                                fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                fontSize: '0.68rem',
+                                background: 'rgba(255,255,255,0.07)',
+                                border: '1px solid rgba(255,255,255,0.2)',
+                                color: 'rgba(255,255,255,0.8)',
+                                padding: '3px 10px',
+                                letterSpacing: '0.18em',
+                                textTransform: 'uppercase',
+                            }}>
                                 {activePoint.year}
                             </span>
-                            <span className="bg-[#66CC66]/20 border border-[#66CC66] text-[#66CC66] text-[0.72rem] font-chalet-condensed px-2.5 py-0.5 uppercase tracking-wider font-bold">
+                            <span style={{
+                                fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                fontSize: '0.68rem',
+                                background: `${accentColor}12`,
+                                border: `1px solid ${accentColor}50`,
+                                color: accentColor,
+                                padding: '3px 10px',
+                                letterSpacing: '0.18em',
+                                textTransform: 'uppercase',
+                                fontWeight: 700,
+                                textShadow: `0 0 6px ${accentColor}60`,
+                            }}>
                                 {activePoint.status}
                             </span>
                         </div>
 
-                        <p className="font-chalet-condensed text-[0.9rem] text-white/90 uppercase leading-relaxed tracking-wider border-t border-white/15 pt-3">
+                        {/* Description */}
+                        <p style={{
+                            fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                            fontSize: '0.88rem',
+                            color: 'rgba(255,255,255,0.75)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.06em',
+                            lineHeight: '1.6',
+                            borderTop: '1px solid rgba(255,255,255,0.08)',
+                            paddingTop: '12px',
+                        }}>
                             {activePoint.desc}
                         </p>
 
-                        <div className="flex flex-col gap-1.5 mt-1">
-                            <span className="font-chalet-condensed text-[0.72rem] text-white/60 uppercase tracking-widest">
+                        {/* Highlights */}
+                        <div>
+                            <span style={{
+                                fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                fontSize: '0.68rem',
+                                color: 'rgba(255,255,255,0.4)',
+                                letterSpacing: '0.3em',
+                                textTransform: 'uppercase',
+                                display: 'block',
+                                marginBottom: '8px',
+                            }}>
                                 KEY COMPETENCIES & MILESTONES:
                             </span>
-                            <div className="flex flex-wrap gap-1.5">
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                                 {activePoint.highlights.map((h, i) => (
                                     <span
                                         key={i}
-                                        className="bg-white/10 border-l-2 border-[#f5a623] px-2.5 py-1 text-[0.74rem] font-chalet-condensed text-white uppercase tracking-wider"
+                                        style={{
+                                            background: `${accentColor}0a`,
+                                            borderLeft: `2px solid ${accentColor}`,
+                                            padding: '4px 10px',
+                                            fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                            fontSize: '0.72rem',
+                                            color: 'rgba(255,255,255,0.85)',
+                                            letterSpacing: '0.12em',
+                                            textTransform: 'uppercase',
+                                        }}
                                     >
                                         {h}
                                     </span>
@@ -254,18 +556,37 @@ export default function MapSection() {
                     </div>
 
                     {/* Waypoint Selector Navigation Bar */}
-                    <div className="grid grid-cols-5 gap-1.5 pt-4 mt-4 border-t border-white/15">
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(5, 1fr)',
+                        gap: '6px',
+                        paddingTop: '16px',
+                        marginTop: '16px',
+                        borderTop: '1px solid rgba(255,255,255,0.08)',
+                    }}>
                         {STUDY_WAYPOINTS.map((wp, i) => {
                             const isSelected = wp.id === selectedId
+                            const color = TYPE_COLORS[wp.type] || '#f5a623'
                             return (
                                 <button
                                     key={wp.id}
                                     onClick={() => setSelectedId(wp.id)}
-                                    className={`py-1.5 text-[0.72rem] font-chalet-condensed uppercase tracking-wider text-center border transition-all ${
-                                        isSelected
-                                            ? 'bg-white text-black border-white font-bold'
-                                            : 'bg-[#15151a] text-white/70 border-white/20 hover:border-white/50'
-                                    }`}
+                                    style={{
+                                        padding: '6px 4px',
+                                        fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                        fontSize: '0.72rem',
+                                        letterSpacing: '0.1em',
+                                        textTransform: 'uppercase',
+                                        textAlign: 'center',
+                                        background: isSelected ? color : 'rgba(15,15,20,0.6)',
+                                        color: isSelected ? '#000' : 'rgba(255,255,255,0.55)',
+                                        border: `1px solid ${isSelected ? color : 'rgba(255,255,255,0.12)'}`,
+                                        cursor: 'pointer',
+                                        fontWeight: isSelected ? 700 : 400,
+                                        boxShadow: isSelected ? `0 0 12px ${color}60` : 'none',
+                                        transition: 'all 0.18s ease',
+                                        outline: 'none',
+                                    }}
                                 >
                                     0{i + 1}
                                 </button>

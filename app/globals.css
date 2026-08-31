@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Bebas+Neue&family=Montserrat:wght@600;700;800;900&family=Chango&family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Bebas+Neue&family=Montserrat:wght@600;700;800;900&family=Chango&family=Russo+One&family=Share+Tech+Mono&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -67,10 +67,19 @@ body {
 }
 
 /* =============================================
-/* =============================================
-   CINEMATIC OVERLAYS & CRISP 4K RENDERING
+   CINEMATIC FILM GRAIN OVERLAY
    ============================================= */
 .noise-overlay {
+  display: none !important;
+}
+
+/* Film grain — disabled for crystal 4K clarity */
+.film-grain {
+  display: none !important;
+}
+
+/* Scanlines — disabled for crystal 4K clarity */
+.scanlines {
   display: none !important;
 }
 
@@ -78,12 +87,21 @@ body {
   display: none !important;
 }
 
+/* =============================================
+   HEAVY VIGNETTE + AMBIENT LIGHTING
+   ============================================= */
+/* Very subtle vignette — just a soft edge darkening, no muddiness */
 .heavy-vignette {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9990;
-  background: radial-gradient(circle, transparent 55%, rgba(0, 0, 0, 0.4) 85%, rgba(0, 0, 0, 0.85) 100%);
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.22) 85%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
 }
 
 /* =============================================
@@ -120,6 +138,170 @@ body {
   }
 }
 
+/* =============================================
+   PREMIUM GLOW ANIMATIONS
+   ============================================= */
+@keyframes gold-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(245, 166, 35, 0.3), inset 0 0 8px rgba(245, 166, 35, 0.05);
+    border-color: rgba(245, 166, 35, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(245, 166, 35, 0.7), 0 0 45px rgba(245, 166, 35, 0.25), inset 0 0 15px rgba(245, 166, 35, 0.08);
+    border-color: rgba(245, 166, 35, 0.9);
+  }
+}
+
+@keyframes neon-breathe {
+  0%, 100% {
+    box-shadow: 0 0 6px rgba(102, 204, 102, 0.25), inset 0 0 6px rgba(102, 204, 102, 0.04);
+    border-color: rgba(102, 204, 102, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(102, 204, 102, 0.65), 0 0 40px rgba(102, 204, 102, 0.2), inset 0 0 12px rgba(102, 204, 102, 0.07);
+    border-color: rgba(102, 204, 102, 0.85);
+  }
+}
+
+@keyframes border-pulse-gold {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes ambient-flicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.94; }
+  95% { opacity: 0.98; }
+  97% { opacity: 0.93; }
+}
+
+/* =============================================
+   SHIMMER ANIMATION
+   ============================================= */
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+@keyframes shimmer-bar {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.stat-bar-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.35) 40%,
+    rgba(255,255,255,0.55) 50%,
+    rgba(255,255,255,0.35) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-bar 2.4s ease-in-out infinite;
+}
+
+/* =============================================
+   RADAR SWEEP
+   ============================================= */
+@keyframes radar-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.radar-sweep {
+  animation: radar-rotate 3s linear infinite;
+  transform-origin: center center;
+}
+
+/* =============================================
+   PING ANIMATION (Waypoint)
+   ============================================= */
+@keyframes ping-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3.5);
+    opacity: 0;
+  }
+}
+
+.waypoint-ping {
+  animation: ping-ring 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* =============================================
+   DASH ANIMATION (Route Lines)
+   ============================================= */
+@keyframes dash-march {
+  to { stroke-dashoffset: -20; }
+}
+
+.route-animated {
+  animation: dash-march 0.7s linear infinite;
+}
+
+/* =============================================
+   TYPEWRITER
+   ============================================= */
+@keyframes blink-caret {
+  0%, 100% { border-color: rgba(255,255,255,0.8); }
+  50% { border-color: transparent; }
+}
+
+.typewriter-cursor {
+  border-right: 2px solid rgba(255,255,255,0.8);
+  animation: blink-caret 1s step-end infinite;
+  padding-right: 3px;
+}
+
+/* =============================================
+   PANEL GLOW UTILITIES
+   ============================================= */
+.panel-glow-gold {
+  animation: gold-pulse 2.8s ease-in-out infinite;
+}
+
+.panel-glow-green {
+  animation: neon-breathe 2.8s ease-in-out infinite;
+}
+
+/* =============================================
+   PULSE DOT (Live indicator)
+   ============================================= */
+@keyframes live-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(102, 204, 102, 0.7);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 5px rgba(102, 204, 102, 0);
+  }
+}
+
+.live-dot {
+  animation: live-pulse 1.5s ease-in-out infinite;
+}
+
+/* =============================================
+   STAT BAR FILL ANIMATION
+   ============================================= */
+@keyframes bar-fill {
+  from { width: 0%; }
+  to { width: var(--target-width, 100%); }
+}
+
+.bar-fill-animate {
+  animation: bar-fill 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* =============================================
+   SMOOTH PULSE (existing, kept)
+   ============================================= */
 .smooth-pulse {
   animation: smooth-pulse-anim 2.4s ease-in-out infinite;
 }
@@ -159,10 +341,67 @@ body {
   100% { opacity: 0.92; }
 }
 
+/* =============================================
+   SLIDE-IN ANIMATION
+   ============================================= */
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in-up {
+  animation: slide-in-up 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* =============================================
+   CORNER BRACKET DECORATION
+   ============================================= */
+.corner-bracket {
+  position: relative;
+}
+
+.corner-bracket::before,
+.corner-bracket::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.corner-bracket::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid rgba(212,150,10,0.6);
+  border-left: 1px solid rgba(212,150,10,0.6);
+}
+
+.corner-bracket::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid rgba(212,150,10,0.6);
+  border-right: 1px solid rgba(212,150,10,0.6);
+}
+
+/* =============================================
+   CSS VARIABLES
+   ============================================= */
 :root {
   --gta-green: #66CC66;
   --gta-red: #cc0000;
   --gta-gold: #f5a623;
+  --gta-dark: #080808;
+  --gta-panel: #0a0a0e;
+  --gta-card: #0e0e12;
+  --gold-glow: 0 0 18px rgba(245,166,35,0.6), 0 0 36px rgba(245,166,35,0.25);
+  --green-glow: 0 0 14px rgba(102,204,102,0.55), 0 0 28px rgba(102,204,102,0.2);
 }
 
 /* =============================================
@@ -279,17 +518,73 @@ body {
   overflow-y: auto;
 }
 
+/* Premium scrollbar */
 .landing-content-panel::-webkit-scrollbar {
-  width: 5px;
-}
-.landing-content-panel::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.6);
-}
-.landing-content-panel::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.4);
+  width: 3px;
 }
 
-/* Mobile responsive styles */
+.landing-content-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.landing-content-panel::-webkit-scrollbar-thumb {
+  background: rgba(212,150,10,0.35);
+}
+
+.landing-content-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(212,150,10,0.65);
+}
+
+/* =============================================
+   GOLD TEXT GLOW
+   ============================================= */
+.text-gold-glow {
+  color: #f5a623;
+  text-shadow: 0 0 10px rgba(245,166,35,0.8), 0 0 24px rgba(245,166,35,0.4);
+}
+
+.text-green-glow {
+  color: #66CC66;
+  text-shadow: 0 0 10px rgba(102,204,102,0.8), 0 0 24px rgba(102,204,102,0.4);
+}
+
+/* =============================================
+   CARD HOVER SHIMMER
+   ============================================= */
+@keyframes card-shimmer {
+  0% { left: -100%; }
+  100% { left: 150%; }
+}
+
+.card-shimmer-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shimmer-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.06) 50%,
+    transparent 100%
+  );
+  transition: none;
+  pointer-events: none;
+}
+
+.card-shimmer-container:hover::after {
+  animation: card-shimmer 0.8s ease-in-out;
+}
+
+/* =============================================
+   MOBILE RESPONSIVE
+   ============================================= */
 @media (max-width: 768px) {
   .wanted-star-svg {
     width: 44px !important;
