@@ -16,27 +16,29 @@ var _s = __turbopack_context__.k.signature();
 ;
 const CONFIGS = {
     'passed-access': {
-        color: '#66CC66',
+        color: '#4ade80',
         line1: 'MISSION PASSED',
         line2: 'ACCESS GRANTED',
-        isPassed: true
+        isPassed: true,
+        rewardText: '+₹15,000 CASH BONUS'
     },
     'passed-portfolio': {
-        color: '#66CC66',
+        color: '#4ade80',
         line1: 'MISSION PASSED',
         line2: 'PORTFOLIO LOADED',
-        isPassed: true
+        isPassed: true,
+        rewardText: '+₹40,000 HEIST SHARE'
     },
     'failed-denied': {
-        color: '#b80000',
+        color: '#ef4444',
         line1: 'MISSION FAILED',
-        line2: 'ACCESS DENIED',
+        line2: 'ACCESS DENIED — RETRYING...',
         isPassed: false
     },
     'failed-redirect': {
-        color: '#b80000',
+        color: '#ef4444',
         line1: 'MISSION FAILED',
-        line2: 'REDIRECTING\u2026',
+        line2: 'REDIRECTING TO BRIEFING...',
         isPassed: false
     }
 };
@@ -47,7 +49,14 @@ function MissionResult({ type, onComplete, sounds }) {
     const headlineRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const subtitleRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const lineRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const statsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const completedRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
     const cfg = type && CONFIGS[type] || CONFIGS['passed-access'];
+    const triggerComplete = ()=>{
+        if (completedRef.current) return;
+        completedRef.current = true;
+        onComplete();
+    };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "MissionResult.useEffect": ()=>{
             try {
@@ -62,12 +71,12 @@ function MissionResult({ type, onComplete, sounds }) {
                 console.warn('Audio notice in mission result:', e);
             }
             const tl = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].timeline({
-                onComplete
+                onComplete: triggerComplete
             });
             // Initial flash
             if (flashRef.current) {
                 tl.fromTo(flashRef.current, {
-                    opacity: 0.6,
+                    opacity: 0.7,
                     backgroundColor: cfg.color
                 }, {
                     opacity: 0,
@@ -75,24 +84,24 @@ function MissionResult({ type, onComplete, sounds }) {
                     ease: 'power2.out'
                 });
             }
-            // Background desaturation / dimming
+            // Background dim
             if (overlayRef.current) {
                 tl.to(overlayRef.current, {
-                    backgroundColor: 'rgba(0,0,0,0.92)',
-                    duration: 0.3
+                    backgroundColor: 'rgba(5, 5, 8, 0.95)',
+                    duration: 0.25
                 }, '-=0.25');
             }
             // Headline Slam
             if (headlineRef.current) {
                 tl.fromTo(headlineRef.current, {
-                    scale: 2.2,
+                    scale: 2.3,
                     opacity: 0
                 }, {
                     scale: 1,
                     opacity: 1,
-                    duration: 0.45,
-                    ease: 'expo.out'
-                }, '-=0.2');
+                    duration: 0.4,
+                    ease: 'back.out(1.5)'
+                }, '-=0.15');
             }
             // Horizontal Line Expand
             if (lineRef.current) {
@@ -102,7 +111,7 @@ function MissionResult({ type, onComplete, sounds }) {
                 }, {
                     scaleX: 1,
                     opacity: 1,
-                    duration: 0.4,
+                    duration: 0.35,
                     ease: 'power3.out'
                 }, '-=0.2');
             }
@@ -110,21 +119,33 @@ function MissionResult({ type, onComplete, sounds }) {
             if (subtitleRef.current) {
                 tl.fromTo(subtitleRef.current, {
                     opacity: 0,
-                    y: 10
+                    y: 12
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                }, '-=0.15');
+            }
+            // Payout / Stats ticker
+            if (statsRef.current && cfg.isPassed) {
+                tl.fromTo(statsRef.current, {
+                    opacity: 0,
+                    y: 15
                 }, {
                     opacity: 1,
                     y: 0,
                     duration: 0.35,
                     ease: 'power2.out'
-                }, '-=0.2');
+                }, '-=0.1');
             }
             tl.to({}, {
-                duration: 2.6
-            }); // Hold for GTA victory feel
+                duration: 2.2
+            }); // Hold duration
             if (overlayRef.current) {
                 tl.to(overlayRef.current, {
                     opacity: 0,
-                    duration: 0.6,
+                    duration: 0.45,
                     ease: 'power2.inOut'
                 });
             }
@@ -136,13 +157,12 @@ function MissionResult({ type, onComplete, sounds }) {
                     if (headlineRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(headlineRef.current);
                     if (subtitleRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(subtitleRef.current);
                     if (lineRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(lineRef.current);
+                    if (statsRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(statsRef.current);
                 }
             })["MissionResult.useEffect"];
         }
     }["MissionResult.useEffect"], [
-        cfg,
-        onComplete,
-        sounds
+        cfg
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: overlayRef,
@@ -154,7 +174,8 @@ function MissionResult({ type, onComplete, sounds }) {
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 9000,
-            userSelect: 'none'
+            userSelect: 'none',
+            cursor: 'default'
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -167,21 +188,14 @@ function MissionResult({ type, onComplete, sounds }) {
                 }
             }, void 0, false, {
                 fileName: "[project]/components/MissionResult.tsx",
-                lineNumber: 137,
+                lineNumber: 161,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "noise-overlay"
+                className: "heavy-vignette"
             }, void 0, false, {
                 fileName: "[project]/components/MissionResult.tsx",
-                lineNumber: 146,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "crt-scanlines"
-            }, void 0, false, {
-                fileName: "[project]/components/MissionResult.tsx",
-                lineNumber: 147,
+                lineNumber: 170,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -201,28 +215,28 @@ function MissionResult({ type, onComplete, sounds }) {
                             textTransform: 'uppercase',
                             color: cfg.color,
                             lineHeight: 0.95,
-                            textShadow: `0 4px 30px rgba(0,0,0,0.9), 0 0 40px ${cfg.color}55`,
+                            textShadow: `0 4px 30px rgba(0,0,0,0.95), 0 0 50px ${cfg.color}66`,
                             fontWeight: 'bold'
                         },
                         children: cfg.line1
                     }, void 0, false, {
                         fileName: "[project]/components/MissionResult.tsx",
-                        lineNumber: 150,
+                        lineNumber: 173,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         ref: lineRef,
                         style: {
                             height: '2px',
-                            width: '280px',
+                            width: '320px',
                             background: cfg.color,
                             margin: '18px auto',
                             opacity: 0,
-                            boxShadow: `0 0 10px ${cfg.color}`
+                            boxShadow: `0 0 14px ${cfg.color}`
                         }
                     }, void 0, false, {
                         fileName: "[project]/components/MissionResult.tsx",
-                        lineNumber: 166,
+                        lineNumber: 189,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -239,23 +253,125 @@ function MissionResult({ type, onComplete, sounds }) {
                         children: cfg.line2
                     }, void 0, false, {
                         fileName: "[project]/components/MissionResult.tsx",
-                        lineNumber: 178,
+                        lineNumber: 201,
                         columnNumber: 17
+                    }, this),
+                    cfg.isPassed && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        ref: statsRef,
+                        style: {
+                            marginTop: '28px',
+                            display: 'inline-flex',
+                            gap: '24px',
+                            padding: '10px 24px',
+                            background: 'rgba(10, 10, 14, 0.85)',
+                            border: '1px solid rgba(74, 222, 128, 0.35)',
+                            boxShadow: '0 0 25px rgba(74, 222, 128, 0.15)'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    textAlign: 'center'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                                            fontSize: '0.7rem',
+                                            color: 'rgba(255,255,255,0.5)',
+                                            letterSpacing: '0.2em'
+                                        },
+                                        children: "PAYOUT"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/MissionResult.tsx",
+                                        lineNumber: 231,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            fontFamily: 'Share Tech Mono, monospace',
+                                            fontSize: '1rem',
+                                            color: '#4ade80',
+                                            fontWeight: 700
+                                        },
+                                        children: cfg.rewardText
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/MissionResult.tsx",
+                                        lineNumber: 234,
+                                        columnNumber: 29
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/MissionResult.tsx",
+                                lineNumber: 230,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    width: '1px',
+                                    background: 'rgba(255,255,255,0.15)'
+                                }
+                            }, void 0, false, {
+                                fileName: "[project]/components/MissionResult.tsx",
+                                lineNumber: 239,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    textAlign: 'center'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                                            fontSize: '0.7rem',
+                                            color: 'rgba(255,255,255,0.5)',
+                                            letterSpacing: '0.2em'
+                                        },
+                                        children: "STATUS"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/MissionResult.tsx",
+                                        lineNumber: 242,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            fontFamily: 'ChaletLondon1960, "Bebas Neue", sans-serif',
+                                            fontSize: '1rem',
+                                            color: '#f5a623',
+                                            letterSpacing: '0.1em'
+                                        },
+                                        children: "GOLD MEDAL ★★★"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/MissionResult.tsx",
+                                        lineNumber: 245,
+                                        columnNumber: 29
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/MissionResult.tsx",
+                                lineNumber: 241,
+                                columnNumber: 25
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/MissionResult.tsx",
+                        lineNumber: 218,
+                        columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/MissionResult.tsx",
-                lineNumber: 149,
+                lineNumber: 172,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/MissionResult.tsx",
-        lineNumber: 124,
+        lineNumber: 147,
         columnNumber: 9
     }, this);
 }
-_s(MissionResult, "jjNs9WrABMKacb682a+LMlalWjw=");
+_s(MissionResult, "kyBvt6DBLXYWmxtAh3LTCh21M24=");
 _c = MissionResult;
 var _c;
 __turbopack_context__.k.register(_c, "MissionResult");

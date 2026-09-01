@@ -13,8 +13,8 @@ export default function WarningScreen({ onComplete, sounds }: BasePhaseProps) {
         if (cardRef.current) {
             gsap.fromTo(
                 cardRef.current,
-                { opacity: 0, scale: 0.98 },
-                { opacity: 1, scale: 1, duration: 1.0, ease: 'power3.out' }
+                { opacity: 0, scale: 0.97, y: 10 },
+                { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: 'power3.out' }
             )
         }
 
@@ -25,6 +25,7 @@ export default function WarningScreen({ onComplete, sounds }: BasePhaseProps) {
             try {
                 if (sounds?.ambience) {
                     sounds.ambience.loop(true)
+                    sounds.ambience.volume(0.35)
                     sounds.ambience.play()
                 }
             } catch (e) {
@@ -40,7 +41,7 @@ export default function WarningScreen({ onComplete, sounds }: BasePhaseProps) {
                         if (flashRef.current) {
                             gsap.to(flashRef.current, {
                                 opacity: 0,
-                                duration: 0.22,
+                                duration: 0.25,
                                 ease: 'power2.out',
                                 onComplete,
                             })
@@ -80,7 +81,7 @@ export default function WarningScreen({ onComplete, sounds }: BasePhaseProps) {
             style={{
                 position: 'fixed',
                 inset: 0,
-                background: '#000',
+                background: '#000000',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -88,47 +89,80 @@ export default function WarningScreen({ onComplete, sounds }: BasePhaseProps) {
                 zIndex: 100,
                 cursor: 'pointer',
                 userSelect: 'none',
+                padding: '24px',
             }}
         >
-            <div className="noise-overlay" />
-            <div className="crt-scanlines" />
+            <div className="heavy-vignette" />
 
+            {/* Pure Monochrome Luxury Card with Intense Shadow Effect */}
             <div
                 ref={cardRef}
                 style={{
-                    maxWidth: 760,
+                    maxWidth: 720,
+                    width: '92%',
                     textAlign: 'center',
-                    padding: '40px 30px',
+                    padding: '48px 40px',
                     zIndex: 110,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '40px',
+                    gap: '26px',
+                    background: 'rgba(8, 8, 10, 0.95)',
+                    backdropFilter: 'blur(24px)',
+                    WebkitBackdropFilter: 'blur(24px)',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    boxShadow:
+                        '0 35px 100px rgba(0, 0, 0, 0.98), 0 0 1px rgba(255, 255, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
                 }}
             >
-                <p
+                <div
                     style={{
                         fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                        fontSize: 'clamp(0.95rem, 2vw, 1.2rem)',
-                        letterSpacing: '0.28em',
-                        lineHeight: 1.85,
-                        color: 'rgba(255, 255, 255, 0.75)',
+                        fontSize: '0.85rem',
+                        letterSpacing: '0.35em',
+                        color: 'rgba(255, 255, 255, 0.5)',
                         textTransform: 'uppercase',
                     }}
                 >
-                    THIS IS A FICTIONAL INTERACTIVE DEVELOPER PORTFOLIO
+                    FAIR WARNING
+                </div>
+
+                <p
+                    style={{
+                        fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                        fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+                        letterSpacing: '0.22em',
+                        lineHeight: 1.7,
+                        color: '#ffffff',
+                        textTransform: 'uppercase',
+                        margin: 0,
+                    }}
+                >
+                    THIS INTERACTIVE EXPERIENCE SHOWCASES ME, MY REAL PROJECTS,
                     <br />
-                    INSPIRED BY CINEMATIC OPEN-WORLD DESIGN
+                    ENGINEERING SKILLS & TECHNOLOGIES.
                 </p>
+
+                <div
+                    style={{
+                        width: '36px',
+                        height: '1px',
+                        background: 'rgba(255, 255, 255, 0.25)',
+                    }}
+                />
 
                 <div className="smooth-pulse">
                     <span
                         style={{
                             fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
-                            fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
-                            letterSpacing: '0.3em',
+                            fontSize: 'clamp(1.1rem, 2.4vw, 1.4rem)',
+                            letterSpacing: '0.24em',
                             textTransform: 'uppercase',
-                            color: '#ffffff',
+                            color: '#000000',
+                            background: '#ffffff',
+                            padding: '10px 28px',
+                            display: 'inline-block',
+                            boxShadow: '0 4px 20px rgba(255, 255, 255, 0.2)',
                         }}
                     >
                         PRESS ENTER OR CLICK TO CONTINUE

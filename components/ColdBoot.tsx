@@ -18,23 +18,22 @@ export default function ColdBoot({ onComplete }: ColdBootProps) {
                 await Howler.ctx.resume()
             }
         } catch (err) {
-            console.log('Audio resume notice:', err)
+            console.warn('Audio resume notice:', err)
         }
 
         if (textRef.current) {
             gsap.to(textRef.current, {
-                scale: 1.15,
                 opacity: 0,
-                filter: 'blur(10px)',
-                duration: 0.6,
+                scale: 1.04,
+                filter: 'blur(8px)',
+                duration: 0.5,
                 ease: 'power2.in',
             })
         }
 
-        // Hold black screen for dramatic pause
         setTimeout(() => {
             onComplete()
-        }, 1400)
+        }, 500)
     }
 
     useEffect(() => {
@@ -52,7 +51,7 @@ export default function ColdBoot({ onComplete }: ColdBootProps) {
             style={{
                 position: 'fixed',
                 inset: 0,
-                background: '#000',
+                background: '#000000',
                 zIndex: 100,
                 display: 'flex',
                 alignItems: 'center',
@@ -61,8 +60,7 @@ export default function ColdBoot({ onComplete }: ColdBootProps) {
                 userSelect: 'none',
             }}
         >
-            <div className="noise-overlay" />
-            <div className="crt-scanlines" />
+            <div className="heavy-vignette" />
 
             {!started && (
                 <div
@@ -70,48 +68,63 @@ export default function ColdBoot({ onComplete }: ColdBootProps) {
                     style={{
                         textAlign: 'center',
                         zIndex: 110,
-                        padding: '30px',
+                        padding: '36px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        gap: '18px',
+                        gap: '20px',
+                        maxWidth: '680px',
                     }}
                 >
                     <div
                         style={{
                             fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                            fontSize: 'clamp(0.8rem, 1.8vw, 1rem)',
-                            letterSpacing: '0.45em',
-                            color: 'rgba(255,255,255,0.4)',
+                            fontSize: 'clamp(0.85rem, 1.6vw, 1rem)',
+                            letterSpacing: '0.4em',
+                            color: 'rgba(255, 255, 255, 0.45)',
                             textTransform: 'uppercase',
                         }}
                     >
-                        PORTFOLIO 2.0 // SYSTEM INITIALIZATION
+                        OM PANDEY'S
                     </div>
+
+                    <h1
+                        style={{
+                            fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
+                            fontSize: 'clamp(2rem, 5vw, 3.4rem)',
+                            letterSpacing: '0.14em',
+                            color: '#ffffff',
+                            textTransform: 'uppercase',
+                            margin: 0,
+                            lineHeight: 1,
+                            textShadow: '0 4px 25px rgba(0, 0, 0, 0.9)',
+                        }}
+                    >
+                        PORTFOLIO
+                    </h1>
+
+                    <div
+                        style={{
+                            width: '36px',
+                            height: '1px',
+                            background: 'rgba(255, 255, 255, 0.35)',
+                            margin: '4px 0',
+                        }}
+                    />
 
                     <p
                         className="smooth-pulse"
                         style={{
-                            fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
-                            fontSize: 'clamp(1.2rem, 3.5vw, 2rem)',
-                            letterSpacing: '0.28em',
-                            color: '#ffffff',
+                            fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                            fontSize: 'clamp(0.8rem, 1.6vw, 0.95rem)',
+                            letterSpacing: '0.3em',
+                            color: 'rgba(255, 255, 255, 0.7)',
                             textTransform: 'uppercase',
                             margin: 0,
                         }}
                     >
-                        CLICK OR PRESS ANY KEY TO START
+                        CLICK OR PRESS ANY KEY TO ENTER
                     </p>
-
-                    <div
-                        style={{
-                            width: '40px',
-                            height: '2px',
-                            background: 'rgba(255,255,255,0.5)',
-                            marginTop: '8px',
-                            boxShadow: '0 0 10px rgba(255,255,255,0.8)',
-                        }}
-                    />
                 </div>
             )}
         </div>

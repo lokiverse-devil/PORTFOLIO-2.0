@@ -4,29 +4,21 @@ import gsap from 'gsap'
 import { Howler } from 'howler'
 import { BasePhaseProps } from '@/lib/types'
 
-interface StarIconProps {
-    className?: string
-    style?: React.CSSProperties
-    flashing?: boolean
-}
-
-function StarIcon({ className, style, flashing = false }: StarIconProps) {
+function CleanWhiteStar() {
     return (
         <svg
-            className={`${className || ''} wanted-star-svg ${flashing ? 'gta-wanted-flash' : ''}`}
-            style={style}
+            width="46"
+            height="46"
             viewBox="0 0 72 72"
-            width="56"
-            height="56"
+            style={{
+                filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.6))',
+            }}
         >
             <polygon
                 points="36,4 44,28 70,28 49,44 57,68 36,52 15,68 23,44 2,28 28,28"
                 fill="#ffffff"
                 stroke="#ffffff"
-                strokeWidth="2.5"
-                style={{
-                    filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.7))',
-                }}
+                strokeWidth="1.5"
             />
         </svg>
     )
@@ -34,194 +26,158 @@ function StarIcon({ className, style, flashing = false }: StarIconProps) {
 
 export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
     const containerRef = useRef<HTMLDivElement | null>(null)
-    const redRef = useRef<HTMLDivElement | null>(null)
-    const blueRef = useRef<HTMLDivElement | null>(null)
-    const sweepRef = useRef<HTMLDivElement | null>(null)
-    const starsContainerRef = useRef<HTMLDivElement | null>(null)
-    const flashRef = useRef<HTMLDivElement | null>(null)
+    const redStrobeRef = useRef<HTMLDivElement | null>(null)
+    const blueStrobeRef = useRef<HTMLDivElement | null>(null)
+    const searchlightRef = useRef<HTMLDivElement | null>(null)
+    const starsGroupRef = useRef<HTMLDivElement | null>(null)
 
-    // starCount starts at 0 (no stars during 0.0s - 8.0s police buildup)
     const [starCount, setStarCount] = useState<number>(0)
-    const [isMaxWanted, setIsMaxWanted] = useState<boolean>(false)
+    const completedRef = useRef<boolean>(false)
+
+    const triggerComplete = () => {
+        if (completedRef.current) return
+        completedRef.current = true
+        onComplete()
+    }
 
     useEffect(() => {
-        const siren = sounds?.siren
-
-        // Start siren_loop.mp3 (17 seconds total)
+        // Start siren_loop.mp3
         const startAudio = async () => {
             try {
                 if (Howler && Howler.ctx && Howler.ctx.state !== 'running') {
                     await Howler.ctx.resume()
                 }
+                const siren = sounds?.siren
                 if (siren) {
                     siren.stop()
-                    siren.volume(0.55)
+                    siren.volume(0.5)
                     siren.play()
                 }
             } catch (err) {
-                console.log('Audio notice:', err)
+                console.warn('Audio notice:', err)
             }
         }
         startAudio()
 
-        // Sweeping helicopter spotlight
-        if (sweepRef.current) {
-            gsap.to(sweepRef.current, {
-                x: '120%',
-                duration: 2.2,
+        // Helicopter searchlight beam
+        if (searchlightRef.current) {
+            gsap.to(searchlightRef.current, {
+                x: '130%',
+                duration: 2.4,
                 repeat: -1,
-                ease: 'power1.inOut',
                 yoyo: true,
+                ease: 'power1.inOut',
             })
         }
 
-        // Alternating Police Strobes
+        // Alternating red/blue police strobes
         const strobeTl = gsap.timeline({ repeat: -1 })
-        if (redRef.current) {
+        if (redStrobeRef.current) {
             strobeTl
-                .to(redRef.current, { opacity: 0.85, duration: 0.06 })
-                .to(redRef.current, { opacity: 0.1, duration: 0.05 })
-                .to(redRef.current, { opacity: 0.95, duration: 0.08 })
-                .to(redRef.current, { opacity: 0, duration: 0.12 })
+                .to(redStrobeRef.current, { opacity: 0.65, duration: 0.06 })
+                .to(redStrobeRef.current, { opacity: 0.08, duration: 0.05 })
+                .to(redStrobeRef.current, { opacity: 0.75, duration: 0.08 })
+                .to(redStrobeRef.current, { opacity: 0, duration: 0.14 })
         }
-        if (blueRef.current) {
+        if (blueStrobeRef.current) {
             strobeTl
-                .to(blueRef.current, { opacity: 0.85, duration: 0.06 }, '-=0.08')
-                .to(blueRef.current, { opacity: 0.1, duration: 0.05 })
-                .to(blueRef.current, { opacity: 0.95, duration: 0.08 })
-                .to(blueRef.current, { opacity: 0, duration: 0.14 })
+                .to(blueStrobeRef.current, { opacity: 0.65, duration: 0.06 }, '-=0.08')
+                .to(blueStrobeRef.current, { opacity: 0.08, duration: 0.05 })
+                .to(blueStrobeRef.current, { opacity: 0.75, duration: 0.08 })
+                .to(blueStrobeRef.current, { opacity: 0, duration: 0.15 })
         }
 
-        // Master Timeline synced with siren_loop.mp3 (17s total duration)
-        // 0.0s - 8.0s: Pure Police Chase buildup
-        // 8.0s - 17.0s: Star audio in siren_loop.mp3 (Stars appear 1+1+1+1+1 = 5)
+        // Master Timeline synced with siren_loop.mp3
+        // 0.0s - 8.0s: Pure police chase lights buildup
+        // 8.0s - 13.0s: Stars appear sequentially (1 per ~1s)
+        // 13.5s - 15.2s: Stars slowly disappear
         const masterTl = gsap.timeline({
-            onComplete: () => {
-                onComplete()
-            },
+            onComplete: triggerComplete,
         })
 
         // Star 1 appears at 8.0s
         masterTl.to(
             {},
             {
-                duration: 0.1,
-                onStart: () => {
-                    setStarCount(1)
-                },
+                duration: 0.01,
+                onStart: () => setStarCount(1),
             },
             8.0
         )
 
-        // Star 2 appears at 9.8s
+        // Star 2 appears at 9.2s
         masterTl.to(
             {},
             {
-                duration: 0.1,
-                onStart: () => {
-                    setStarCount(2)
-                },
+                duration: 0.01,
+                onStart: () => setStarCount(2),
             },
-            9.8
+            9.2
         )
 
-        // Star 3 appears at 11.6s
+        // Star 3 appears at 10.4s
         masterTl.to(
             {},
             {
-                duration: 0.1,
-                onStart: () => {
-                    setStarCount(3)
-                },
+                duration: 0.01,
+                onStart: () => setStarCount(3),
+            },
+            10.4
+        )
+
+        // Star 4 appears at 11.6s
+        masterTl.to(
+            {},
+            {
+                duration: 0.01,
+                onStart: () => setStarCount(4),
             },
             11.6
         )
 
-        // Star 4 appears at 13.4s
+        // Star 5 appears at 12.8s
         masterTl.to(
             {},
             {
-                duration: 0.1,
-                onStart: () => {
-                    setStarCount(4)
-                },
+                duration: 0.01,
+                onStart: () => setStarCount(5),
             },
-            13.4
+            12.8
         )
 
-        // Star 5 appears at 15.2s (Max Wanted!)
+        // Slowly disappear the stars between 13.6s and 15.2s
         masterTl.to(
             {},
             {
-                duration: 0.1,
+                duration: 0.01,
                 onStart: () => {
-                    setStarCount(5)
-                    setIsMaxWanted(true)
-
-                    if (flashRef.current) {
-                        gsap.fromTo(
-                            flashRef.current,
-                            { opacity: 0, scale: 0.5 },
-                            {
-                                opacity: 1,
-                                scale: 5,
-                                duration: 0.25,
-                                ease: 'power2.out',
-                                yoyo: true,
-                                repeat: 1,
-                            }
-                        )
-                    }
-
-                    if (containerRef.current) {
-                        gsap.fromTo(
-                            containerRef.current,
-                            { x: -10, y: -6 },
-                            {
-                                x: 10,
-                                y: 6,
-                                duration: 0.04,
-                                repeat: 10,
-                                yoyo: true,
-                                ease: 'power2.inOut',
-                                onComplete: () => {
-                                    if (containerRef.current) {
-                                        gsap.set(containerRef.current, { x: 0, y: 0 })
-                                    }
-                                },
-                            }
-                        )
+                    if (starsGroupRef.current) {
+                        gsap.to(starsGroupRef.current, {
+                            opacity: 0,
+                            scale: 0.95,
+                            duration: 1.5,
+                            ease: 'power2.inOut',
+                        })
                     }
                 },
             },
-            15.2
+            13.6
         )
 
-        // Hold until 17.0s (end of siren_loop.mp3)
-        masterTl.to({}, { duration: 1.8 }, 15.2)
-
-        // Key handler to skip
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.code === 'Space' || e.code === 'Enter') {
-                onComplete()
-            }
-        }
-        window.addEventListener('keydown', handleKeyDown)
+        // Complete sequence at 15.3s
+        masterTl.to({}, { duration: 1.7 }, 13.6)
 
         return () => {
             masterTl.kill()
             strobeTl.kill()
-            window.removeEventListener('keydown', handleKeyDown)
-            if (sweepRef.current) gsap.killTweensOf(sweepRef.current)
-            if (containerRef.current) gsap.killTweensOf(containerRef.current)
-            if (flashRef.current) gsap.killTweensOf(flashRef.current)
+            if (searchlightRef.current) gsap.killTweensOf(searchlightRef.current)
+            if (starsGroupRef.current) gsap.killTweensOf(starsGroupRef.current)
         }
-    }, [onComplete, sounds])
+    }, [sounds])
 
     return (
         <div
             ref={containerRef}
-            onClick={onComplete}
             style={{
                 position: 'fixed',
                 inset: 0,
@@ -232,17 +188,17 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 userSelect: 'none',
-                cursor: 'pointer',
+                cursor: 'default',
             }}
         >
             {/* Red Police Strobe */}
             <div
-                ref={redRef}
+                ref={redStrobeRef}
                 style={{
                     position: 'absolute',
                     inset: 0,
                     background:
-                        'radial-gradient(ellipse at 15% 50%, rgba(255, 0, 0, 0.7) 0%, rgba(200, 0, 0, 0.25) 45%, transparent 70%)',
+                        'radial-gradient(ellipse at 12% 50%, rgba(255, 0, 0, 0.6) 0%, rgba(180, 0, 0, 0.2) 45%, transparent 70%)',
                     opacity: 0,
                     mixBlendMode: 'screen',
                 }}
@@ -250,20 +206,20 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
 
             {/* Blue Police Strobe */}
             <div
-                ref={blueRef}
+                ref={blueStrobeRef}
                 style={{
                     position: 'absolute',
                     inset: 0,
                     background:
-                        'radial-gradient(ellipse at 85% 50%, rgba(0, 102, 255, 0.7) 0%, rgba(0, 70, 220, 0.25) 45%, transparent 70%)',
+                        'radial-gradient(ellipse at 88% 50%, rgba(0, 90, 255, 0.6) 0%, rgba(0, 60, 190, 0.2) 45%, transparent 70%)',
                     opacity: 0,
                     mixBlendMode: 'screen',
                 }}
             />
 
-            {/* Helicopter Searchlight Beam */}
+            {/* Helicopter Searchlight Sweep */}
             <div
-                ref={sweepRef}
+                ref={searchlightRef}
                 style={{
                     position: 'absolute',
                     top: '-20%',
@@ -271,7 +227,7 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                     width: '60%',
                     height: '140%',
                     background:
-                        'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, transparent 60%)',
+                        'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.12) 0%, transparent 60%)',
                     transform: 'rotate(-25deg)',
                     pointerEvents: 'none',
                     mixBlendMode: 'screen',
@@ -280,32 +236,17 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
 
             <div className="heavy-vignette" />
 
-            {/* Screen Flash on Max Wanted */}
-            <div
-                ref={flashRef}
-                style={{
-                    position: 'absolute',
-                    width: '320px',
-                    height: '320px',
-                    background: 'radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.85) 30%, transparent 70%)',
-                    opacity: 0,
-                    filter: 'blur(20px)',
-                    pointerEvents: 'none',
-                    zIndex: 115,
-                }}
-            />
-
-            {/* STARS APPEAR SEQUENTIALLY: 1+1+1+1+1=5 (Clean, pure visual without any text clutter) */}
+            {/* Subtle, Pure White Wanted Stars (Sequentially 8s to 13s, then slowly fading) */}
             {starCount > 0 && (
                 <div
-                    ref={starsContainerRef}
+                    ref={starsGroupRef}
                     style={{
                         display: 'flex',
-                        gap: '22px',
+                        gap: '20px',
                         alignItems: 'center',
                         justifyContent: 'center',
                         zIndex: 110,
-                        padding: '20px',
+                        padding: '16px',
                     }}
                 >
                     {Array.from({ length: starCount }).map((_, i) => (
@@ -315,23 +256,23 @@ export default function WantedStars({ onComplete, sounds }: BasePhaseProps) {
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                animation: 'starPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                                animation: 'starPopIn 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                             }}
                         >
-                            <StarIcon flashing={isMaxWanted} />
+                            <CleanWhiteStar />
                         </div>
                     ))}
                 </div>
             )}
 
             <style jsx>{`
-                @keyframes starPop {
+                @keyframes starPopIn {
                     0% {
                         transform: scale(0.3);
                         opacity: 0;
                     }
                     70% {
-                        transform: scale(1.3);
+                        transform: scale(1.25);
                     }
                     100% {
                         transform: scale(1);

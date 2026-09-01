@@ -18,6 +18,12 @@ function CityReveal({ onComplete }) {
     _s();
     const imgRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [time, setTime] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const completedRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
+    const triggerComplete = ()=>{
+        if (completedRef.current) return;
+        completedRef.current = true;
+        onComplete();
+    };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "CityReveal.useEffect": ()=>{
             const updateTime = {
@@ -35,7 +41,7 @@ function CityReveal({ onComplete }) {
                         second: '2-digit',
                         hour12: false
                     });
-                    setTime(`${d}  ${t}`);
+                    setTime(`${d}  //  ${t}`);
                 }
             }["CityReveal.useEffect.updateTime"];
             updateTime();
@@ -44,19 +50,28 @@ function CityReveal({ onComplete }) {
             if (imgRef.current) {
                 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].fromTo(imgRef.current, {
                     opacity: 0,
-                    scale: 1.08
+                    scale: 1.5
                 }, {
                     opacity: 1,
                     scale: 1.0,
-                    duration: 3.5,
+                    duration: 2.8,
                     ease: 'power2.out'
                 });
             }
-            const timer = setTimeout(onComplete, 3500);
+            const timer = setTimeout(triggerComplete, 2800);
+            const handleKey = {
+                "CityReveal.useEffect.handleKey": (e)=>{
+                    if (e.code === 'Space' || e.code === 'Enter' || e.code === 'Escape') {
+                        triggerComplete();
+                    }
+                }
+            }["CityReveal.useEffect.handleKey"];
+            window.addEventListener('keydown', handleKey);
             return ({
                 "CityReveal.useEffect": ()=>{
                     clearTimeout(timer);
                     clearInterval(interval);
+                    window.removeEventListener('keydown', handleKey);
                     if (imgRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(imgRef.current);
                 }
             })["CityReveal.useEffect"];
@@ -65,12 +80,15 @@ function CityReveal({ onComplete }) {
         onComplete
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        onClick: triggerComplete,
         style: {
             position: 'fixed',
             inset: 0,
             background: '#000',
             overflow: 'hidden',
-            zIndex: 100
+            zIndex: 100,
+            cursor: 'pointer',
+            userSelect: 'none'
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
@@ -84,32 +102,18 @@ function CityReveal({ onComplete }) {
                     height: '100%',
                     objectFit: 'cover',
                     opacity: 0,
-                    filter: 'contrast(1.12) brightness(0.9)'
+                    filter: 'contrast(1.12) brightness(0.92)'
                 }
             }, void 0, false, {
                 fileName: "[project]/components/CityReveal.tsx",
-                lineNumber: 68,
+                lineNumber: 86,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "heavy-vignette"
             }, void 0, false, {
                 fileName: "[project]/components/CityReveal.tsx",
-                lineNumber: 82,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "noise-overlay"
-            }, void 0, false, {
-                fileName: "[project]/components/CityReveal.tsx",
-                lineNumber: 83,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "crt-scanlines"
-            }, void 0, false, {
-                fileName: "[project]/components/CityReveal.tsx",
-                lineNumber: 84,
+                lineNumber: 100,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -121,7 +125,7 @@ function CityReveal({ onComplete }) {
                     zIndex: 120,
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '2px',
+                    gap: '4px',
                     fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
                     textTransform: 'uppercase',
                     textShadow: '0 2px 8px rgba(0,0,0,0.9)'
@@ -129,42 +133,100 @@ function CityReveal({ onComplete }) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            fontSize: '1.05rem',
-                            letterSpacing: '0.2em',
-                            color: '#ffffff'
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px'
                         },
-                        children: "PORTFOLIO 2.0 // DEPLOYMENT"
-                    }, void 0, false, {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    width: '3px',
+                                    height: '14px',
+                                    background: '#ffffff'
+                                }
+                            }, void 0, false, {
+                                fileName: "[project]/components/CityReveal.tsx",
+                                lineNumber: 119,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                style: {
+                                    fontSize: '1.05rem',
+                                    letterSpacing: '0.22em',
+                                    color: '#ffffff',
+                                    fontWeight: 700
+                                },
+                                children: "UTTARAKHAND // DEV BHOOMI"
+                            }, void 0, false, {
+                                fileName: "[project]/components/CityReveal.tsx",
+                                lineNumber: 120,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/components/CityReveal.tsx",
-                        lineNumber: 102,
+                        lineNumber: 118,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            fontSize: '0.85rem',
-                            letterSpacing: '0.15em',
-                            color: 'rgba(255,255,255,0.65)'
+                            fontSize: '0.8rem',
+                            letterSpacing: '0.18em',
+                            color: 'rgba(255,255,255,0.65)',
+                            paddingLeft: '11px'
                         },
                         children: time
                     }, void 0, false, {
                         fileName: "[project]/components/CityReveal.tsx",
-                        lineNumber: 105,
+                        lineNumber: 124,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            fontSize: '0.7rem',
+                            letterSpacing: '0.22em',
+                            color: 'rgba(255,255,255,0.45)',
+                            paddingLeft: '11px',
+                            marginTop: '2px'
+                        },
+                        children: "SYSTEM STATUS: ONLINE"
+                    }, void 0, false, {
+                        fileName: "[project]/components/CityReveal.tsx",
+                        lineNumber: 127,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CityReveal.tsx",
-                lineNumber: 87,
+                lineNumber: 103,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    position: 'absolute',
+                    bottom: 24,
+                    right: 36,
+                    zIndex: 120,
+                    fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                    fontSize: '0.75rem',
+                    letterSpacing: '0.25em',
+                    color: 'rgba(255, 255, 255, 0.4)',
+                    textTransform: 'uppercase'
+                },
+                children: "[ CLICK OR PRESS SPACE TO CONTINUE ]"
+            }, void 0, false, {
+                fileName: "[project]/components/CityReveal.tsx",
+                lineNumber: 133,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/CityReveal.tsx",
-        lineNumber: 59,
+        lineNumber: 74,
         columnNumber: 9
     }, this);
 }
-_s(CityReveal, "LSGVZ5GPDV3LL52L7eXFwglSCig=");
+_s(CityReveal, "1kYKwhtUZex2Z9DFJcK9MQKpDKQ=");
 _c = CityReveal;
 var _c;
 __turbopack_context__.k.register(_c, "CityReveal");

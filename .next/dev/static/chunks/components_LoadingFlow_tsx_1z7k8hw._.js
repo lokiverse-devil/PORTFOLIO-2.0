@@ -20,11 +20,12 @@ const IMAGES = [
     '/images/loading_3.jpeg'
 ];
 const TIPS = [
-    'OM PANDEY // FULL STACK & AI ENGINEER',
-    'SPECIAL ABILITY: FAST-PACED LEARNING, PROGRAMMING & PROBLEM SOLVING',
-    'HIGH CONCURRENCY ARCHITECTURES BUILT FOR PERFORMANCE & PRECISION',
-    'EXPLORE THE RADAR MAP & CHARACTER DOSSIER IN THE MAIN DASHBOARD',
-    'EXPERTISE IN SUPABASE, POSTGRES, NEXT.JS, C++, JAVA & MCP INTEGRATIONS'
+    'OM PANDEY // FULL STACK DEVELOPER & AI ENGINEER',
+    'CORE STACK: C++, JAVA, TYPESCRIPT, NEXT.JS, POSTGRESQL & SUPABASE',
+    'EXPLORE VIBECHAT, HTRACX & SMARTCLASS X IN THE OPERATIONS TAB',
+    'USE THE RADAR MAP TO VIEW ACADEMIC MILESTONES & CREDENTIALS',
+    'EXPERIENCED WITH GEMINI AI TOOLS AND MODEL CONTEXT PROTOCOL (MCP)',
+    'PRESS KEYS 1 TO 5 ON THE DASHBOARD TO SWITCH TABS ANYTIME'
 ];
 function LoadingFlow({ onComplete, sounds }) {
     _s();
@@ -39,7 +40,7 @@ function LoadingFlow({ onComplete, sounds }) {
             try {
                 if (sounds?.ambience) {
                     if (!sounds.ambience.playing()) {
-                        sounds.ambience.volume(0.4);
+                        sounds.ambience.volume(0.35);
                         sounds.ambience.loop(true);
                         sounds.ambience.play();
                     }
@@ -47,11 +48,11 @@ function LoadingFlow({ onComplete, sounds }) {
             } catch (e) {
                 console.warn('Audio ambience notice:', e);
             }
-            // GTA Spinner rotation
+            // Small GTA Spinner rotation
             if (spinnerRef.current) {
                 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].to(spinnerRef.current, {
                     rotation: 360,
-                    duration: 1.6,
+                    duration: 1.2,
                     repeat: -1,
                     ease: 'linear'
                 });
@@ -60,15 +61,15 @@ function LoadingFlow({ onComplete, sounds }) {
             if (imgs.current[0]) {
                 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].fromTo(imgs.current[0], {
                     opacity: 0,
-                    scale: 1.05
+                    scale: 1.03
                 }, {
                     opacity: 1,
                     scale: 1.0,
-                    duration: 1.2,
+                    duration: 1.0,
                     ease: 'power2.out'
                 });
             }
-            // Image cycling with smooth Ken Burns zoom
+            // Image cycling
             let current = 0;
             const cycleImages = {
                 "LoadingFlow.useEffect.cycleImages": ()=>{
@@ -76,26 +77,26 @@ function LoadingFlow({ onComplete, sounds }) {
                     if (imgs.current[current]) {
                         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].to(imgs.current[current], {
                             opacity: 0,
-                            scale: 1.05,
-                            duration: 1.2,
+                            scale: 1.03,
+                            duration: 1.0,
                             ease: 'power2.inOut'
                         });
                     }
                     if (imgs.current[next]) {
                         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].fromTo(imgs.current[next], {
                             opacity: 0,
-                            scale: 1.08
+                            scale: 1.05
                         }, {
                             opacity: 1,
                             scale: 1.0,
-                            duration: 1.4,
+                            duration: 1.1,
                             ease: 'power2.out'
                         });
                     }
                     current = next;
                 }
             }["LoadingFlow.useEffect.cycleImages"];
-            const imgInterval = setInterval(cycleImages, 4800);
+            const imgInterval = setInterval(cycleImages, 3400);
             // Tip rotation
             const tipInterval = setInterval({
                 "LoadingFlow.useEffect.tipInterval": ()=>{
@@ -103,61 +104,51 @@ function LoadingFlow({ onComplete, sounds }) {
                         "LoadingFlow.useEffect.tipInterval": (p)=>(p + 1) % TIPS.length
                     }["LoadingFlow.useEffect.tipInterval"]);
                 }
-            }["LoadingFlow.useEffect.tipInterval"], 3800);
-            // Smooth GTA Loading Bar
+            }["LoadingFlow.useEffect.tipInterval"], 2800);
+            // Loading Bar Timeline (~5.8s)
             const barTl = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].timeline({
                 onComplete: {
                     "LoadingFlow.useEffect.barTl": ()=>{
                         clearInterval(imgInterval);
                         clearInterval(tipInterval);
-                        setTimeout(onComplete, 600);
+                        setTimeout(onComplete, 400);
                     }
                 }["LoadingFlow.useEffect.barTl"]
             });
             if (barRef.current) {
                 barTl.to(barRef.current, {
-                    width: '35%',
-                    duration: 1.8,
+                    width: '45%',
+                    duration: 1.6,
                     ease: 'power2.out',
                     onUpdate: {
                         "LoadingFlow.useEffect": function() {
-                            setProgressPct(Math.round(this.progress() * 35));
+                            setProgressPct(Math.round(this.progress() * 45));
                         }
                     }["LoadingFlow.useEffect"]
                 });
                 barTl.to({}, {
-                    duration: 0.4
+                    duration: 0.25
                 });
                 barTl.to(barRef.current, {
-                    width: '68%',
-                    duration: 2.2,
+                    width: '80%',
+                    duration: 1.8,
                     ease: 'power1.inOut',
                     onUpdate: {
                         "LoadingFlow.useEffect": function() {
-                            setProgressPct(35 + Math.round(this.progress() * 33));
+                            setProgressPct(45 + Math.round(this.progress() * 35));
                         }
                     }["LoadingFlow.useEffect"]
                 });
                 barTl.to({}, {
-                    duration: 0.3
-                });
-                barTl.to(barRef.current, {
-                    width: '92%',
-                    duration: 2.0,
-                    ease: 'power1.out',
-                    onUpdate: {
-                        "LoadingFlow.useEffect": function() {
-                            setProgressPct(68 + Math.round(this.progress() * 24));
-                        }
-                    }["LoadingFlow.useEffect"]
+                    duration: 0.15
                 });
                 barTl.to(barRef.current, {
                     width: '100%',
-                    duration: 0.8,
-                    ease: 'power3.in',
+                    duration: 1.2,
+                    ease: 'power2.inOut',
                     onUpdate: {
                         "LoadingFlow.useEffect": function() {
-                            setProgressPct(92 + Math.round(this.progress() * 8));
+                            setProgressPct(80 + Math.round(this.progress() * 20));
                         }
                     }["LoadingFlow.useEffect"]
                 });
@@ -186,7 +177,7 @@ function LoadingFlow({ onComplete, sounds }) {
         style: {
             position: 'fixed',
             inset: 0,
-            background: '#0a0a0c',
+            background: '#000000',
             zIndex: 100,
             overflow: 'hidden',
             userSelect: 'none',
@@ -194,21 +185,14 @@ function LoadingFlow({ onComplete, sounds }) {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '24px 32px 64px 32px'
+            padding: '24px 28px 60px 28px'
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "noise-overlay"
+                className: "heavy-vignette"
             }, void 0, false, {
                 fileName: "[project]/components/LoadingFlow.tsx",
-                lineNumber: 164,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "crt-scanlines"
-            }, void 0, false, {
-                fileName: "[project]/components/LoadingFlow.tsx",
-                lineNumber: 165,
+                lineNumber: 157,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -218,50 +202,50 @@ function LoadingFlow({ onComplete, sounds }) {
                     left: 36,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '12px',
+                    gap: '10px',
                     zIndex: 110
                 },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         style: {
                             display: 'inline-block',
-                            width: '4px',
-                            height: '18px',
-                            background: '#f5a623'
+                            width: '3px',
+                            height: '14px',
+                            background: '#ffffff'
                         }
                     }, void 0, false, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 179,
+                        lineNumber: 171,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         style: {
                             fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
                             fontSize: '1rem',
-                            letterSpacing: '0.2em',
-                            color: '#ffffff',
+                            letterSpacing: '0.22em',
+                            color: 'rgba(255, 255, 255, 0.9)',
                             textTransform: 'uppercase'
                         },
-                        children: "INITIALIZING SESSION // PORTFOLIO 2.0"
+                        children: "INITIALIZING // PORTFOLIO"
                     }, void 0, false, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 187,
+                        lineNumber: 179,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LoadingFlow.tsx",
-                lineNumber: 168,
+                lineNumber: 160,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 style: {
                     position: 'relative',
-                    width: 'min(94vw, 1300px)',
-                    height: 'min(68vh, 620px)',
-                    background: '#000000',
-                    border: '1px solid rgba(255, 255, 255, 0.22)',
-                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 0, 0, 0.8)',
+                    width: 'min(96vw, 1400px)',
+                    height: 'min(70vh, 640px)',
+                    background: '#050507',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.98)',
                     overflow: 'hidden',
                     display: 'flex',
                     alignItems: 'center',
@@ -273,7 +257,7 @@ function LoadingFlow({ onComplete, sounds }) {
                                 imgs.current[i] = el;
                             },
                             src: src,
-                            alt: "Loading artwork",
+                            alt: "Loading visual",
                             style: {
                                 position: 'absolute',
                                 width: '100%',
@@ -282,56 +266,37 @@ function LoadingFlow({ onComplete, sounds }) {
                                 objectPosition: 'center 25%',
                                 opacity: i === 0 ? 1 : 0,
                                 filter: 'contrast(1.08) brightness(0.92)',
-                                transition: 'opacity 1.2s ease-in-out'
+                                transition: 'opacity 1.0s ease-in-out'
                             }
                         }, src, false, {
                             fileName: "[project]/components/LoadingFlow.tsx",
-                            lineNumber: 217,
+                            lineNumber: 209,
                             columnNumber: 21
                         }, this)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
                             position: 'absolute',
                             inset: 0,
-                            background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.65) 100%)',
+                            background: 'radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.65) 100%)',
                             pointerEvents: 'none'
                         }
                     }, void 0, false, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 238,
-                        columnNumber: 17
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        style: {
-                            position: 'absolute',
-                            bottom: 12,
-                            right: 16,
-                            fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                            fontSize: '0.75rem',
-                            letterSpacing: '0.25em',
-                            color: 'rgba(255, 255, 255, 0.65)',
-                            background: 'rgba(0, 0, 0, 0.65)',
-                            padding: '3px 8px',
-                            border: '1px solid rgba(255, 255, 255, 0.15)'
-                        },
-                        children: "PORTFOLIO 2.0 // HD REEL"
-                    }, void 0, false, {
-                        fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 248,
+                        lineNumber: 230,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LoadingFlow.tsx",
-                lineNumber: 201,
+                lineNumber: 193,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 style: {
                     position: 'absolute',
                     bottom: 24,
-                    left: 'max(36px, calc((100vw - min(94vw, 1300px)) / 2))',
-                    right: 'max(36px, calc((100vw - min(94vw, 1300px)) / 2))',
+                    left: 'max(28px, calc((100vw - min(96vw, 1400px)) / 2))',
+                    right: 'max(28px, calc((100vw - min(96vw, 1400px)) / 2))',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '10px',
@@ -343,18 +308,18 @@ function LoadingFlow({ onComplete, sounds }) {
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'flex-end',
-                            gap: '20px'
+                            gap: '16px'
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    maxWidth: '850px'
+                                    maxWidth: '900px'
                                 },
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     style: {
                                         fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                                        fontSize: 'clamp(0.9rem, 1.6vw, 1.15rem)',
-                                        letterSpacing: '0.18em',
+                                        fontSize: 'clamp(0.85rem, 1.5vw, 1.05rem)',
+                                        letterSpacing: '0.2em',
                                         lineHeight: 1.3,
                                         textTransform: 'uppercase',
                                         color: '#ffffff',
@@ -363,12 +328,12 @@ function LoadingFlow({ onComplete, sounds }) {
                                     children: TIPS[tipIdx]
                                 }, tipIdx, false, {
                                     fileName: "[project]/components/LoadingFlow.tsx",
-                                    lineNumber: 289,
+                                    lineNumber: 263,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/LoadingFlow.tsx",
-                                lineNumber: 288,
+                                lineNumber: 262,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -381,10 +346,10 @@ function LoadingFlow({ onComplete, sounds }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         style: {
-                                            fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
-                                            fontSize: '1rem',
-                                            color: '#f5a623',
-                                            letterSpacing: '0.1em'
+                                            fontFamily: 'Share Tech Mono, monospace',
+                                            fontSize: '0.85rem',
+                                            color: 'rgba(255, 255, 255, 0.85)',
+                                            letterSpacing: '0.05em'
                                         },
                                         children: [
                                             progressPct,
@@ -392,52 +357,52 @@ function LoadingFlow({ onComplete, sounds }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/LoadingFlow.tsx",
-                                        lineNumber: 314,
+                                        lineNumber: 288,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                         ref: spinnerRef,
-                                        width: "22",
-                                        height: "22",
+                                        width: "16",
+                                        height: "16",
                                         viewBox: "0 0 24 24",
                                         fill: "none",
                                         stroke: "#ffffff",
                                         strokeWidth: "2.5",
                                         style: {
-                                            filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.7))'
+                                            filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.7))'
                                         },
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
                                             cx: "12",
                                             cy: "12",
                                             r: "9",
-                                            strokeDasharray: "28 14"
+                                            strokeDasharray: "26 14"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LoadingFlow.tsx",
-                                            lineNumber: 334,
+                                            lineNumber: 308,
                                             columnNumber: 29
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/LoadingFlow.tsx",
-                                        lineNumber: 324,
+                                        lineNumber: 298,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/LoadingFlow.tsx",
-                                lineNumber: 306,
+                                lineNumber: 280,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 280,
+                        lineNumber: 254,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
                             width: '100%',
-                            height: '4px',
-                            background: 'rgba(255, 255, 255, 0.15)',
+                            height: '2px',
+                            background: 'rgba(255, 255, 255, 0.12)',
                             position: 'relative',
                             overflow: 'hidden'
                         },
@@ -446,29 +411,29 @@ function LoadingFlow({ onComplete, sounds }) {
                             style: {
                                 height: '100%',
                                 width: '0%',
-                                background: '#f5a623',
-                                boxShadow: '0 0 12px rgba(245, 166, 35, 0.9)'
+                                background: '#ffffff',
+                                boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)'
                             }
                         }, void 0, false, {
                             fileName: "[project]/components/LoadingFlow.tsx",
-                            lineNumber: 349,
+                            lineNumber: 323,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 340,
+                        lineNumber: 314,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LoadingFlow.tsx",
-                lineNumber: 267,
+                lineNumber: 241,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/LoadingFlow.tsx",
-        lineNumber: 148,
+        lineNumber: 141,
         columnNumber: 9
     }, this);
 }

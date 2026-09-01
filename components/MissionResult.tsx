@@ -8,31 +8,34 @@ interface ConfigItem {
     line1: string
     line2: string
     isPassed: boolean
+    rewardText?: string
 }
 
 const CONFIGS: Record<string, ConfigItem> = {
     'passed-access': {
-        color: '#66CC66',
+        color: '#4ade80',
         line1: 'MISSION PASSED',
         line2: 'ACCESS GRANTED',
         isPassed: true,
+        rewardText: '+₹15,000 CASH BONUS',
     },
     'passed-portfolio': {
-        color: '#66CC66',
+        color: '#4ade80',
         line1: 'MISSION PASSED',
         line2: 'PORTFOLIO LOADED',
         isPassed: true,
+        rewardText: '+₹40,000 HEIST SHARE',
     },
     'failed-denied': {
-        color: '#b80000',
+        color: '#ef4444',
         line1: 'MISSION FAILED',
-        line2: 'ACCESS DENIED',
+        line2: 'ACCESS DENIED — RETRYING...',
         isPassed: false,
     },
     'failed-redirect': {
-        color: '#b80000',
+        color: '#ef4444',
         line1: 'MISSION FAILED',
-        line2: 'REDIRECTING\u2026',
+        line2: 'REDIRECTING TO BRIEFING...',
         isPassed: false,
     },
 }
@@ -43,7 +46,16 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
     const headlineRef = useRef<HTMLHeadingElement | null>(null)
     const subtitleRef = useRef<HTMLParagraphElement | null>(null)
     const lineRef = useRef<HTMLDivElement | null>(null)
+    const statsRef = useRef<HTMLDivElement | null>(null)
+    const completedRef = useRef<boolean>(false)
+
     const cfg = (type && CONFIGS[type]) || CONFIGS['passed-access']
+
+    const triggerComplete = () => {
+        if (completedRef.current) return
+        completedRef.current = true
+        onComplete()
+    }
 
     useEffect(() => {
         try {
@@ -58,29 +70,29 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
             console.warn('Audio notice in mission result:', e)
         }
 
-        const tl = gsap.timeline({ onComplete })
+        const tl = gsap.timeline({ onComplete: triggerComplete })
 
         // Initial flash
         if (flashRef.current) {
             tl.fromTo(
                 flashRef.current,
-                { opacity: 0.6, backgroundColor: cfg.color },
+                { opacity: 0.7, backgroundColor: cfg.color },
                 { opacity: 0, duration: 0.35, ease: 'power2.out' }
             )
         }
 
-        // Background desaturation / dimming
+        // Background dim
         if (overlayRef.current) {
-            tl.to(overlayRef.current, { backgroundColor: 'rgba(0,0,0,0.92)', duration: 0.3 }, '-=0.25')
+            tl.to(overlayRef.current, { backgroundColor: 'rgba(5, 5, 8, 0.95)', duration: 0.25 }, '-=0.25')
         }
 
         // Headline Slam
         if (headlineRef.current) {
             tl.fromTo(
                 headlineRef.current,
-                { scale: 2.2, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 0.45, ease: 'expo.out' },
-                '-=0.2'
+                { scale: 2.3, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.5)' },
+                '-=0.15'
             )
         }
 
@@ -89,7 +101,7 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
             tl.fromTo(
                 lineRef.current,
                 { scaleX: 0, opacity: 0 },
-                { scaleX: 1, opacity: 1, duration: 0.4, ease: 'power3.out' },
+                { scaleX: 1, opacity: 1, duration: 0.35, ease: 'power3.out' },
                 '-=0.2'
             )
         }
@@ -98,16 +110,26 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
         if (subtitleRef.current) {
             tl.fromTo(
                 subtitleRef.current,
-                { opacity: 0, y: 10 },
-                { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' },
-                '-=0.2'
+                { opacity: 0, y: 12 },
+                { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' },
+                '-=0.15'
             )
         }
 
-        tl.to({}, { duration: 2.6 }) // Hold for GTA victory feel
+        // Payout / Stats ticker
+        if (statsRef.current && cfg.isPassed) {
+            tl.fromTo(
+                statsRef.current,
+                { opacity: 0, y: 15 },
+                { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' },
+                '-=0.1'
+            )
+        }
+
+        tl.to({}, { duration: 2.2 }) // Hold duration
 
         if (overlayRef.current) {
-            tl.to(overlayRef.current, { opacity: 0, duration: 0.6, ease: 'power2.inOut' })
+            tl.to(overlayRef.current, { opacity: 0, duration: 0.45, ease: 'power2.inOut' })
         }
 
         return () => {
@@ -117,8 +139,9 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
             if (headlineRef.current) gsap.killTweensOf(headlineRef.current)
             if (subtitleRef.current) gsap.killTweensOf(subtitleRef.current)
             if (lineRef.current) gsap.killTweensOf(lineRef.current)
+            if (statsRef.current) gsap.killTweensOf(statsRef.current)
         }
-    }, [cfg, onComplete, sounds])
+    }, [cfg])
 
     return (
         <div
@@ -132,6 +155,7 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
                 justifyContent: 'center',
                 zIndex: 9000,
                 userSelect: 'none',
+                cursor: 'default',
             }}
         >
             <div
@@ -143,8 +167,7 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
                     pointerEvents: 'none',
                 }}
             />
-            <div className="noise-overlay" />
-            <div className="crt-scanlines" />
+            <div className="heavy-vignette" />
 
             <div style={{ textAlign: 'center', zIndex: 9002, padding: '0 20px', maxWidth: '900px' }}>
                 <h1
@@ -156,7 +179,7 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
                         textTransform: 'uppercase',
                         color: cfg.color,
                         lineHeight: 0.95,
-                        textShadow: `0 4px 30px rgba(0,0,0,0.9), 0 0 40px ${cfg.color}55`,
+                        textShadow: `0 4px 30px rgba(0,0,0,0.95), 0 0 50px ${cfg.color}66`,
                         fontWeight: 'bold',
                     }}
                 >
@@ -167,11 +190,11 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
                     ref={lineRef}
                     style={{
                         height: '2px',
-                        width: '280px',
+                        width: '320px',
                         background: cfg.color,
                         margin: '18px auto',
                         opacity: 0,
-                        boxShadow: `0 0 10px ${cfg.color}`,
+                        boxShadow: `0 0 14px ${cfg.color}`,
                     }}
                 />
 
@@ -189,6 +212,42 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
                 >
                     {cfg.line2}
                 </p>
+
+                {/* GTA V Heist Stats / Payout Breakout */}
+                {cfg.isPassed && (
+                    <div
+                        ref={statsRef}
+                        style={{
+                            marginTop: '28px',
+                            display: 'inline-flex',
+                            gap: '24px',
+                            padding: '10px 24px',
+                            background: 'rgba(10, 10, 14, 0.85)',
+                            border: '1px solid rgba(74, 222, 128, 0.35)',
+                            boxShadow: '0 0 25px rgba(74, 222, 128, 0.15)',
+                        }}
+                    >
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em' }}>
+                                PAYOUT
+                            </div>
+                            <div style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '1rem', color: '#4ade80', fontWeight: 700 }}>
+                                {cfg.rewardText}
+                            </div>
+                        </div>
+
+                        <div style={{ width: '1px', background: 'rgba(255,255,255,0.15)' }} />
+
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em' }}>
+                                STATUS
+                            </div>
+                            <div style={{ fontFamily: 'ChaletLondon1960, "Bebas Neue", sans-serif', fontSize: '1rem', color: '#f5a623', letterSpacing: '0.1em' }}>
+                                GOLD MEDAL ★★★
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )

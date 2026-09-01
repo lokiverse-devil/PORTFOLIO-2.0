@@ -22,9 +22,9 @@ const STUDY_WAYPOINTS = [
         location: 'Almora, Uttarakhand',
         state: 'Uttarakhand, India',
         type: 'SCHOOL',
-        year: 'Early Education',
-        status: 'COMPLETED // EXCELLENCE',
-        desc: 'Foundational schooling and early development in the scenic hills of Almora. Nurtured analytical thinking, mathematics, and curiosity for science.',
+        year: 'Early Schooling',
+        status: 'COMPLETED // DISTINCTION',
+        desc: 'Early schooling in Almora, Uttarakhand. Built a strong foundation in science, mathematics, and curiosity for computing.',
         coordinates: {
             x: 72,
             y: 55,
@@ -32,9 +32,8 @@ const STUDY_WAYPOINTS = [
             long: '79.6591° E'
         },
         highlights: [
-            'Science & Mathematics Foundation',
-            'Analytical & Logic Building',
-            'Academic Distinction'
+            'Science & Mathematics',
+            'Learning'
         ]
     },
     {
@@ -45,8 +44,8 @@ const STUDY_WAYPOINTS = [
         state: 'Uttarakhand, India',
         type: 'SECONDARY',
         year: 'High School',
-        status: 'COMPLETED // DISTINCTION',
-        desc: 'Comprehensive secondary education focusing on rigorous science curriculum, computer science fundamentals, and extracurricular leadership.',
+        status: 'COMPLETED // FIRST DIVISION',
+        desc: 'High school education in Haldwani focused on core science and computer science fundamentals.',
         coordinates: {
             x: 65,
             y: 68,
@@ -54,9 +53,9 @@ const STUDY_WAYPOINTS = [
             long: '79.5130° E'
         },
         highlights: [
-            'Computer Science Fundamentals',
+            'Computer Science Basics',
             'Science Stream Curriculum',
-            'Team Collaboration & Activities'
+            'Team Activities'
         ]
     },
     {
@@ -68,7 +67,7 @@ const STUDY_WAYPOINTS = [
         type: 'DIPLOMA',
         year: 'Polytechnic Engineering',
         status: 'COMPLETED // FIRST CLASS',
-        desc: 'Rigorous engineering diploma in Computer Science Engineering. Built core programming, data structures, digital electronics, and software systems.',
+        desc: 'Hands-on diploma in Computer Science Engineering. Learned C, C++, Java, SQL, and computer networking.',
         coordinates: {
             x: 50,
             y: 72,
@@ -76,9 +75,10 @@ const STUDY_WAYPOINTS = [
             long: '78.9619° E'
         },
         highlights: [
-            'C / C++ & Java Architecture',
-            'Database Management & SQL',
-            'Operating Systems & Networking'
+            'C / C++ & Java Programming',
+            'Database Design & SQL',
+            'Operating Systems & Networks',
+            'Academic Honors'
         ]
     },
     {
@@ -90,7 +90,7 @@ const STUDY_WAYPOINTS = [
         type: 'BTECH',
         year: 'Undergraduate // Current',
         status: 'ACTIVE // IN PROGRESS',
-        desc: 'Veer Madho Singh Bhandari Uttarakhand Technical University (Faculty of Technology). Deep specialization in AI, Distributed Systems, Cloud & Full Stack.',
+        desc: 'Undergraduate degree in Computer Science at Veer Madho Singh Bhandari Uttarakhand Technical University. Focusing on full-stack web architectures, distributed systems, and AI tools.',
         coordinates: {
             x: 28,
             y: 38,
@@ -98,40 +98,40 @@ const STUDY_WAYPOINTS = [
             long: '78.0322° E'
         },
         highlights: [
-            'AI Engineering & MCP',
-            'Full Stack Scalable Architecture',
-            'Systems Design & IoT Innovation'
+            'Web Architecture',
+            'AI & Agent Workflows',
+            'System Design & IoT Projects'
         ]
     },
     {
         id: 'future',
-        title: 'GLOBAL OPERATIONS',
+        title: 'GLOBAL OPPORTUNITIES',
         institution: 'Worldwide Tech Missions',
-        location: 'Global / Remote',
+        location: 'Remote / Global',
         state: 'Worldwide',
         type: 'FUTURE',
-        year: 'Next Horizon',
-        status: 'OPEN FOR EXPEDITIONS',
-        desc: 'Ready to deploy engineering solutions worldwide — open for high-impact software engineering roles, hackathons, and international collaborations.',
+        year: 'Current & Future',
+        status: 'OPEN FOR ROLES',
+        desc: 'Ready to build high-impact software solutions worldwide — open for software engineering roles, internships, and collaborative projects.',
         coordinates: {
             x: 88,
             y: 22,
             lat: 'GLOBAL',
-            long: 'EXPEDITIONS'
+            long: 'REMOTE'
         },
         highlights: [
-            'International Tech Collaborations',
-            'High-Scale Distributed Engineering',
-            'Global Product Impact'
+            'Full-Time Software Roles',
+            'Internships & Contracts',
+            'Open-Source Contributions'
         ]
     }
 ];
 const TYPE_COLORS = {
-    SCHOOL: '#7eb8f7',
-    SECONDARY: '#c084fc',
-    DIPLOMA: '#f5a623',
+    SCHOOL: '#94a3b8',
+    SECONDARY: '#cbd5e1',
+    DIPLOMA: '#e2e8f0',
     BTECH: '#66CC66',
-    FUTURE: '#34d399'
+    FUTURE: '#4ade80'
 };
 function MapSection() {
     _s();
@@ -140,7 +140,10 @@ function MapSection() {
     const radarRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(0);
     const animRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const activePoint = STUDY_WAYPOINTS.find((w)=>w.id === selectedId) || STUDY_WAYPOINTS[3];
-    const accentColor = TYPE_COLORS[activePoint.type] || '#f5a623';
+    const accentColor = TYPE_COLORS[activePoint.type] || '#ffffff';
+    const handleSelectWaypoint = (id)=>{
+        setSelectedId(id);
+    };
     // Radar sweep animation
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "MapSection.useEffect": ()=>{
@@ -168,7 +171,7 @@ function MapSection() {
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex flex-wrap items-center justify-between gap-3 pb-3",
                 style: {
-                    borderBottom: '1px solid rgba(255,255,255,0.12)'
+                    borderBottom: '1px solid rgba(255,255,255,0.1)'
                 },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -178,57 +181,54 @@ function MapSection() {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
-                                            width: '10px',
-                                            height: '10px',
-                                            background: '#f5a623',
-                                            boxShadow: '0 0 10px rgba(245,166,35,0.9), 0 0 20px rgba(245,166,35,0.5)',
-                                            animation: 'gold-pulse 2.8s ease-in-out infinite'
+                                            width: '3px',
+                                            height: '14px',
+                                            background: '#ffffff'
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 124,
+                                        lineNumber: 132,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                         style: {
                                             fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                            fontSize: 'clamp(1.1rem, 2.2vw, 1.55rem)',
-                                            letterSpacing: '0.12em',
+                                            fontSize: 'clamp(1.1rem, 2vw, 1.45rem)',
+                                            letterSpacing: '0.14em',
                                             color: '#fff',
-                                            textTransform: 'uppercase',
-                                            textShadow: '0 0 20px rgba(255,255,255,0.1)'
+                                            textTransform: 'uppercase'
                                         },
-                                        children: "TERRITORY RADAR // ACADEMIC EXPEDITIONS"
+                                        children: "TERRITORY RADAR // ACADEMIC JOURNEY"
                                     }, void 0, false, {
                                         fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 130,
+                                        lineNumber: 139,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 123,
+                                lineNumber: 131,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 style: {
                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                     fontSize: '0.78rem',
-                                    color: 'rgba(255,255,255,0.55)',
-                                    letterSpacing: '0.25em',
+                                    color: 'rgba(255,255,255,0.45)',
+                                    letterSpacing: '0.22em',
                                     textTransform: 'uppercase',
                                     marginTop: '3px'
                                 },
-                                children: "UTTARAKHAND (INDIA) TO GLOBAL HORIZON // SELECT A WAYPOINT FOR DOSSIER"
+                                children: "UTTARAKHAND TO GLOBAL HORIZON // SELECT A WAYPOINT FOR DETAILS"
                             }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 141,
+                                lineNumber: 151,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/MapSection.tsx",
-                        lineNumber: 122,
+                        lineNumber: 130,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -242,44 +242,43 @@ function MapSection() {
                                 style: {
                                     width: '6px',
                                     height: '6px',
-                                    background: '#f5a623',
-                                    boxShadow: '0 0 6px rgba(245,166,35,0.9)',
-                                    animation: 'live-pulse 1.5s ease-in-out infinite'
+                                    background: '#66CC66',
+                                    borderRadius: '50%',
+                                    boxShadow: '0 0 6px rgba(102,204,102,0.8)'
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 154,
+                                lineNumber: 166,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 style: {
                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                     fontSize: '0.72rem',
-                                    color: '#f5a623',
-                                    background: 'rgba(245,166,35,0.08)',
-                                    border: '1px solid rgba(245,166,35,0.35)',
+                                    color: '#66CC66',
+                                    background: 'rgba(102,204,102,0.06)',
+                                    border: '1px solid rgba(102,204,102,0.3)',
                                     padding: '4px 12px',
                                     letterSpacing: '0.2em',
                                     textTransform: 'uppercase',
-                                    fontWeight: 700,
-                                    textShadow: '0 0 8px rgba(245,166,35,0.5)'
+                                    fontWeight: 700
                                 },
                                 children: "GPS GRID ACTIVE"
                             }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 160,
+                                lineNumber: 175,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/MapSection.tsx",
-                        lineNumber: 153,
+                        lineNumber: 165,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/MapSection.tsx",
-                lineNumber: 120,
+                lineNumber: 126,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -288,8 +287,8 @@ function MapSection() {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "lg:col-span-7 relative overflow-hidden",
                         style: {
-                            background: 'linear-gradient(135deg, #080c0b 0%, #050a08 100%)',
-                            border: '1px solid rgba(255,255,255,0.12)',
+                            background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
+                            border: '1px solid rgba(255,255,255,0.1)',
                             minHeight: '340px',
                             padding: '16px',
                             display: 'flex',
@@ -301,36 +300,15 @@ function MapSection() {
                                 className: "absolute inset-0 pointer-events-none",
                                 style: {
                                     backgroundImage: `
-                                linear-gradient(to right, rgba(102,204,102,0.07) 1px, transparent 1px),
-                                linear-gradient(to bottom, rgba(102,204,102,0.07) 1px, transparent 1px)
+                                linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+                                linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)
                             `,
                                     backgroundSize: '40px 40px',
-                                    opacity: 0.8
+                                    opacity: 0.7
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 193,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "absolute inset-0 pointer-events-none",
-                                style: {
-                                    opacity: 0.04
-                                },
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    style: {
-                                        position: 'absolute',
-                                        inset: 0,
-                                        backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 1px, transparent 1px, transparent 30px)'
-                                    }
-                                }, void 0, false, {
-                                    fileName: "[project]/components/MapSection.tsx",
-                                    lineNumber: 207,
-                                    columnNumber: 25
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 206,
+                                lineNumber: 209,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -345,8 +323,8 @@ function MapSection() {
                                     borderRadius: '50% !important',
                                     background: `conic-gradient(
                             from ${radarAngle}deg,
-                            rgba(102,204,102,0.18) 0deg,
-                            rgba(102,204,102,0.06) 20deg,
+                            rgba(102,204,102,0.14) 0deg,
+                            rgba(102,204,102,0.04) 20deg,
                             transparent 60deg,
                             transparent 360deg
                         )`,
@@ -354,7 +332,7 @@ function MapSection() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 215,
+                                lineNumber: 222,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -367,12 +345,12 @@ function MapSection() {
                                     marginLeft: '-100px',
                                     marginTop: '-100px',
                                     borderRadius: '50% !important',
-                                    border: '1px solid rgba(102,204,102,0.15)',
+                                    border: '1px solid rgba(255,255,255,0.08)',
                                     zIndex: 1
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 231,
+                                lineNumber: 244,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -385,308 +363,130 @@ function MapSection() {
                                     marginLeft: '-175px',
                                     marginTop: '-175px',
                                     borderRadius: '50% !important',
-                                    border: '1px solid rgba(102,204,102,0.08)',
+                                    border: '1px solid rgba(255,255,255,0.05)',
                                     zIndex: 1
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 239,
+                                lineNumber: 258,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "absolute pointer-events-none",
+                                className: "absolute top-2 left-1/2 -translate-x-1/2 font-mono text-xs pointer-events-none",
                                 style: {
-                                    top: '50%',
-                                    left: '50%',
-                                    width: '500px',
-                                    height: '500px',
-                                    marginLeft: '-250px',
-                                    marginTop: '-250px',
-                                    borderRadius: '50% !important',
-                                    border: '1px solid rgba(102,204,102,0.05)',
-                                    zIndex: 1
-                                }
-                            }, void 0, false, {
-                                fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 247,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "absolute pointer-events-none",
-                                style: {
-                                    top: '50%',
-                                    left: '50%',
-                                    width: '160px',
-                                    height: '1px',
-                                    transformOrigin: '0 50%',
-                                    transform: `rotate(${radarAngle}deg)`,
-                                    background: 'linear-gradient(to right, rgba(102,204,102,0.9), transparent)',
-                                    boxShadow: '0 0 4px rgba(102,204,102,0.5)',
+                                    color: 'rgba(255,255,255,0.25)',
                                     zIndex: 2
-                                }
+                                },
+                                children: "N"
                             }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 257,
+                                lineNumber: 274,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "relative flex justify-between items-center",
+                                className: "absolute bottom-2 left-1/2 -translate-x-1/2 font-mono text-xs pointer-events-none",
                                 style: {
-                                    fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                    fontSize: '0.7rem',
-                                    color: 'rgba(102,204,102,0.7)',
-                                    letterSpacing: '0.22em',
-                                    textTransform: 'uppercase',
-                                    zIndex: 10
+                                    color: 'rgba(255,255,255,0.25)',
+                                    zIndex: 2
                                 },
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: "SAT_NAV // SECTOR 05: UTTARAKHAND"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 276,
-                                        columnNumber: 25
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        style: {
-                                            color: '#66CC66',
-                                            fontWeight: 700,
-                                            textShadow: '0 0 8px rgba(102,204,102,0.6)'
-                                        },
-                                        children: "SIGNAL: 100% LOCK"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 277,
-                                        columnNumber: 25
-                                    }, this)
-                                ]
-                            }, void 0, true, {
+                                children: "S"
+                            }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 268,
+                                lineNumber: 280,
                                 columnNumber: 21
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                className: "absolute inset-0 w-full h-full pointer-events-none",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "absolute left-2 top-1/2 -translate-y-1/2 font-mono text-xs pointer-events-none",
                                 style: {
-                                    zIndex: 3
+                                    color: 'rgba(255,255,255,0.25)',
+                                    zIndex: 2
                                 },
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("defs", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("filter", {
-                                                id: "glow-gold",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feGaussianBlur", {
-                                                        stdDeviation: "2",
-                                                        result: "coloredBlur"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/MapSection.tsx",
-                                                        lineNumber: 290,
-                                                        columnNumber: 33
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feMerge", {
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feMergeNode", {
-                                                                in: "coloredBlur"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/MapSection.tsx",
-                                                                lineNumber: 291,
-                                                                columnNumber: 42
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feMergeNode", {
-                                                                in: "SourceGraphic"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/MapSection.tsx",
-                                                                lineNumber: 291,
-                                                                columnNumber: 74
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/components/MapSection.tsx",
-                                                        lineNumber: 291,
-                                                        columnNumber: 33
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 289,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("filter", {
-                                                id: "glow-green",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feGaussianBlur", {
-                                                        stdDeviation: "2",
-                                                        result: "coloredBlur"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/MapSection.tsx",
-                                                        lineNumber: 294,
-                                                        columnNumber: 33
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feMerge", {
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feMergeNode", {
-                                                                in: "coloredBlur"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/MapSection.tsx",
-                                                                lineNumber: 295,
-                                                                columnNumber: 42
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feMergeNode", {
-                                                                in: "SourceGraphic"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/MapSection.tsx",
-                                                                lineNumber: 295,
-                                                                columnNumber: 74
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/components/MapSection.tsx",
-                                                        lineNumber: 295,
-                                                        columnNumber: 33
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 293,
-                                                columnNumber: 29
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 288,
-                                        columnNumber: 25
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("polyline", {
-                                        points: "72%,55% 65%,68% 50%,72% 28%,38%",
-                                        fill: "none",
-                                        stroke: "rgba(245, 166, 35, 0.65)",
-                                        strokeWidth: "2",
-                                        strokeDasharray: "6 5",
-                                        filter: "url(#glow-gold)",
-                                        style: {
-                                            animation: 'dash-march 0.7s linear infinite'
-                                        }
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 299,
-                                        columnNumber: 25
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("polyline", {
-                                        points: "28%,38% 88%,22%",
-                                        fill: "none",
-                                        stroke: "rgba(52, 211, 153, 0.7)",
-                                        strokeWidth: "2",
-                                        strokeDasharray: "4 5",
-                                        filter: "url(#glow-green)",
-                                        style: {
-                                            animation: 'dash-march 0.5s linear infinite'
-                                        }
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 309,
-                                        columnNumber: 25
-                                    }, this)
-                                ]
-                            }, void 0, true, {
+                                children: "W"
+                            }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 287,
+                                lineNumber: 286,
                                 columnNumber: 21
                             }, this),
-                            STUDY_WAYPOINTS.map((wp, idx)=>{
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "absolute right-2 top-1/2 -translate-y-1/2 font-mono text-xs pointer-events-none",
+                                style: {
+                                    color: 'rgba(255,255,255,0.25)',
+                                    zIndex: 2
+                                },
+                                children: "E"
+                            }, void 0, false, {
+                                fileName: "[project]/components/MapSection.tsx",
+                                lineNumber: 292,
+                                columnNumber: 21
+                            }, this),
+                            STUDY_WAYPOINTS.map((wp)=>{
                                 const isSelected = wp.id === selectedId;
-                                const color = TYPE_COLORS[wp.type] || '#f5a623';
+                                const color = TYPE_COLORS[wp.type] || '#ffffff';
                                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    onClick: ()=>setSelectedId(wp.id),
+                                    onClick: ()=>handleSelectWaypoint(wp.id),
+                                    title: `${wp.institution} (${wp.location})`,
                                     style: {
                                         position: 'absolute',
                                         left: `${wp.coordinates.x}%`,
                                         top: `${wp.coordinates.y}%`,
                                         transform: 'translate(-50%, -50%)',
-                                        zIndex: 20,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '6px',
-                                        background: 'none',
+                                        zIndex: isSelected ? 20 : 10,
+                                        background: 'transparent',
                                         border: 'none',
                                         cursor: 'pointer',
-                                        padding: '4px',
-                                        outline: 'none',
-                                        transition: 'transform 0.2s ease'
+                                        padding: '6px',
+                                        outline: 'none'
                                     },
                                     children: [
-                                        isSelected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             style: {
-                                                position: 'absolute',
-                                                top: '50%',
-                                                left: '12px',
-                                                width: '24px',
-                                                height: '24px',
-                                                border: `1px solid ${color}`,
-                                                borderRadius: '50% !important',
-                                                animation: 'ping-ring 1.6s cubic-bezier(0, 0, 0.2, 1) infinite',
-                                                pointerEvents: 'none',
-                                                boxShadow: `0 0 8px ${color}50`
+                                                width: isSelected ? '13px' : '9px',
+                                                height: isSelected ? '13px' : '9px',
+                                                borderRadius: '50%',
+                                                background: color,
+                                                boxShadow: isSelected ? `0 0 10px ${color}, 0 0 20px ${color}` : `0 0 5px ${color}60`,
+                                                border: '2px solid #000',
+                                                transition: 'all 0.2s ease'
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/components/MapSection.tsx",
-                                            lineNumber: 347,
-                                            columnNumber: 37
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            style: {
-                                                width: '24px',
-                                                height: '24px',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                fontFamily: 'ChaletLondon1960,"Bebas Neue",sans-serif',
-                                                fontSize: '0.72rem',
-                                                fontWeight: 700,
-                                                background: isSelected ? color : wp.type === 'FUTURE' ? `${color}25` : 'rgba(15,15,20,0.92)',
-                                                color: isSelected ? '#000' : color,
-                                                border: `1px solid ${color}`,
-                                                boxShadow: isSelected ? `0 0 14px ${color}, 0 0 28px ${color}50` : `0 0 6px ${color}50`,
-                                                transition: 'all 0.2s ease',
-                                                flexShrink: 0
-                                            },
-                                            children: idx + 1
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/MapSection.tsx",
-                                            lineNumber: 362,
+                                            lineNumber: 321,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             style: {
-                                                padding: '2px 8px',
+                                                position: 'absolute',
+                                                top: '100%',
+                                                left: '50%',
+                                                transform: 'translateX(-50%)',
+                                                marginTop: '4px',
                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                                fontSize: '0.68rem',
+                                                fontSize: '0.62rem',
                                                 letterSpacing: '0.15em',
                                                 textTransform: 'uppercase',
                                                 whiteSpace: 'nowrap',
-                                                background: isSelected ? color : 'rgba(8,10,9,0.88)',
-                                                color: isSelected ? '#000' : 'rgba(255,255,255,0.85)',
-                                                border: `1px solid ${isSelected ? color : `${color}50`}`,
-                                                boxShadow: isSelected ? `0 0 10px ${color}60` : 'none',
-                                                fontWeight: isSelected ? 700 : 400
+                                                color: isSelected ? '#fff' : 'rgba(255,255,255,0.5)',
+                                                fontWeight: isSelected ? 700 : 400,
+                                                textShadow: '0 1px 4px #000',
+                                                pointerEvents: 'none'
                                             },
                                             children: wp.institution.split(' ')[0]
                                         }, void 0, false, {
                                             fileName: "[project]/components/MapSection.tsx",
-                                            lineNumber: 388,
+                                            lineNumber: 334,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, wp.id, true, {
                                     fileName: "[project]/components/MapSection.tsx",
-                                    lineNumber: 325,
+                                    lineNumber: 304,
                                     columnNumber: 29
                                 }, this);
                             }),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "relative flex justify-between items-end pt-3 mt-auto",
                                 style: {
-                                    borderTop: '1px solid rgba(102,204,102,0.12)',
+                                    borderTop: '1px solid rgba(255,255,255,0.08)',
                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                     fontSize: '0.68rem',
                                     color: 'rgba(255,255,255,0.4)',
@@ -697,68 +497,66 @@ function MapSection() {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: [
-                                            "LAT: ",
+                                            "LAT:",
+                                            ' ',
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 style: {
-                                                    color: '#66CC66',
+                                                    color: '#fff',
                                                     fontWeight: 700
                                                 },
                                                 children: activePoint.coordinates.lat
                                             }, void 0, false, {
                                                 fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 418,
-                                                columnNumber: 34
+                                                lineNumber: 373,
+                                                columnNumber: 29
                                             }, this),
                                             ' ',
                                             "// LONG:",
                                             ' ',
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 style: {
-                                                    color: '#66CC66',
+                                                    color: '#fff',
                                                     fontWeight: 700
                                                 },
                                                 children: activePoint.coordinates.long
                                             }, void 0, false, {
                                                 fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 420,
+                                                lineNumber: 377,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 417,
+                                        lineNumber: 371,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         children: "CLICK WAYPOINTS 1–5 TO INSPECT"
                                     }, void 0, false, {
                                         fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 422,
+                                        lineNumber: 381,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 408,
+                                lineNumber: 359,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/MapSection.tsx",
-                        lineNumber: 180,
+                        lineNumber: 196,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "lg:col-span-5 flex flex-col justify-between",
                         style: {
-                            background: 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)',
-                            borderTop: '1px solid rgba(255,255,255,0.1)',
-                            borderRight: '1px solid rgba(255,255,255,0.1)',
-                            borderBottom: '1px solid rgba(255,255,255,0.1)',
+                            background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
+                            border: '1px solid rgba(255,255,255,0.1)',
                             borderLeft: `3px solid ${accentColor}`,
                             padding: '18px 20px',
-                            boxShadow: `inset 3px 0 20px ${accentColor}08`,
-                            transition: 'border-left-color 0.3s ease, box-shadow 0.3s ease'
+                            transition: 'border-left-color 0.3s ease'
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -778,7 +576,6 @@ function MapSection() {
                                                     letterSpacing: '0.3em',
                                                     textTransform: 'uppercase',
                                                     fontWeight: 700,
-                                                    textShadow: `0 0 8px ${accentColor}80`,
                                                     display: 'block',
                                                     marginBottom: '6px'
                                                 },
@@ -789,30 +586,29 @@ function MapSection() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 443,
+                                                lineNumber: 399,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
                                                 style: {
                                                     fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                    fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
+                                                    fontSize: 'clamp(1.2rem, 2vw, 1.45rem)',
                                                     color: '#fff',
                                                     letterSpacing: '0.08em',
                                                     textTransform: 'uppercase',
-                                                    lineHeight: 1.1,
-                                                    textShadow: '0 0 20px rgba(255,255,255,0.1)'
+                                                    lineHeight: 1.1
                                                 },
                                                 children: activePoint.institution
                                             }, void 0, false, {
                                                 fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 456,
+                                                lineNumber: 413,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 style: {
                                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                     fontSize: '0.82rem',
-                                                    color: 'rgba(255,255,255,0.6)',
+                                                    color: 'rgba(255,255,255,0.5)',
                                                     letterSpacing: '0.2em',
                                                     textTransform: 'uppercase',
                                                     marginTop: '4px'
@@ -820,13 +616,13 @@ function MapSection() {
                                                 children: activePoint.location
                                             }, void 0, false, {
                                                 fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 467,
+                                                lineNumber: 425,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 442,
+                                        lineNumber: 398,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -841,9 +637,9 @@ function MapSection() {
                                                 style: {
                                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                     fontSize: '0.68rem',
-                                                    background: 'rgba(255,255,255,0.07)',
-                                                    border: '1px solid rgba(255,255,255,0.2)',
-                                                    color: 'rgba(255,255,255,0.8)',
+                                                    background: 'rgba(255,255,255,0.06)',
+                                                    border: '1px solid rgba(255,255,255,0.15)',
+                                                    color: 'rgba(255,255,255,0.75)',
                                                     padding: '3px 10px',
                                                     letterSpacing: '0.18em',
                                                     textTransform: 'uppercase'
@@ -851,7 +647,7 @@ function MapSection() {
                                                 children: activePoint.year
                                             }, void 0, false, {
                                                 fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 481,
+                                                lineNumber: 441,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -859,24 +655,23 @@ function MapSection() {
                                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                     fontSize: '0.68rem',
                                                     background: `${accentColor}12`,
-                                                    border: `1px solid ${accentColor}50`,
+                                                    border: `1px solid ${accentColor}40`,
                                                     color: accentColor,
                                                     padding: '3px 10px',
                                                     letterSpacing: '0.18em',
                                                     textTransform: 'uppercase',
-                                                    fontWeight: 700,
-                                                    textShadow: `0 0 6px ${accentColor}60`
+                                                    fontWeight: 700
                                                 },
                                                 children: activePoint.status
                                             }, void 0, false, {
                                                 fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 493,
+                                                lineNumber: 455,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 480,
+                                        lineNumber: 440,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -893,7 +688,7 @@ function MapSection() {
                                         children: activePoint.desc
                                     }, void 0, false, {
                                         fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 510,
+                                        lineNumber: 473,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -908,10 +703,10 @@ function MapSection() {
                                                     display: 'block',
                                                     marginBottom: '8px'
                                                 },
-                                                children: "KEY COMPETENCIES & MILESTONES:"
+                                                children: "KEY HIGHLIGHTS:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 525,
+                                                lineNumber: 490,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -922,36 +717,36 @@ function MapSection() {
                                                 },
                                                 children: activePoint.highlights.map((h, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         style: {
-                                                            background: `${accentColor}0a`,
+                                                            background: 'rgba(255,255,255,0.04)',
                                                             borderLeft: `2px solid ${accentColor}`,
                                                             padding: '4px 10px',
                                                             fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                             fontSize: '0.72rem',
-                                                            color: 'rgba(255,255,255,0.85)',
+                                                            color: 'rgba(255,255,255,0.8)',
                                                             letterSpacing: '0.12em',
                                                             textTransform: 'uppercase'
                                                         },
                                                         children: h
                                                     }, i, false, {
                                                         fileName: "[project]/components/MapSection.tsx",
-                                                        lineNumber: 538,
+                                                        lineNumber: 505,
                                                         columnNumber: 37
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/MapSection.tsx",
-                                                lineNumber: 536,
+                                                lineNumber: 503,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 524,
+                                        lineNumber: 489,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 440,
+                                lineNumber: 396,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -965,9 +760,9 @@ function MapSection() {
                                 },
                                 children: STUDY_WAYPOINTS.map((wp, i)=>{
                                     const isSelected = wp.id === selectedId;
-                                    const color = TYPE_COLORS[wp.type] || '#f5a623';
+                                    const color = TYPE_COLORS[wp.type] || '#ffffff';
                                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        onClick: ()=>setSelectedId(wp.id),
+                                        onClick: ()=>handleSelectWaypoint(wp.id),
                                         style: {
                                             padding: '6px 4px',
                                             fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
@@ -975,12 +770,11 @@ function MapSection() {
                                             letterSpacing: '0.1em',
                                             textTransform: 'uppercase',
                                             textAlign: 'center',
-                                            background: isSelected ? color : 'rgba(15,15,20,0.6)',
-                                            color: isSelected ? '#000' : 'rgba(255,255,255,0.55)',
-                                            border: `1px solid ${isSelected ? color : 'rgba(255,255,255,0.12)'}`,
+                                            background: isSelected ? color : 'rgba(255,255,255,0.04)',
+                                            color: isSelected ? '#000' : 'rgba(255,255,255,0.5)',
+                                            border: `1px solid ${isSelected ? color : 'rgba(255,255,255,0.1)'}`,
                                             cursor: 'pointer',
                                             fontWeight: isSelected ? 700 : 400,
-                                            boxShadow: isSelected ? `0 0 12px ${color}60` : 'none',
                                             transition: 'all 0.18s ease',
                                             outline: 'none'
                                         },
@@ -990,31 +784,31 @@ function MapSection() {
                                         ]
                                     }, wp.id, true, {
                                         fileName: "[project]/components/MapSection.tsx",
-                                        lineNumber: 571,
+                                        lineNumber: 540,
                                         columnNumber: 33
                                     }, this);
                                 })
                             }, void 0, false, {
                                 fileName: "[project]/components/MapSection.tsx",
-                                lineNumber: 559,
+                                lineNumber: 526,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/MapSection.tsx",
-                        lineNumber: 427,
+                        lineNumber: 386,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/MapSection.tsx",
-                lineNumber: 178,
+                lineNumber: 194,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/MapSection.tsx",
-        lineNumber: 118,
+        lineNumber: 124,
         columnNumber: 9
     }, this);
 }
@@ -1049,15 +843,15 @@ const CHARACTER_STATS = [
         level: 98,
         levelStr: '98%',
         category: 'CORE PERK',
-        summary: 'Rapid assimilation of complex tech stacks, swift debugging under pressure, and translating requirements into clean production code.',
+        summary: 'I pick up new tools and frameworks fast, debug problems under pressure, and turn messy requirements into clean working software.',
         skillsList: [
             'Fast-Paced Learning',
             'Algorithmic Problem Solving',
             'Root-Cause Debugging',
             'Technical Adaptability'
         ],
-        projectProof: 'Mastered MCP and Next.js Turbopack architectures in record time for complex project builds.',
-        color: '#f5a623'
+        projectProof: 'Built complex Next.js, IoT, and AI agent architectures with rapid turnaround.',
+        color: '#ffffff'
     },
     {
         id: 'programming',
@@ -1066,24 +860,24 @@ const CHARACTER_STATS = [
         level: 94,
         levelStr: '94%',
         category: 'FOUNDATION',
-        summary: 'Solid foundational computer science fundamentals with deep understanding of memory, OOP, and algorithms.',
+        summary: 'Strong foundation in data structures, algorithms, memory management, and object-oriented programming with C, C++, and Java.',
         skillsList: [
             'C / C++',
             'Java',
             'Object-Oriented Design',
             'Data Structures & Algorithms'
         ],
-        projectProof: 'High-performance algorithms and academic project backends built during Diploma and B.Tech CSE.',
-        color: '#f5a623'
+        projectProof: 'Developed core systems, academic algorithms, and backend utilities during Diploma and B.Tech.',
+        color: '#cbd5e1'
     },
     {
         id: 'fullstack',
-        name: 'FULL-STACK DEVELOPMENT',
+        name: 'AI BASED DEVELOPMENT',
         gameAlias: 'STAMINA // ARCHITECTURE',
         level: 92,
         levelStr: '92%',
         category: 'FRONTEND & WEB',
-        summary: 'Architecting fast, responsive, and intuitive web applications with modern component architecture and server actions.',
+        summary: 'Building fast, responsive web applications with React, Next.js, and TypeScript that feel smooth, modern, and enjoyable to use.',
         skillsList: [
             'React',
             'Next.js',
@@ -1092,7 +886,7 @@ const CHARACTER_STATS = [
             'WebSockets',
             'REST APIs'
         ],
-        projectProof: 'VibeChat (real-time chat protocol) and HTRACX (smart management portal).',
+        projectProof: 'Created VibeChat (real-time chat) and HTRACX (hostel management portal).',
         color: '#66CC66'
     },
     {
@@ -1102,7 +896,7 @@ const CHARACTER_STATS = [
         level: 90,
         levelStr: '90%',
         category: 'BACKEND & DATA',
-        summary: 'Designing relational schemas, relational queries, migrations, and low-latency data access layers.',
+        summary: 'Designing clear database schemas, writing efficient SQL queries, and managing reliable data flows with PostgreSQL and Supabase.',
         skillsList: [
             'PostgreSQL',
             'SQL',
@@ -1110,8 +904,8 @@ const CHARACTER_STATS = [
             'Database Normalization',
             'Indexing'
         ],
-        projectProof: 'AIMS & HTRACX multi-table relational schema design and automated record integrity.',
-        color: '#7eb8f7'
+        projectProof: 'Architected multi-table relational databases and automated integrity rules for AIMS and HTRACX.',
+        color: '#94a3b8'
     },
     {
         id: 'iot',
@@ -1120,7 +914,7 @@ const CHARACTER_STATS = [
         level: 88,
         levelStr: '88%',
         category: 'SYSTEMS & HARDWARE',
-        summary: 'Connecting hardware sensors, telemetry streams, and microcontroller networks with cloud applications.',
+        summary: 'Hooking up hardware sensors, microcontrollers, and Python code to stream real-time telemetry straight into web dashboards.',
         skillsList: [
             'IoT Automation',
             'Python Telemetry',
@@ -1128,8 +922,8 @@ const CHARACTER_STATS = [
             'Sensor Interfacing',
             'Hardware-to-Cloud Sync'
         ],
-        projectProof: 'SmartClass X: IoT-enabled classroom with automated presence telemetry and environmental controls.',
-        color: '#f87171'
+        projectProof: 'Built SmartClass X to automate classroom lights, fans, and attendance tracking.',
+        color: '#a1a1aa'
     },
     {
         id: 'ai_mcp',
@@ -1138,7 +932,7 @@ const CHARACTER_STATS = [
         level: 95,
         levelStr: '95%',
         category: 'AI & AGENTS',
-        summary: 'Integrating Gemini AI, tool calling, structured outputs, and Model Context Protocol (MCP) servers for autonomous workflows.',
+        summary: 'Connecting Gemini AI and Model Context Protocol (MCP) servers to give assistants access to real tools, APIs, and custom databases.',
         skillsList: [
             'Model Context Protocol (MCP)',
             'Gemini AI',
@@ -1146,8 +940,8 @@ const CHARACTER_STATS = [
             'Prompt Engineering',
             'Structured JSON Output'
         ],
-        projectProof: 'Autonomous tool workflows, custom MCP server integrations, and AI-powered assistants.',
-        color: '#c084fc'
+        projectProof: 'Implemented custom MCP servers and autonomous agent tool workflows for developer tools.',
+        color: '#e2e8f0'
     },
     {
         id: 'leadership',
@@ -1156,19 +950,19 @@ const CHARACTER_STATS = [
         level: 92,
         levelStr: '92%',
         category: 'MANAGEMENT',
-        summary: 'Guiding engineering teams, coordinating milestones, agile task breakdown, and pitching technical proposals.',
+        summary: 'Leading development teams, planning sprints, coordinating development, and presenting clear working prototypes to audiences.',
         skillsList: [
-            'Team Lead & Coordination',
-            'Project Management',
+            'Team Leadership',
+            'Project Coordination',
             'Agile & Sprint Planning',
-            'Pitching & Technical Demos'
+            'Demos & Presentations'
         ],
-        projectProof: 'Led multi-developer college projects and successfully pitched solutions in tech showcases.',
-        color: '#34d399'
+        projectProof: 'Led student development teams in college projects and pitched working software in showcases.',
+        color: '#4ade80'
     }
 ];
 // Typewriter hook
-function useTypewriter(text, speed = 18) {
+function useTypewriter(text, speed = 16) {
     _s();
     const [displayed, setDisplayed] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
     const [done, setDone] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -1204,19 +998,52 @@ function useTypewriter(text, speed = 18) {
     };
 }
 _s(useTypewriter, "R8r6E0f53z1f9ezZ93YLzyAT4k8=");
+// Segmented GTA Stat Bar
+function SegmentedStatBar({ level, color, totalSegments = 10 }) {
+    const filledCount = Math.round(level / 100 * totalSegments);
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        style: {
+            display: 'flex',
+            gap: '3px',
+            alignItems: 'center',
+            width: '100%'
+        },
+        children: Array.from({
+            length: totalSegments
+        }).map((_, i)=>{
+            const isFilled = i < filledCount;
+            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    flex: 1,
+                    height: '6px',
+                    background: isFilled ? color : 'rgba(255,255,255,0.06)',
+                    border: `1px solid ${isFilled ? color + '80' : 'rgba(255,255,255,0.08)'}`,
+                    transition: `background 0.3s ease ${i * 30}ms`
+                }
+            }, i, false, {
+                fileName: "[project]/components/CharacterSection.tsx",
+                lineNumber: 187,
+                columnNumber: 21
+            }, this);
+        })
+    }, void 0, false, {
+        fileName: "[project]/components/CharacterSection.tsx",
+        lineNumber: 183,
+        columnNumber: 9
+    }, this);
+}
+_c = SegmentedStatBar;
 // Animated level number
 function AnimatedLevel({ target }) {
     _s1();
     const [value, setValue] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
-    const hasRun = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AnimatedLevel.useEffect": ()=>{
-            hasRun.current = false;
             setValue(0);
             const timeout = setTimeout({
                 "AnimatedLevel.useEffect.timeout": ()=>{
                     let current = 0;
-                    const step = Math.ceil(target / 30);
+                    const step = Math.ceil(target / 25);
                     const interval = setInterval({
                         "AnimatedLevel.useEffect.timeout.interval": ()=>{
                             current += step;
@@ -1227,12 +1054,12 @@ function AnimatedLevel({ target }) {
                                 setValue(current);
                             }
                         }
-                    }["AnimatedLevel.useEffect.timeout.interval"], 22);
+                    }["AnimatedLevel.useEffect.timeout.interval"], 20);
                     return ({
                         "AnimatedLevel.useEffect.timeout": ()=>clearInterval(interval)
                     })["AnimatedLevel.useEffect.timeout"];
                 }
-            }["AnimatedLevel.useEffect.timeout"], 80);
+            }["AnimatedLevel.useEffect.timeout"], 60);
             return ({
                 "AnimatedLevel.useEffect": ()=>clearTimeout(timeout)
             })["AnimatedLevel.useEffect"];
@@ -1247,22 +1074,20 @@ function AnimatedLevel({ target }) {
         ]
     }, void 0, true);
 }
-_s1(AnimatedLevel, "BjxWrfD190Qg2PusDCm7Wlf8zzY=");
-_c = AnimatedLevel;
+_s1(AnimatedLevel, "QEMGEmq5Rfwf2KLuWFF3dZYTA2c=");
+_c1 = AnimatedLevel;
 function CharacterSection() {
     _s2();
     const [selectedStatId, setSelectedStatId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('special');
     const [abilityActive, setAbilityActive] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [barKey, setBarKey] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const activeStat = CHARACTER_STATS.find((s)=>s.id === selectedStatId) || CHARACTER_STATS[0];
-    const { displayed: typewriterText, done: typewriterDone } = useTypewriter(activeStat.summary, 16);
+    const { displayed: typewriterText } = useTypewriter(activeStat.summary, 14);
     const handleSelectStat = (id)=>{
         setSelectedStatId(id);
-        setBarKey((k)=>k + 1);
     };
     const handleTriggerAbility = ()=>{
         setAbilityActive(true);
-        setTimeout(()=>setAbilityActive(false), 3000);
+        setTimeout(()=>setAbilityActive(false), 2400);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col gap-4 w-full",
@@ -1270,7 +1095,7 @@ function CharacterSection() {
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex flex-wrap items-center justify-between gap-3 pb-3",
                 style: {
-                    borderBottom: '1px solid rgba(255,255,255,0.12)'
+                    borderBottom: '1px solid rgba(255,255,255,0.1)'
                 },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1280,125 +1105,101 @@ function CharacterSection() {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
-                                            width: '10px',
-                                            height: '10px',
-                                            background: '#66CC66',
-                                            boxShadow: '0 0 10px rgba(102,204,102,0.9), 0 0 20px rgba(102,204,102,0.5)',
-                                            animation: 'neon-breathe 2.8s ease-in-out infinite'
+                                            width: '3px',
+                                            height: '14px',
+                                            background: '#ffffff'
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 183,
+                                        lineNumber: 255,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                         style: {
                                             fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                            fontSize: 'clamp(1.1rem, 2.2vw, 1.55rem)',
-                                            letterSpacing: '0.12em',
+                                            fontSize: 'clamp(1.1rem, 2vw, 1.45rem)',
+                                            letterSpacing: '0.14em',
                                             color: '#fff',
-                                            textTransform: 'uppercase',
-                                            textShadow: '0 0 20px rgba(255,255,255,0.1)'
+                                            textTransform: 'uppercase'
                                         },
-                                        children: "CHARACTER DOSSIER // OM PANDEY"
+                                        children: "CHARACTER DOSSIER // SKILLS & CAPABILITIES"
                                     }, void 0, false, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 189,
+                                        lineNumber: 262,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CharacterSection.tsx",
-                                lineNumber: 182,
+                                lineNumber: 254,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 style: {
                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                     fontSize: '0.78rem',
-                                    color: 'rgba(255,255,255,0.55)',
-                                    letterSpacing: '0.25em',
+                                    color: 'rgba(255,255,255,0.45)',
+                                    letterSpacing: '0.22em',
                                     textTransform: 'uppercase',
                                     marginTop: '3px'
                                 },
-                                children: "PROTAGONIST STATS & PERKS // CLICK ANY ATTRIBUTE TO INSPECT"
+                                children: "CHARACTER ATTRIBUTES // SELECT ANY STAT BELOW TO INSPECT"
                             }, void 0, false, {
                                 fileName: "[project]/components/CharacterSection.tsx",
-                                lineNumber: 200,
+                                lineNumber: 274,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CharacterSection.tsx",
-                        lineNumber: 181,
+                        lineNumber: 253,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: handleTriggerAbility,
+                        disabled: abilityActive,
                         style: {
-                            padding: '6px 16px',
-                            fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                            fontSize: '0.72rem',
-                            letterSpacing: '0.22em',
+                            fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
+                            fontSize: '0.82rem',
+                            letterSpacing: '0.18em',
                             textTransform: 'uppercase',
-                            cursor: 'pointer',
-                            outline: 'none',
-                            transition: 'all 0.2s ease',
-                            background: abilityActive ? 'linear-gradient(90deg, #f5a623, #ffcc44)' : 'rgba(102,204,102,0.1)',
-                            border: abilityActive ? '1px solid #f5a623' : '1px solid rgba(102,204,102,0.45)',
-                            color: abilityActive ? '#000' : '#66CC66',
-                            fontWeight: abilityActive ? 700 : 400,
-                            boxShadow: abilityActive ? '0 0 20px rgba(245,166,35,0.7), 0 0 40px rgba(245,166,35,0.3)' : '0 0 10px rgba(102,204,102,0.15)',
-                            transform: abilityActive ? 'scale(1.03)' : 'none'
+                            padding: '6px 18px',
+                            background: abilityActive ? '#ffffff' : 'transparent',
+                            color: abilityActive ? '#000000' : '#ffffff',
+                            border: '1px solid rgba(255,255,255,0.3)',
+                            cursor: abilityActive ? 'default' : 'pointer',
+                            transition: 'all 0.2s ease'
                         },
-                        children: abilityActive ? '⚡ ABILITY OVERCLOCK ACTIVE' : '▶ TRIGGER SPECIAL ABILITY'
+                        children: abilityActive ? '● ABILITY ACTIVE' : '● SPECIAL ABILITY'
                     }, void 0, false, {
                         fileName: "[project]/components/CharacterSection.tsx",
-                        lineNumber: 212,
+                        lineNumber: 288,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CharacterSection.tsx",
-                lineNumber: 179,
+                lineNumber: 249,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "lg:col-span-7 flex flex-col gap-2.5",
+                        className: "lg:col-span-7 flex flex-col gap-3",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 onClick: ()=>handleSelectStat('special'),
                                 style: {
-                                    padding: '14px 16px',
-                                    background: selectedStatId === 'special' ? 'linear-gradient(135deg, #110f00 0%, #0e0c00 100%)' : 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)',
-                                    border: '1px solid',
-                                    borderColor: selectedStatId === 'special' ? 'rgba(245,166,35,0.5)' : 'rgba(255,255,255,0.1)',
-                                    borderLeft: `3px solid #f5a623`,
-                                    boxShadow: selectedStatId === 'special' ? '0 0 20px rgba(245,166,35,0.12), inset 0 0 20px rgba(245,166,35,0.04)' : 'none',
+                                    background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
+                                    border: '1px solid rgba(255,255,255,0.12)',
+                                    borderLeft: '3px solid #ffffff',
+                                    padding: '16px 18px',
                                     cursor: 'pointer',
                                     transition: 'all 0.2s ease',
-                                    position: 'relative',
-                                    overflow: 'hidden'
+                                    boxShadow: selectedStatId === 'special' ? '0 0 20px rgba(255,255,255,0.08)' : 'none'
                                 },
                                 children: [
-                                    selectedStatId === 'special' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        style: {
-                                            position: 'absolute',
-                                            top: 0,
-                                            left: 0,
-                                            right: 0,
-                                            bottom: 0,
-                                            background: 'radial-gradient(ellipse at 20% 50%, rgba(245,166,35,0.06) 0%, transparent 70%)',
-                                            pointerEvents: 'none'
-                                        }
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 267,
-                                        columnNumber: 29
-                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
                                             display: 'flex',
@@ -1413,66 +1214,49 @@ function CharacterSection() {
                                                     alignItems: 'center',
                                                     gap: '8px'
                                                 },
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        style: {
-                                                            width: '8px',
-                                                            height: '8px',
-                                                            background: '#f5a623',
-                                                            boxShadow: '0 0 6px rgba(245,166,35,0.9)',
-                                                            animation: 'live-pulse 1.5s ease-in-out infinite'
-                                                        }
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 277,
-                                                        columnNumber: 33
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        style: {
-                                                            fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                            fontSize: '1rem',
-                                                            color: '#f5a623',
-                                                            letterSpacing: '0.1em',
-                                                            textTransform: 'uppercase',
-                                                            textShadow: '0 0 12px rgba(245,166,35,0.5)'
-                                                        },
-                                                        children: "SPECIAL ABILITY // FAST LEARNING & PROBLEM SOLVING"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 283,
-                                                        columnNumber: 33
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    style: {
+                                                        fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
+                                                        fontSize: '1rem',
+                                                        color: '#ffffff',
+                                                        letterSpacing: '0.1em',
+                                                        textTransform: 'uppercase'
+                                                    },
+                                                    children: "SPECIAL ABILITY // FAST LEARNING & PROBLEM SOLVING"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/CharacterSection.tsx",
+                                                    lineNumber: 337,
+                                                    columnNumber: 33
+                                                }, this)
+                                            }, void 0, false, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 276,
+                                                lineNumber: 336,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 style: {
                                                     fontFamily: 'Share Tech Mono,monospace',
                                                     fontSize: '0.88rem',
-                                                    color: '#f5a623',
-                                                    fontWeight: 700,
-                                                    textShadow: '0 0 8px rgba(245,166,35,0.7)'
+                                                    color: '#ffffff',
+                                                    fontWeight: 700
                                                 },
                                                 children: "98% MAX"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 294,
+                                                lineNumber: 349,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 275,
+                                        lineNumber: 328,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
                                             width: '100%',
                                             background: 'rgba(255,255,255,0.06)',
-                                            height: '4px',
+                                            height: '3px',
                                             position: 'relative',
                                             overflow: 'hidden'
                                         },
@@ -1480,53 +1264,39 @@ function CharacterSection() {
                                             style: {
                                                 width: abilityActive ? '100%' : '98%',
                                                 height: '100%',
-                                                background: 'linear-gradient(to right, #f5a623aa, #f5a623, #ffdd88)',
-                                                boxShadow: '0 0 8px rgba(245,166,35,0.8)',
-                                                transition: 'width 0.4s ease',
-                                                position: 'relative'
-                                            },
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                style: {
-                                                    position: 'absolute',
-                                                    inset: 0,
-                                                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)',
-                                                    backgroundSize: '200% 100%',
-                                                    animation: 'shimmer-bar 1.8s ease-in-out infinite'
-                                                }
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 321,
-                                                columnNumber: 33
-                                            }, this)
+                                                background: '#ffffff',
+                                                boxShadow: '0 0 8px rgba(255,255,255,0.7)',
+                                                transition: 'width 0.4s ease'
+                                            }
                                         }, void 0, false, {
                                             fileName: "[project]/components/CharacterSection.tsx",
-                                            lineNumber: 313,
+                                            lineNumber: 371,
                                             columnNumber: 29
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 306,
+                                        lineNumber: 362,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         style: {
                                             fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                            fontSize: '0.78rem',
-                                            color: 'rgba(255,255,255,0.65)',
+                                            fontSize: '0.8rem',
+                                            color: 'rgba(255,255,255,0.6)',
                                             textTransform: 'uppercase',
                                             letterSpacing: '0.08em',
                                             marginTop: '8px'
                                         },
-                                        children: "Fast assimilation, algorithmic troubleshooting, and adaptive engineering under pressure."
+                                        children: "Rapid learning, root-cause troubleshooting, and clean code implementation."
                                     }, void 0, false, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 331,
+                                        lineNumber: 382,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CharacterSection.tsx",
-                                lineNumber: 244,
+                                lineNumber: 313,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1537,48 +1307,17 @@ function CharacterSection() {
                                         onClick: ()=>handleSelectStat(stat.id),
                                         style: {
                                             padding: '12px 14px',
-                                            background: isSelected ? `linear-gradient(135deg, #0e0e14 0%, ${stat.color}08 100%)` : 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)',
+                                            background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
                                             border: '1px solid',
-                                            borderColor: isSelected ? `${stat.color}50` : 'rgba(255,255,255,0.08)',
+                                            borderColor: isSelected ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.08)',
                                             borderLeft: `3px solid ${stat.color}`,
-                                            boxShadow: isSelected ? `0 0 18px ${stat.color}12, inset 0 0 15px ${stat.color}05` : 'none',
                                             cursor: 'pointer',
-                                            transition: 'all 0.2s ease',
+                                            transition: 'all 0.18s ease',
                                             display: 'flex',
                                             flexDirection: 'column',
-                                            gap: '8px',
-                                            position: 'relative',
-                                            overflow: 'hidden'
-                                        },
-                                        onMouseEnter: (e)=>{
-                                            if (!isSelected) {
-                                                e.currentTarget.style.borderColor = `${stat.color}35`;
-                                                e.currentTarget.style.boxShadow = `0 0 10px ${stat.color}08`;
-                                            }
-                                        },
-                                        onMouseLeave: (e)=>{
-                                            if (!isSelected) {
-                                                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
-                                                e.currentTarget.style.borderLeftColor = stat.color;
-                                                e.currentTarget.style.boxShadow = 'none';
-                                            }
+                                            gap: '8px'
                                         },
                                         children: [
-                                            isSelected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                style: {
-                                                    position: 'absolute',
-                                                    top: 0,
-                                                    left: 0,
-                                                    right: 0,
-                                                    bottom: 0,
-                                                    background: `radial-gradient(ellipse at 15% 50%, ${stat.color}08 0%, transparent 70%)`,
-                                                    pointerEvents: 'none'
-                                                }
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 385,
-                                                columnNumber: 41
-                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 style: {
                                                     display: 'flex',
@@ -1586,204 +1325,78 @@ function CharacterSection() {
                                                     alignItems: 'center'
                                                 },
                                                 children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         style: {
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            gap: '6px'
+                                                            fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
+                                                            fontSize: '0.9rem',
+                                                            color: isSelected ? '#fff' : 'rgba(255,255,255,0.75)',
+                                                            letterSpacing: '0.08em',
+                                                            textTransform: 'uppercase'
                                                         },
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                style: {
-                                                                    width: '5px',
-                                                                    height: '5px',
-                                                                    background: stat.color,
-                                                                    boxShadow: isSelected ? `0 0 5px ${stat.color}` : 'none'
-                                                                }
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/CharacterSection.tsx",
-                                                                lineNumber: 395,
-                                                                columnNumber: 45
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                style: {
-                                                                    fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                                    fontSize: '0.88rem',
-                                                                    color: isSelected ? '#fff' : 'rgba(255,255,255,0.8)',
-                                                                    letterSpacing: '0.08em',
-                                                                    textTransform: 'uppercase'
-                                                                },
-                                                                children: stat.name
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/CharacterSection.tsx",
-                                                                lineNumber: 400,
-                                                                columnNumber: 45
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
+                                                        children: stat.name
+                                                    }, void 0, false, {
                                                         fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 394,
+                                                        lineNumber: 426,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         style: {
                                                             fontFamily: 'Share Tech Mono,monospace',
-                                                            fontSize: '0.8rem',
+                                                            fontSize: '0.85rem',
                                                             color: stat.color,
-                                                            fontWeight: 700,
-                                                            textShadow: isSelected ? `0 0 6px ${stat.color}` : 'none'
+                                                            fontWeight: 700
                                                         },
-                                                        children: isSelected ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AnimatedLevel, {
-                                                            target: stat.level
-                                                        }, barKey, false, {
-                                                            fileName: "[project]/components/CharacterSection.tsx",
-                                                            lineNumber: 417,
-                                                            columnNumber: 59
-                                                        }, this) : stat.levelStr
+                                                        children: stat.levelStr
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 410,
+                                                        lineNumber: 437,
                                                         columnNumber: 41
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 393,
+                                                lineNumber: 419,
                                                 columnNumber: 37
                                             }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                style: {
-                                                    width: '100%',
-                                                    background: 'rgba(255,255,255,0.06)',
-                                                    height: '3px',
-                                                    overflow: 'hidden',
-                                                    position: 'relative'
-                                                },
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    style: {
-                                                        width: stat.levelStr,
-                                                        height: '100%',
-                                                        background: `linear-gradient(to right, ${stat.color}88, ${stat.color})`,
-                                                        boxShadow: isSelected ? `0 0 6px ${stat.color}80` : 'none',
-                                                        position: 'relative',
-                                                        transition: 'box-shadow 0.3s ease'
-                                                    },
-                                                    children: isSelected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        style: {
-                                                            position: 'absolute',
-                                                            inset: 0,
-                                                            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)',
-                                                            backgroundSize: '200% 100%',
-                                                            animation: 'shimmer-bar 2s ease-in-out infinite'
-                                                        }
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 438,
-                                                        columnNumber: 49
-                                                    }, this)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/CharacterSection.tsx",
-                                                    lineNumber: 429,
-                                                    columnNumber: 41
-                                                }, this)
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(SegmentedStatBar, {
+                                                level: stat.level,
+                                                color: stat.color,
+                                                totalSegments: 10
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 422,
-                                                columnNumber: 37
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                style: {
-                                                    display: 'flex',
-                                                    justifyContent: 'space-between',
-                                                    alignItems: 'center',
-                                                    fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                                    fontSize: '0.68rem',
-                                                    textTransform: 'uppercase',
-                                                    letterSpacing: '0.15em'
-                                                },
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        style: {
-                                                            color: 'rgba(255,255,255,0.4)'
-                                                        },
-                                                        children: stat.gameAlias
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 458,
-                                                        columnNumber: 41
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        style: {
-                                                            color: isSelected ? stat.color : 'rgba(255,255,255,0.35)',
-                                                            fontWeight: isSelected ? 700 : 400,
-                                                            textShadow: isSelected ? `0 0 6px ${stat.color}` : 'none'
-                                                        },
-                                                        children: isSelected ? '● ACTIVE' : 'INSPECT ↗'
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 459,
-                                                        columnNumber: 41
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 449,
+                                                lineNumber: 450,
                                                 columnNumber: 37
                                             }, this)
                                         ]
                                     }, stat.id, true, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 348,
+                                        lineNumber: 401,
                                         columnNumber: 33
                                     }, this);
                                 })
                             }, void 0, false, {
                                 fileName: "[project]/components/CharacterSection.tsx",
-                                lineNumber: 344,
+                                lineNumber: 397,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CharacterSection.tsx",
-                        lineNumber: 242,
+                        lineNumber: 311,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "lg:col-span-5 flex flex-col justify-between",
                         style: {
-                            background: 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)',
-                            borderTop: '1px solid rgba(255,255,255,0.08)',
-                            borderRight: '1px solid rgba(255,255,255,0.08)',
-                            borderBottom: '1px solid rgba(255,255,255,0.08)',
+                            background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
+                            border: '1px solid rgba(255,255,255,0.1)',
                             borderLeft: `3px solid ${activeStat.color}`,
-                            padding: '18px 20px',
-                            boxShadow: `inset 3px 0 25px ${activeStat.color}06`,
-                            transition: 'border-left-color 0.3s ease, box-shadow 0.3s ease',
-                            position: 'relative',
-                            overflow: 'hidden'
+                            padding: '20px',
+                            transition: 'border-left-color 0.3s ease'
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                style: {
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    background: `radial-gradient(ellipse at 10% 30%, ${activeStat.color}06 0%, transparent 65%)`,
-                                    pointerEvents: 'none',
-                                    transition: 'background 0.4s ease'
-                                }
-                            }, void 0, false, {
-                                fileName: "[project]/components/CharacterSection.tsx",
-                                lineNumber: 490,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex flex-col gap-3",
-                                style: {
-                                    position: 'relative'
-                                },
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
@@ -1799,88 +1412,74 @@ function CharacterSection() {
                                                     letterSpacing: '0.3em',
                                                     textTransform: 'uppercase',
                                                     fontWeight: 700,
-                                                    textShadow: `0 0 8px ${activeStat.color}80`,
                                                     display: 'block',
-                                                    marginBottom: '6px'
+                                                    marginBottom: '4px'
                                                 },
                                                 children: [
-                                                    "[ ATTRIBUTE INTEL // ",
+                                                    "[ ",
                                                     activeStat.category,
                                                     " ]"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 501,
+                                                lineNumber: 475,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                style: {
-                                                    display: 'flex',
-                                                    justifyContent: 'space-between',
-                                                    alignItems: 'flex-end'
-                                                },
+                                                className: "flex justify-between items-start gap-2",
                                                 children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                                                style: {
-                                                                    fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                                    fontSize: 'clamp(1.15rem, 2vw, 1.4rem)',
-                                                                    color: '#fff',
-                                                                    letterSpacing: '0.08em',
-                                                                    textTransform: 'uppercase',
-                                                                    textShadow: '0 0 20px rgba(255,255,255,0.1)'
-                                                                },
-                                                                children: activeStat.name
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/CharacterSection.tsx",
-                                                                lineNumber: 516,
-                                                                columnNumber: 37
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                style: {
-                                                                    fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                                                    fontSize: '0.75rem',
-                                                                    color: 'rgba(255,255,255,0.45)',
-                                                                    letterSpacing: '0.2em',
-                                                                    textTransform: 'uppercase',
-                                                                    marginTop: '2px'
-                                                                },
-                                                                children: activeStat.gameAlias
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/CharacterSection.tsx",
-                                                                lineNumber: 526,
-                                                                columnNumber: 37
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
+                                                        style: {
+                                                            fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
+                                                            fontSize: 'clamp(1.25rem, 2vw, 1.55rem)',
+                                                            color: '#fff',
+                                                            letterSpacing: '0.08em',
+                                                            textTransform: 'uppercase',
+                                                            lineHeight: 1.1
+                                                        },
+                                                        children: activeStat.name
+                                                    }, void 0, false, {
                                                         fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 515,
+                                                        lineNumber: 490,
                                                         columnNumber: 33
                                                     }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         style: {
                                                             fontFamily: 'Share Tech Mono,monospace',
-                                                            fontSize: '1.8rem',
+                                                            fontSize: '1.4rem',
                                                             color: activeStat.color,
                                                             fontWeight: 700,
-                                                            textShadow: `0 0 16px ${activeStat.color}80`,
                                                             lineHeight: 1
                                                         },
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AnimatedLevel, {
                                                             target: activeStat.level
-                                                        }, `dossier-${barKey}-${activeStat.id}`, false, {
+                                                        }, void 0, false, {
                                                             fileName: "[project]/components/CharacterSection.tsx",
-                                                            lineNumber: 545,
+                                                            lineNumber: 511,
                                                             columnNumber: 37
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 537,
+                                                        lineNumber: 502,
                                                         columnNumber: 33
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
+                                                fileName: "[project]/components/CharacterSection.tsx",
+                                                lineNumber: 489,
+                                                columnNumber: 29
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                style: {
+                                                    fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                                    fontSize: '0.78rem',
+                                                    color: 'rgba(255,255,255,0.45)',
+                                                    letterSpacing: '0.2em',
+                                                    textTransform: 'uppercase',
+                                                    marginTop: '4px'
+                                                },
+                                                children: activeStat.gameAlias
+                                            }, void 0, false, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
                                                 lineNumber: 514,
                                                 columnNumber: 29
@@ -1888,56 +1487,34 @@ function CharacterSection() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 500,
+                                        lineNumber: 474,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                style: {
-                                                    fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                                    fontSize: '0.65rem',
-                                                    color: 'rgba(255,255,255,0.35)',
-                                                    letterSpacing: '0.3em',
-                                                    textTransform: 'uppercase',
-                                                    display: 'block',
-                                                    marginBottom: '6px'
-                                                },
-                                                children: "TACTICAL OVERVIEW:"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 552,
-                                                columnNumber: 29
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                style: {
-                                                    fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                                    fontSize: '0.88rem',
-                                                    color: 'rgba(255,255,255,0.85)',
-                                                    textTransform: 'uppercase',
-                                                    letterSpacing: '0.06em',
-                                                    lineHeight: '1.6',
-                                                    minHeight: '4.2em'
-                                                },
-                                                children: [
-                                                    typewriterText,
-                                                    !typewriterDone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "typewriter-cursor"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 573,
-                                                        columnNumber: 53
-                                                    }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 563,
-                                                columnNumber: 29
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                        style: {
+                                            minHeight: '68px',
+                                            borderBottom: '1px solid rgba(255,255,255,0.08)',
+                                            paddingBottom: '12px'
+                                        },
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            style: {
+                                                fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
+                                                fontSize: '0.88rem',
+                                                color: 'rgba(255,255,255,0.85)',
+                                                letterSpacing: '0.05em',
+                                                textTransform: 'uppercase',
+                                                lineHeight: '1.6',
+                                                margin: 0
+                                            },
+                                            children: typewriterText
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/CharacterSection.tsx",
+                                            lineNumber: 536,
+                                            columnNumber: 29
+                                        }, this)
+                                    }, void 0, false, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 551,
+                                        lineNumber: 529,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1946,16 +1523,16 @@ function CharacterSection() {
                                                 style: {
                                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                     fontSize: '0.65rem',
-                                                    color: 'rgba(255,255,255,0.35)',
+                                                    color: 'rgba(255,255,255,0.4)',
                                                     letterSpacing: '0.3em',
                                                     textTransform: 'uppercase',
                                                     display: 'block',
                                                     marginBottom: '8px'
                                                 },
-                                                children: "ARSENAL COMPONENTS:"
+                                                children: "KEY TECHNICAL COMPETENCIES:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 579,
+                                                lineNumber: 553,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1966,51 +1543,36 @@ function CharacterSection() {
                                                 },
                                                 children: activeStat.skillsList.map((skill, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         style: {
-                                                            background: `${activeStat.color}0d`,
-                                                            border: `1px solid ${activeStat.color}30`,
-                                                            padding: '3px 10px',
+                                                            background: 'rgba(255,255,255,0.04)',
+                                                            borderLeft: `2px solid ${activeStat.color}`,
+                                                            padding: '4px 10px',
                                                             fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                             fontSize: '0.72rem',
-                                                            color: 'rgba(255,255,255,0.85)',
-                                                            letterSpacing: '0.1em',
-                                                            textTransform: 'uppercase',
-                                                            transition: 'all 0.15s ease',
-                                                            cursor: 'default'
-                                                        },
-                                                        onMouseEnter: (e)=>{
-                                                            e.currentTarget.style.background = `${activeStat.color}20`;
-                                                            e.currentTarget.style.borderColor = `${activeStat.color}70`;
-                                                            e.currentTarget.style.color = '#fff';
-                                                            e.currentTarget.style.boxShadow = `0 0 8px ${activeStat.color}30`;
-                                                        },
-                                                        onMouseLeave: (e)=>{
-                                                            e.currentTarget.style.background = `${activeStat.color}0d`;
-                                                            e.currentTarget.style.borderColor = `${activeStat.color}30`;
-                                                            e.currentTarget.style.color = 'rgba(255,255,255,0.85)';
-                                                            e.currentTarget.style.boxShadow = 'none';
+                                                            color: 'rgba(255,255,255,0.8)',
+                                                            letterSpacing: '0.12em',
+                                                            textTransform: 'uppercase'
                                                         },
                                                         children: skill
                                                     }, i, false, {
                                                         fileName: "[project]/components/CharacterSection.tsx",
-                                                        lineNumber: 592,
+                                                        lineNumber: 568,
                                                         columnNumber: 37
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 590,
+                                                lineNumber: 566,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 578,
+                                        lineNumber: 552,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
-                                            background: `${activeStat.color}06`,
-                                            border: `1px solid ${activeStat.color}20`,
-                                            borderLeft: `2px solid ${activeStat.color}80`,
+                                            background: 'rgba(255,255,255,0.03)',
+                                            border: '1px solid rgba(255,255,255,0.08)',
                                             padding: '12px 14px'
                                         },
                                         children: [
@@ -2022,21 +1584,20 @@ function CharacterSection() {
                                                     letterSpacing: '0.3em',
                                                     textTransform: 'uppercase',
                                                     fontWeight: 700,
-                                                    textShadow: `0 0 6px ${activeStat.color}60`,
                                                     display: 'block',
                                                     marginBottom: '6px'
                                                 },
-                                                children: "FIELD APPLICATION // EVIDENCE:"
+                                                children: "REAL-WORLD EVIDENCE:"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 632,
+                                                lineNumber: 595,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 style: {
                                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                                    fontSize: '0.82rem',
-                                                    color: 'rgba(255,255,255,0.8)',
+                                                    fontSize: '0.84rem',
+                                                    color: 'rgba(255,255,255,0.85)',
                                                     textTransform: 'uppercase',
                                                     letterSpacing: '0.06em',
                                                     lineHeight: '1.5'
@@ -2044,19 +1605,19 @@ function CharacterSection() {
                                                 children: activeStat.projectProof
                                             }, void 0, false, {
                                                 fileName: "[project]/components/CharacterSection.tsx",
-                                                lineNumber: 645,
+                                                lineNumber: 609,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 626,
+                                        lineNumber: 588,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CharacterSection.tsx",
-                                lineNumber: 498,
+                                lineNumber: 472,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2070,8 +1631,7 @@ function CharacterSection() {
                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                     fontSize: '0.68rem',
                                     textTransform: 'uppercase',
-                                    letterSpacing: '0.2em',
-                                    position: 'relative'
+                                    letterSpacing: '0.2em'
                                 },
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2081,55 +1641,55 @@ function CharacterSection() {
                                         children: "STATUS: VERIFIED"
                                     }, void 0, false, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 672,
+                                        lineNumber: 639,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         style: {
                                             color: '#66CC66',
-                                            fontWeight: 700,
-                                            textShadow: '0 0 6px rgba(102,204,102,0.6)'
+                                            fontWeight: 700
                                         },
-                                        children: "✓ READY FOR DEPLOYMENT"
+                                        children: "✓ ALWAYS READY"
                                     }, void 0, false, {
                                         fileName: "[project]/components/CharacterSection.tsx",
-                                        lineNumber: 673,
+                                        lineNumber: 640,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/CharacterSection.tsx",
-                                lineNumber: 659,
+                                lineNumber: 625,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/CharacterSection.tsx",
-                        lineNumber: 474,
+                        lineNumber: 462,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/CharacterSection.tsx",
-                lineNumber: 240,
+                lineNumber: 309,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/CharacterSection.tsx",
-        lineNumber: 177,
+        lineNumber: 247,
         columnNumber: 9
     }, this);
 }
-_s2(CharacterSection, "KrY60OYlYTTCVhqoymctyX0R0G4=", false, function() {
+_s2(CharacterSection, "FLBpugtaVcw9ou22tp6yikdYSCs=", false, function() {
     return [
         useTypewriter
     ];
 });
-_c1 = CharacterSection;
-var _c, _c1;
-__turbopack_context__.k.register(_c, "AnimatedLevel");
-__turbopack_context__.k.register(_c1, "CharacterSection");
+_c2 = CharacterSection;
+var _c, _c1, _c2;
+__turbopack_context__.k.register(_c, "SegmentedStatBar");
+__turbopack_context__.k.register(_c1, "AnimatedLevel");
+__turbopack_context__.k.register(_c2, "CharacterSection");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -2157,68 +1717,68 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 ;
 const USER_DATA = {
     name: 'OM PANDEY',
-    tagline: 'FULL STACK ARCHITECT & AI ENGINEER',
+    tagline: 'A PROFESSIONAL TECH ENTHUSIAST',
     rank: 100,
-    cash: '$2,450,000',
-    bank: '$18,920,000',
+    cash: '₹15,000',
+    bank: '₹40,000',
     email: 'ompandey2341@gmail.com',
     github: 'https://github.com/lokiverse-devil',
     linkedin: 'https://linkedin.com/in/om-pandey-1b3b3b3b3',
     projects: [
         {
             title: 'VibeChat',
-            category: 'REALTIME MESSAGING',
-            desc: 'High-speed expressive communication protocol built with modern web architecture and real-time synchronization.',
+            category: 'REAL-TIME MESSAGING',
+            desc: 'A fast, real-time messaging EMOJI-ONLY app built with Next.js and WebSockets for instant chat and media sharing.',
             tags: [
-                'REACT',
-                'NEXT.JS',
+                'HTML',
+                'CSS',
                 'WEBSOCKETS',
-                'TAILWIND'
+                'JAVASCRIPT'
             ],
             link: 'https://github.com/lokiverse-devil',
-            status: 'MISSION PASSED',
+            status: 'COMPLETED',
             opNum: '01'
         },
         {
             title: 'HTRACX',
-            category: 'ENTERPRISE SYSTEM',
-            desc: 'Smart Hostel Management System automating room allocation, billing, analytics, and identity verification.',
+            category: 'HOSTEL MANAGEMENT',
+            desc: 'A digital portal that simplifies hostel room allotments, student records, and fee tracking.',
             tags: [
                 'FULL STACK',
-                'DATABASE',
-                'MANAGEMENT',
-                'POSTGRES'
+                'POSTGRESQL',
+                'SUPABASE',
+                'NEXT.JS'
             ],
             link: 'https://github.com/lokiverse-devil',
-            status: 'MISSION PASSED',
+            status: 'COMPLETED',
             opNum: '02'
         },
         {
             title: 'SmartClass X',
-            category: 'IOT & AUTOMATION',
-            desc: 'Intelligent IoT-enabled smart classroom system with automated telemetry, presence detection, and environment controls.',
+            category: 'IOT AUTOMATION',
+            desc: 'An automated classroom setup using IoT sensors to manage smart lighting, fans, and attendance.',
             tags: [
-                'IOT',
                 'PYTHON',
+                'IOT',
                 'EMBEDDED',
-                'TELEMETRY'
+                'WEB PORTALS'
             ],
             link: 'https://github.com/lokiverse-devil',
-            status: 'MISSION PASSED',
+            status: 'COMPLETED',
             opNum: '03'
         },
         {
             title: 'AIMS',
-            category: 'INSTITUTIONAL SUITE',
-            desc: 'Academic Infrastructure Management System streamlining asset tracking, operations, and departmental workflows.',
+            category: 'CAMPUS ASSET SUITE',
+            desc: 'An infrastructure and asset tracking platform helping colleges manage lab inventory and staff requests.',
             tags: [
-                'POSTGRES',
                 'SYSTEM DESIGN',
-                'API SUITE',
-                'SUPABASE'
+                'POSTGRESQL',
+                'SUPABASE',
+                'REST APIS'
             ],
-            link: 'https://github.com/lokiverse-devil',
-            status: 'MISSION PASSED',
+            link: 'https://aims-it-ugip.vercel.app/',
+            status: 'COMPLETED',
             opNum: '04'
         }
     ],
@@ -2228,24 +1788,31 @@ const USER_DATA = {
             proficiency: '94%',
             profNum: 94,
             category: 'CORE',
-            color: '#f5a623'
+            color: '#ffffff'
         },
         {
             name: 'JAVA & OOP',
             proficiency: '90%',
             profNum: 90,
             category: 'CORE',
-            color: '#f5a623'
+            color: '#cbd5e1'
         },
         {
-            name: 'REACT & NEXT.JS',
+            name: 'DATA STRUCTURES & ALGORITHMS',
+            proficiency: '92%',
+            profNum: 92,
+            category: 'CORE',
+            color: '#e2e8f0'
+        },
+        {
+            name: 'NEXT.JS',
             proficiency: '95%',
             profNum: 95,
             category: 'FRONTEND',
             color: '#66CC66'
         },
         {
-            name: 'TYPESCRIPT / JAVASCRIPT',
+            name: 'TYPESCRIPT',
             proficiency: '92%',
             profNum: 92,
             category: 'FRONTEND',
@@ -2256,56 +1823,42 @@ const USER_DATA = {
             proficiency: '92%',
             profNum: 92,
             category: 'DATABASE',
-            color: '#7eb8f7'
+            color: '#94a3b8'
         },
         {
             name: 'SUPABASE & BACKEND',
             proficiency: '90%',
             profNum: 90,
             category: 'DATABASE',
-            color: '#7eb8f7'
+            color: '#94a3b8'
         },
         {
-            name: 'MODEL CONTEXT PROTOCOL',
+            name: 'MODEL CONTEXT PROTOCOL (MCP)',
             proficiency: '95%',
             profNum: 95,
             category: 'AI TECH',
-            color: '#c084fc'
+            color: '#ffffff'
         },
         {
-            name: 'GEMINI AI INTEGRATION',
+            name: 'USING AI MODELS',
             proficiency: '94%',
             profNum: 94,
             category: 'AI TECH',
-            color: '#c084fc'
+            color: '#cbd5e1'
         },
         {
-            name: 'IOT & EMBEDDED TELEMETRY',
+            name: 'IOT & EMBEDDED SYSTEMS',
             proficiency: '88%',
             profNum: 88,
             category: 'HARDWARE',
-            color: '#f87171'
+            color: '#a1a1aa'
         },
         {
-            name: 'SYSTEM ARCHITECTURE',
-            proficiency: '90%',
-            profNum: 90,
-            category: 'ENGINEERING',
-            color: '#fbbf24'
-        },
-        {
-            name: 'TEAM LEAD & MANAGEMENT',
+            name: 'TEAM LEADERSHIP & DEMOS',
             proficiency: '92%',
             profNum: 92,
             category: 'LEADERSHIP',
-            color: '#34d399'
-        },
-        {
-            name: 'PROJECT PITCHING & DEMOS',
-            proficiency: '94%',
-            profNum: 94,
-            category: 'LEADERSHIP',
-            color: '#34d399'
+            color: '#4ade80'
         }
     ]
 };
@@ -2313,47 +1866,33 @@ const MENU_ITEMS = [
     {
         key: 'MAP',
         label: 'TERRITORY',
-        shortcut: '1',
-        icon: '◎'
+        shortcut: '1'
     },
     {
         key: 'CHARACTER',
         label: 'CHARACTER',
-        shortcut: '2',
-        icon: '◈'
+        shortcut: '2'
     },
     {
         key: 'PROJECTS',
         label: 'OPERATIONS',
-        shortcut: '3',
-        icon: '◆'
+        shortcut: '3'
     },
     {
         key: 'ARSENAL',
         label: 'ARSENAL',
-        shortcut: '4',
-        icon: '◉'
+        shortcut: '4'
     },
     {
         key: 'CONTACT',
         label: 'COMMS',
-        shortcut: '5',
-        icon: '◐'
+        shortcut: '5'
     }
 ];
-const CATEGORY_COLORS = {
-    CORE: '#f5a623',
-    FRONTEND: '#66CC66',
-    DATABASE: '#7eb8f7',
-    'AI TECH': '#c084fc',
-    HARDWARE: '#f87171',
-    ENGINEERING: '#fbbf24',
-    LEADERSHIP: '#34d399'
-};
-// Animated counter component
+// Animated cash counter
 function AnimatedCounter({ target, suffix = '' }) {
     _s();
-    const [display, setDisplay] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('$0');
+    const [display, setDisplay] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('₹0');
     const hasAnimated = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AnimatedCounter.useEffect": ()=>{
@@ -2365,9 +1904,9 @@ function AnimatedCounter({ target, suffix = '' }) {
                 setDisplay(target);
                 return;
             }
-            const prefix = target.startsWith('$') ? '$' : '';
+            const prefix = target.startsWith('₹') ? '₹' : target.startsWith('$') ? '$' : '';
             let start = 0;
-            const duration = 1400;
+            const duration = 1000;
             const step = 16;
             const increment = end / (duration / step);
             const timer = setInterval({
@@ -2393,9 +1932,9 @@ function AnimatedCounter({ target, suffix = '' }) {
         children: display
     }, void 0, false);
 }
-_s(AnimatedCounter, "gyArr6nnlj00i4KkGbK8W1eqowA=");
+_s(AnimatedCounter, "d6CZpIDdqkzx4pXc11G+rLVZbaM=");
 _c = AnimatedCounter;
-// Elegant wanted stars — smooth gold glow, no jarring blink
+// Subtle pure white wanted stars HUD
 function WantedStarsHUD() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         style: {
@@ -2410,31 +1949,31 @@ function WantedStarsHUD() {
             3,
             4
         ].map((i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                width: "16",
-                height: "16",
+                width: "14",
+                height: "14",
                 viewBox: "0 0 72 72",
                 style: {
-                    opacity: 0.92
+                    opacity: 0.85
                 },
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("polygon", {
                     points: "36,4 44,28 70,28 49,44 57,68 36,52 15,68 23,44 2,28 28,28",
-                    fill: "#d4960a",
+                    fill: "#ffffff",
                     style: {
-                        filter: 'drop-shadow(0 0 3px rgba(212,150,10,0.7))'
+                        filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.7))'
                     }
                 }, void 0, false, {
                     fileName: "[project]/components/LandingPage.tsx",
-                    lineNumber: 152,
+                    lineNumber: 143,
                     columnNumber: 21
                 }, this)
             }, i, false, {
                 fileName: "[project]/components/LandingPage.tsx",
-                lineNumber: 150,
+                lineNumber: 142,
                 columnNumber: 17
             }, this))
     }, void 0, false, {
         fileName: "[project]/components/LandingPage.tsx",
-        lineNumber: 148,
+        lineNumber: 140,
         columnNumber: 9
     }, this);
 }
@@ -2457,7 +1996,7 @@ function LandingPage() {
                         '/sounds/loading_ambience.mp3'
                     ],
                     loop: true,
-                    volume: 0.28
+                    volume: 0.25
                 });
                 ambienceRef.current.play();
             } catch (e) {
@@ -2498,20 +2037,21 @@ function LandingPage() {
             if (contentRef.current) {
                 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].fromTo(contentRef.current, {
                     opacity: 0,
-                    y: 14,
-                    scale: 0.995
+                    y: 8
                 }, {
                     opacity: 1,
                     y: 0,
-                    scale: 1,
-                    duration: 0.28,
-                    ease: 'power3.out'
+                    duration: 0.2,
+                    ease: 'power2.out'
                 });
             }
         }
     }["LandingPage.useEffect"], [
         activeItem
     ]);
+    const handleTabChange = (key)=>{
+        setActiveItem(key);
+    };
     const toggleAmbience = ()=>{
         if (ambienceRef.current) {
             if (ambienceMuted) {
@@ -2526,20 +2066,20 @@ function LandingPage() {
     const handleCopyEmail = ()=>{
         navigator.clipboard.writeText(USER_DATA.email);
         setCopied(true);
-        setTimeout(()=>setCopied(false), 2500);
+        setTimeout(()=>setCopied(false), 2400);
     };
     const renderContent = ()=>{
         switch(activeItem){
             case 'MAP':
                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$MapSection$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                     fileName: "[project]/components/LandingPage.tsx",
-                    lineNumber: 241,
+                    lineNumber: 236,
                     columnNumber: 24
                 }, this);
             case 'CHARACTER':
                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$CharacterSection$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                     fileName: "[project]/components/LandingPage.tsx",
-                    lineNumber: 244,
+                    lineNumber: 239,
                     columnNumber: 24
                 }, this);
             case 'PROJECTS':
@@ -2549,7 +2089,7 @@ function LandingPage() {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-wrap justify-between items-center gap-3 pb-3",
                             style: {
-                                borderBottom: '1px solid rgba(255,255,255,0.12)'
+                                borderBottom: '1px solid rgba(255,255,255,0.1)'
                             },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2559,57 +2099,54 @@ function LandingPage() {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     style: {
-                                                        width: '10px',
-                                                        height: '10px',
-                                                        background: '#f5a623',
-                                                        boxShadow: '0 0 10px rgba(245,166,35,0.9), 0 0 20px rgba(245,166,35,0.5)',
-                                                        animation: 'live-pulse 1.5s ease-in-out infinite'
+                                                        width: '3px',
+                                                        height: '14px',
+                                                        background: '#ffffff'
                                                     }
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/LandingPage.tsx",
-                                                    lineNumber: 254,
+                                                    lineNumber: 251,
                                                     columnNumber: 37
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                     style: {
                                                         fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                        fontSize: 'clamp(1.1rem, 2.2vw, 1.55rem)',
-                                                        letterSpacing: '0.12em',
+                                                        fontSize: 'clamp(1.1rem, 2vw, 1.45rem)',
+                                                        letterSpacing: '0.14em',
                                                         color: '#fff',
-                                                        textTransform: 'uppercase',
-                                                        textShadow: '0 0 30px rgba(255,255,255,0.15)'
+                                                        textTransform: 'uppercase'
                                                     },
-                                                    children: "ACTIVE OPERATIONS // MISSIONS DOSSIER"
+                                                    children: "OPERATIONS // COMPLETED PROJECTS"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/LandingPage.tsx",
-                                                    lineNumber: 260,
+                                                    lineNumber: 258,
                                                     columnNumber: 37
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 253,
+                                            lineNumber: 250,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                 fontSize: '0.78rem',
-                                                color: 'rgba(255,255,255,0.55)',
-                                                letterSpacing: '0.25em',
+                                                color: 'rgba(255,255,255,0.45)',
+                                                letterSpacing: '0.22em',
                                                 textTransform: 'uppercase',
                                                 marginTop: '3px'
                                             },
-                                            children: "04 MAJOR OPERATIONS // CLICK ANY CARD TO LAUNCH REPOSITORY"
+                                            children: "04 MAJOR SYSTEMS // CLICK ANY CARD TO VIEW REPOSITORY"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 271,
+                                            lineNumber: 270,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 252,
+                                    lineNumber: 249,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2617,24 +2154,23 @@ function LandingPage() {
                                         fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                         fontSize: '0.72rem',
                                         color: '#66CC66',
-                                        background: 'rgba(102,204,102,0.1)',
-                                        border: '1px solid rgba(102,204,102,0.45)',
+                                        background: 'rgba(102,204,102,0.06)',
+                                        border: '1px solid rgba(102,204,102,0.3)',
                                         padding: '4px 12px',
                                         letterSpacing: '0.2em',
                                         textTransform: 'uppercase',
-                                        fontWeight: 700,
-                                        textShadow: '0 0 8px rgba(102,204,102,0.6)'
+                                        fontWeight: 700
                                     },
-                                    children: "✓ ALL MISSIONS PASSED"
+                                    children: "✓ ALL VERIFIED"
                                 }, void 0, false, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 282,
+                                    lineNumber: 283,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/LandingPage.tsx",
-                            lineNumber: 250,
+                            lineNumber: 245,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2643,56 +2179,15 @@ function LandingPage() {
                                     href: p.link,
                                     target: "_blank",
                                     rel: "noopener noreferrer",
-                                    className: "card-shimmer-container group block",
+                                    className: "block group p-5 transition-all duration-200",
                                     style: {
-                                        background: 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)',
-                                        border: '1px solid rgba(255,255,255,0.12)',
-                                        borderLeft: '3px solid #f5a623',
-                                        padding: '20px 22px',
+                                        background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        borderLeft: '3px solid #ffffff',
                                         position: 'relative',
-                                        overflow: 'hidden',
-                                        transition: 'all 0.22s cubic-bezier(0.2,0.8,0.2,1)',
-                                        cursor: 'pointer',
                                         textDecoration: 'none'
                                     },
-                                    onMouseEnter: (e)=>{
-                                        const el = e.currentTarget;
-                                        el.style.background = 'linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%)';
-                                        el.style.borderColor = 'rgba(0,0,0,0.1)';
-                                        el.style.borderLeftColor = '#f5a623';
-                                        el.style.transform = 'translateY(-2px) scale(1.008)';
-                                        el.style.boxShadow = '0 12px 40px rgba(0,0,0,0.8), 0 0 25px rgba(245,166,35,0.2)';
-                                    },
-                                    onMouseLeave: (e)=>{
-                                        const el = e.currentTarget;
-                                        el.style.background = 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)';
-                                        el.style.borderColor = 'rgba(255,255,255,0.12)';
-                                        el.style.borderLeftColor = '#f5a623';
-                                        el.style.transform = 'none';
-                                        el.style.boxShadow = 'none';
-                                    },
                                     children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            style: {
-                                                position: 'absolute',
-                                                right: '12px',
-                                                top: '50%',
-                                                transform: 'translateY(-50%)',
-                                                fontFamily: 'ChaletLondon1960,"Bebas Neue",sans-serif',
-                                                fontSize: '5rem',
-                                                color: 'rgba(255,255,255,0.03)',
-                                                fontWeight: 900,
-                                                lineHeight: 1,
-                                                letterSpacing: '-0.02em',
-                                                pointerEvents: 'none',
-                                                userSelect: 'none'
-                                            },
-                                            children: p.opNum
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 336,
-                                            columnNumber: 37
-                                        }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             style: {
                                                 display: 'flex',
@@ -2707,67 +2202,62 @@ function LandingPage() {
                                                             style: {
                                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                                 fontSize: '0.68rem',
-                                                                color: 'rgba(255,255,255,0.45)',
+                                                                color: 'rgba(255,255,255,0.4)',
                                                                 letterSpacing: '0.3em',
                                                                 textTransform: 'uppercase',
                                                                 display: 'block'
                                                             },
-                                                            className: "group-hover:!text-black/50",
                                                             children: [
                                                                 "OPERATION ",
                                                                 p.opNum
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/LandingPage.tsx",
-                                                            lineNumber: 355,
+                                                            lineNumber: 326,
                                                             columnNumber: 45
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
                                                             style: {
                                                                 fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                                fontSize: 'clamp(1.15rem, 2vw, 1.4rem)',
+                                                                fontSize: 'clamp(1.15rem, 2vw, 1.35rem)',
                                                                 color: '#fff',
-                                                                letterSpacing: '0.1em',
-                                                                textTransform: 'uppercase',
-                                                                textShadow: '0 0 20px rgba(255,255,255,0.1)'
+                                                                letterSpacing: '0.08em',
+                                                                textTransform: 'uppercase'
                                                             },
-                                                            className: "group-hover:!text-black !text-shadow-none",
                                                             children: p.title
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/LandingPage.tsx",
-                                                            lineNumber: 365,
+                                                            lineNumber: 338,
                                                             columnNumber: 45
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/LandingPage.tsx",
-                                                    lineNumber: 354,
+                                                    lineNumber: 325,
                                                     columnNumber: 41
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                     style: {
                                                         fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                                        fontSize: '0.68rem',
-                                                        color: '#66CC66',
-                                                        background: 'rgba(102,204,102,0.08)',
-                                                        border: '1px solid rgba(102,204,102,0.35)',
+                                                        fontSize: '0.66rem',
+                                                        color: 'rgba(255,255,255,0.7)',
+                                                        background: 'rgba(255,255,255,0.06)',
+                                                        border: '1px solid rgba(255,255,255,0.15)',
                                                         padding: '3px 10px',
                                                         letterSpacing: '0.15em',
                                                         textTransform: 'uppercase',
-                                                        fontWeight: 700,
                                                         whiteSpace: 'nowrap'
                                                     },
-                                                    className: "group-hover:!text-black group-hover:!bg-transparent group-hover:!border-black/20",
                                                     children: p.category
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/LandingPage.tsx",
-                                                    lineNumber: 376,
+                                                    lineNumber: 350,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 353,
+                                            lineNumber: 317,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2780,11 +2270,10 @@ function LandingPage() {
                                                 lineHeight: '1.55',
                                                 marginBottom: '12px'
                                             },
-                                            className: "group-hover:!text-black/75",
                                             children: p.desc
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 392,
+                                            lineNumber: 367,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2797,20 +2286,19 @@ function LandingPage() {
                                             children: [
                                                 p.tags.map((t)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         style: {
-                                                            background: 'rgba(255,255,255,0.07)',
-                                                            border: '1px solid rgba(255,255,255,0.18)',
-                                                            color: 'rgba(255,255,255,0.85)',
-                                                            fontSize: '0.65rem',
+                                                            background: 'rgba(255,255,255,0.05)',
+                                                            border: '1px solid rgba(255,255,255,0.12)',
+                                                            color: 'rgba(255,255,255,0.75)',
+                                                            fontSize: '0.64rem',
                                                             fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                             padding: '2px 8px',
-                                                            letterSpacing: '0.2em',
+                                                            letterSpacing: '0.18em',
                                                             textTransform: 'uppercase'
                                                         },
-                                                        className: "group-hover:!bg-black/8 group-hover:!text-black group-hover:!border-black/15",
                                                         children: t
                                                     }, t, false, {
                                                         fileName: "[project]/components/LandingPage.tsx",
-                                                        lineNumber: 406,
+                                                        lineNumber: 390,
                                                         columnNumber: 45
                                                     }, this)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2823,37 +2311,36 @@ function LandingPage() {
                                                         textTransform: 'uppercase',
                                                         fontWeight: 700
                                                     },
-                                                    className: "group-hover:!text-black/60",
                                                     children: [
                                                         "✓ ",
                                                         p.status
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/LandingPage.tsx",
-                                                    lineNumber: 423,
+                                                    lineNumber: 406,
                                                     columnNumber: 41
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 404,
+                                            lineNumber: 381,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, i, true, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 301,
+                                    lineNumber: 303,
                                     columnNumber: 33
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/components/LandingPage.tsx",
-                            lineNumber: 299,
+                            lineNumber: 301,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/LandingPage.tsx",
-                    lineNumber: 248,
+                    lineNumber: 243,
                     columnNumber: 21
                 }, this);
             case 'ARSENAL':
@@ -2867,7 +2354,7 @@ function LandingPage() {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             style: {
-                                borderBottom: '1px solid rgba(255,255,255,0.12)',
+                                borderBottom: '1px solid rgba(255,255,255,0.1)',
                                 paddingBottom: '12px'
                             },
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2880,81 +2367,79 @@ function LandingPage() {
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         style: {
-                                                            width: '10px',
-                                                            height: '10px',
-                                                            background: '#66CC66',
-                                                            boxShadow: '0 0 10px rgba(102,204,102,0.9), 0 0 20px rgba(102,204,102,0.5)',
-                                                            animation: 'neon-breathe 2.8s ease-in-out infinite'
+                                                            width: '3px',
+                                                            height: '14px',
+                                                            background: '#ffffff'
                                                         }
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/LandingPage.tsx",
-                                                        lineNumber: 455,
+                                                        lineNumber: 442,
                                                         columnNumber: 41
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                         style: {
                                                             fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                            fontSize: 'clamp(1.1rem, 2.2vw, 1.55rem)',
-                                                            letterSpacing: '0.12em',
+                                                            fontSize: 'clamp(1.1rem, 2vw, 1.45rem)',
+                                                            letterSpacing: '0.14em',
                                                             color: '#fff',
                                                             textTransform: 'uppercase'
                                                         },
-                                                        children: "CLASSIFIED ARSENAL // TECH CAPABILITIES"
+                                                        children: "ARSENAL // TECHNICAL LOADOUT"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/LandingPage.tsx",
-                                                        lineNumber: 461,
+                                                        lineNumber: 449,
                                                         columnNumber: 41
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/LandingPage.tsx",
-                                                lineNumber: 454,
+                                                lineNumber: 441,
                                                 columnNumber: 37
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                 style: {
                                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                     fontSize: '0.78rem',
-                                                    color: 'rgba(255,255,255,0.55)',
-                                                    letterSpacing: '0.25em',
+                                                    color: 'rgba(255,255,255,0.45)',
+                                                    letterSpacing: '0.22em',
                                                     textTransform: 'uppercase',
                                                     marginTop: '3px'
                                                 },
-                                                children: "CORE LANGUAGES, FRAMEWORKS, AI & SYSTEM ENGINEERING"
+                                                children: "CORE LANGUAGES, FRAMEWORKS, AI & SYSTEMS ENGINEERING"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/LandingPage.tsx",
-                                                lineNumber: 471,
+                                                lineNumber: 461,
                                                 columnNumber: 37
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 453,
+                                        lineNumber: 440,
                                         columnNumber: 33
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         style: {
                                             fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                             fontSize: '0.72rem',
-                                            color: 'rgba(255,255,255,0.6)',
+                                            color: 'rgba(255,255,255,0.5)',
                                             letterSpacing: '0.2em',
                                             textTransform: 'uppercase'
                                         },
                                         children: "12 LOADOUT ITEMS"
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 482,
+                                        lineNumber: 474,
                                         columnNumber: 33
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 452,
+                                lineNumber: 439,
                                 columnNumber: 29
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/LandingPage.tsx",
-                            lineNumber: 451,
+                            lineNumber: 436,
                             columnNumber: 25
                         }, this),
                         Object.entries(groupedArsenal).map(([category, items])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2968,73 +2453,47 @@ function LandingPage() {
                                             marginBottom: '2px'
                                         },
                                         children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                style: {
-                                                    width: '3px',
-                                                    height: '16px',
-                                                    background: CATEGORY_COLORS[category] || '#fff',
-                                                    boxShadow: `0 0 8px ${CATEGORY_COLORS[category] || '#fff'}`
-                                                }
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/LandingPage.tsx",
-                                                lineNumber: 504,
-                                                columnNumber: 37
-                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 style: {
                                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                     fontSize: '0.72rem',
-                                                    color: CATEGORY_COLORS[category] || '#fff',
+                                                    color: 'rgba(255,255,255,0.8)',
                                                     letterSpacing: '0.3em',
                                                     textTransform: 'uppercase',
-                                                    fontWeight: 700,
-                                                    textShadow: `0 0 8px ${CATEGORY_COLORS[category] || '#fff'}`
+                                                    fontWeight: 700
                                                 },
                                                 children: category
                                             }, void 0, false, {
                                                 fileName: "[project]/components/LandingPage.tsx",
-                                                lineNumber: 510,
+                                                lineNumber: 499,
                                                 columnNumber: 37
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 style: {
                                                     flex: 1,
                                                     height: '1px',
-                                                    background: `linear-gradient(to right, ${CATEGORY_COLORS[category] || '#fff'}40, transparent)`
+                                                    background: 'rgba(255,255,255,0.08)'
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/components/LandingPage.tsx",
-                                                lineNumber: 521,
+                                                lineNumber: 511,
                                                 columnNumber: 37
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 498,
+                                        lineNumber: 491,
                                         columnNumber: 33
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "grid grid-cols-1 sm:grid-cols-2 gap-2.5",
                                         children: items.map((item, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 style: {
-                                                    background: 'linear-gradient(135deg, #0e0e14 0%, #0b0b10 100%)',
-                                                    border: '1px solid rgba(255,255,255,0.1)',
+                                                    background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
+                                                    border: '1px solid rgba(255,255,255,0.08)',
                                                     borderLeft: `3px solid ${item.color}`,
                                                     padding: '12px 14px',
-                                                    transition: 'all 0.18s ease',
-                                                    position: 'relative',
-                                                    overflow: 'hidden'
-                                                },
-                                                onMouseEnter: (e)=>{
-                                                    e.currentTarget.style.borderColor = item.color;
-                                                    e.currentTarget.style.boxShadow = `0 0 20px ${item.color}20, inset 0 0 20px ${item.color}05`;
-                                                    e.currentTarget.style.background = `linear-gradient(135deg, #0f0f16 0%, ${item.color}06 100%)`;
-                                                },
-                                                onMouseLeave: (e)=>{
-                                                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                                                    e.currentTarget.style.borderLeftColor = item.color;
-                                                    e.currentTarget.style.boxShadow = 'none';
-                                                    e.currentTarget.style.background = 'linear-gradient(135deg, #0e0e14 0%, #0b0b10 100%)';
+                                                    position: 'relative'
                                                 },
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3045,43 +2504,18 @@ function LandingPage() {
                                                             marginBottom: '8px'
                                                         },
                                                         children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                 style: {
-                                                                    display: 'flex',
-                                                                    alignItems: 'center',
-                                                                    gap: '8px'
+                                                                    fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
+                                                                    fontSize: '0.9rem',
+                                                                    color: '#fff',
+                                                                    letterSpacing: '0.08em',
+                                                                    textTransform: 'uppercase'
                                                                 },
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        style: {
-                                                                            width: '5px',
-                                                                            height: '5px',
-                                                                            background: item.color,
-                                                                            boxShadow: `0 0 5px ${item.color}`
-                                                                        }
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/components/LandingPage.tsx",
-                                                                        lineNumber: 555,
-                                                                        columnNumber: 53
-                                                                    }, this),
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                        style: {
-                                                                            fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                                            fontSize: '0.9rem',
-                                                                            color: '#fff',
-                                                                            letterSpacing: '0.08em',
-                                                                            textTransform: 'uppercase'
-                                                                        },
-                                                                        children: item.name
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/components/LandingPage.tsx",
-                                                                        lineNumber: 560,
-                                                                        columnNumber: 53
-                                                                    }, this)
-                                                                ]
-                                                            }, void 0, true, {
+                                                                children: item.name
+                                                            }, void 0, false, {
                                                                 fileName: "[project]/components/LandingPage.tsx",
-                                                                lineNumber: 554,
+                                                                lineNumber: 540,
                                                                 columnNumber: 49
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3089,19 +2523,18 @@ function LandingPage() {
                                                                     fontFamily: 'Share Tech Mono,monospace',
                                                                     fontSize: '0.85rem',
                                                                     color: item.color,
-                                                                    fontWeight: 700,
-                                                                    textShadow: `0 0 8px ${item.color}`
+                                                                    fontWeight: 700
                                                                 },
                                                                 children: item.proficiency
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/LandingPage.tsx",
-                                                                lineNumber: 570,
+                                                                lineNumber: 551,
                                                                 columnNumber: 49
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/LandingPage.tsx",
-                                                        lineNumber: 553,
+                                                        lineNumber: 532,
                                                         columnNumber: 45
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3109,61 +2542,45 @@ function LandingPage() {
                                                             width: '100%',
                                                             background: 'rgba(255,255,255,0.06)',
                                                             height: '3px',
-                                                            position: 'relative',
-                                                            overflow: 'hidden'
+                                                            position: 'relative'
                                                         },
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             style: {
                                                                 width: item.proficiency,
                                                                 height: '100%',
-                                                                background: `linear-gradient(to right, ${item.color}aa, ${item.color})`,
-                                                                boxShadow: `0 0 6px ${item.color}80`,
-                                                                position: 'relative'
-                                                            },
-                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                style: {
-                                                                    position: 'absolute',
-                                                                    inset: 0,
-                                                                    background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%)',
-                                                                    backgroundSize: '200% 100%',
-                                                                    animation: 'shimmer-bar 2.5s ease-in-out infinite'
-                                                                }
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/LandingPage.tsx",
-                                                                lineNumber: 599,
-                                                                columnNumber: 53
-                                                            }, this)
+                                                                background: item.color
+                                                            }
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/LandingPage.tsx",
-                                                            lineNumber: 589,
+                                                            lineNumber: 571,
                                                             columnNumber: 49
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/LandingPage.tsx",
-                                                        lineNumber: 582,
+                                                        lineNumber: 563,
                                                         columnNumber: 45
                                                     }, this)
                                                 ]
                                             }, i, true, {
                                                 fileName: "[project]/components/LandingPage.tsx",
-                                                lineNumber: 530,
+                                                lineNumber: 522,
                                                 columnNumber: 41
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 528,
+                                        lineNumber: 520,
                                         columnNumber: 33
                                     }, this)
                                 ]
                             }, category, true, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 496,
+                                lineNumber: 490,
                                 columnNumber: 29
                             }, this))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/LandingPage.tsx",
-                    lineNumber: 449,
+                    lineNumber: 434,
                     columnNumber: 21
                 }, this);
             case 'CONTACT':
@@ -3172,7 +2589,7 @@ function LandingPage() {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             style: {
-                                borderBottom: '1px solid rgba(255,255,255,0.12)',
+                                borderBottom: '1px solid rgba(255,255,255,0.1)',
                                 paddingBottom: '12px'
                             },
                             children: [
@@ -3181,56 +2598,54 @@ function LandingPage() {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             style: {
-                                                width: '10px',
-                                                height: '10px',
-                                                background: '#f5a623',
-                                                boxShadow: '0 0 10px rgba(245,166,35,0.9)',
-                                                animation: 'gold-pulse 2.8s ease-in-out infinite'
+                                                width: '3px',
+                                                height: '14px',
+                                                background: '#ffffff'
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 622,
+                                            lineNumber: 595,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                             style: {
                                                 fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                fontSize: 'clamp(1.1rem, 2.2vw, 1.55rem)',
-                                                letterSpacing: '0.12em',
+                                                fontSize: 'clamp(1.1rem, 2vw, 1.45rem)',
+                                                letterSpacing: '0.14em',
                                                 color: '#fff',
                                                 textTransform: 'uppercase'
                                             },
-                                            children: "ENCRYPTED COMMS // DIRECT DISPATCH"
+                                            children: "DIRECT DISPATCH // CONTACT & SOCIALS"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 628,
+                                            lineNumber: 602,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 621,
+                                    lineNumber: 594,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     style: {
                                         fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                         fontSize: '0.78rem',
-                                        color: 'rgba(255,255,255,0.55)',
-                                        letterSpacing: '0.25em',
+                                        color: 'rgba(255,255,255,0.45)',
+                                        letterSpacing: '0.22em',
                                         textTransform: 'uppercase',
                                         marginTop: '3px'
                                     },
-                                    children: "TRANSMIT HIGH-PRIORITY CONTRACTS & FULL-TIME PROPOSALS"
+                                    children: "AVAILABLE FOR SOFTWARE ROLES, INTERNSHIPS AND TECHNICAL COLLABORATIONS"
                                 }, void 0, false, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 638,
+                                    lineNumber: 614,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/LandingPage.tsx",
-                            lineNumber: 620,
+                            lineNumber: 591,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3239,39 +2654,20 @@ function LandingPage() {
                                 alignItems: 'center',
                                 gap: '8px',
                                 padding: '10px 16px',
-                                background: 'rgba(102,204,102,0.05)',
+                                background: 'rgba(102,204,102,0.04)',
                                 border: '1px solid rgba(102,204,102,0.2)'
                             },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     style: {
-                                        display: 'flex',
-                                        alignItems: 'flex-end',
-                                        gap: '3px',
-                                        height: '18px'
-                                    },
-                                    children: [
-                                        4,
-                                        7,
-                                        11,
-                                        15,
-                                        18
-                                    ].map((h, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            style: {
-                                                width: '3px',
-                                                height: `${h}px`,
-                                                background: '#66CC66',
-                                                boxShadow: '0 0 4px rgba(102,204,102,0.8)',
-                                                opacity: 0.85 + i * 0.03
-                                            }
-                                        }, i, false, {
-                                            fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 661,
-                                            columnNumber: 37
-                                        }, this))
+                                        width: '6px',
+                                        height: '6px',
+                                        background: '#66CC66',
+                                        borderRadius: '50%'
+                                    }
                                 }, void 0, false, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 659,
+                                    lineNumber: 639,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3281,34 +2677,18 @@ function LandingPage() {
                                         color: '#66CC66',
                                         letterSpacing: '0.25em',
                                         textTransform: 'uppercase',
-                                        fontWeight: 700,
-                                        textShadow: '0 0 8px rgba(102,204,102,0.6)'
+                                        fontWeight: 700
                                     },
-                                    children: "SIGNAL STRENGTH: MAXIMUM // OPEN FOR OPPORTUNITIES"
+                                    children: "STATUS: ONLINE // OPEN FOR OPPORTUNITIES"
                                 }, void 0, false, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 670,
-                                    columnNumber: 29
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "live-dot",
-                                    style: {
-                                        marginLeft: 'auto',
-                                        width: '8px',
-                                        height: '8px',
-                                        background: '#66CC66',
-                                        borderRadius: '50% !important',
-                                        boxShadow: '0 0 8px rgba(102,204,102,0.8)'
-                                    }
-                                }, void 0, false, {
-                                    fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 681,
+                                    lineNumber: 647,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/LandingPage.tsx",
-                            lineNumber: 651,
+                            lineNumber: 629,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3316,280 +2696,251 @@ function LandingPage() {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     onClick: handleCopyEmail,
-                                    className: "card-shimmer-container group cursor-pointer",
+                                    className: "cursor-pointer p-5 transition-colors duration-200",
                                     style: {
-                                        background: 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)',
-                                        border: '1px solid rgba(255,255,255,0.12)',
-                                        borderLeft: '3px solid #f5a623',
-                                        padding: '20px',
-                                        transition: 'all 0.22s cubic-bezier(0.2,0.8,0.2,1)',
-                                        position: 'relative',
-                                        overflow: 'hidden'
+                                        background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        borderLeft: '3px solid #ffffff',
+                                        position: 'relative'
                                     },
                                     onMouseEnter: (e)=>{
-                                        e.currentTarget.style.background = '#fff';
-                                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0,0,0,0.7), 0 0 20px rgba(245,166,35,0.25)';
-                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)';
                                     },
                                     onMouseLeave: (e)=>{
-                                        e.currentTarget.style.background = 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)';
-                                        e.currentTarget.style.boxShadow = 'none';
-                                        e.currentTarget.style.transform = 'none';
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                                        e.currentTarget.style.borderLeftColor = '#ffffff';
                                     },
                                     children: [
                                         copied && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             style: {
                                                 position: 'absolute',
                                                 inset: 0,
-                                                background: 'rgba(102,204,102,0.15)',
+                                                background: 'rgba(102,204,102,0.12)',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
-                                                zIndex: 5,
-                                                animation: 'slide-in-up 0.3s ease'
+                                                zIndex: 5
                                             },
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 style: {
                                                     fontFamily: 'ChaletLondon1960,"Bebas Neue",sans-serif',
-                                                    fontSize: '1.1rem',
+                                                    fontSize: '1rem',
                                                     color: '#66CC66',
-                                                    letterSpacing: '0.2em',
-                                                    textShadow: '0 0 20px rgba(102,204,102,0.8)'
+                                                    letterSpacing: '0.15em'
                                                 },
-                                                children: "✓ TRANSMISSION SENT"
+                                                children: "✓ EMAIL COPIED"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/LandingPage.tsx",
-                                                lineNumber: 728,
+                                                lineNumber: 693,
                                                 columnNumber: 41
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 718,
+                                            lineNumber: 682,
                                             columnNumber: 37
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                 fontSize: '0.68rem',
-                                                color: 'rgba(255,255,255,0.45)',
+                                                color: 'rgba(255,255,255,0.4)',
                                                 letterSpacing: '0.3em',
                                                 textTransform: 'uppercase',
                                                 marginBottom: '6px'
                                             },
-                                            className: "group-hover:!text-black/50",
-                                            children: "◎ DIRECT EMAIL // DISPATCH"
+                                            children: "DIRECT EMAIL"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 739,
+                                            lineNumber: 705,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                fontSize: '0.88rem',
+                                                fontSize: '0.92rem',
                                                 color: '#fff',
                                                 letterSpacing: '0.05em',
                                                 textTransform: 'uppercase',
                                                 wordBreak: 'break-all'
                                             },
-                                            className: "group-hover:!text-black",
                                             children: USER_DATA.email
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 749,
+                                            lineNumber: 717,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                 fontSize: '0.72rem',
-                                                color: '#f5a623',
+                                                color: 'rgba(255,255,255,0.5)',
                                                 textTransform: 'uppercase',
                                                 marginTop: '12px',
                                                 fontWeight: 700,
                                                 letterSpacing: '0.2em'
                                             },
-                                            className: "group-hover:!text-black/60",
                                             children: "[ CLICK TO COPY ]"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 759,
+                                            lineNumber: 729,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 694,
+                                    lineNumber: 664,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                     href: USER_DATA.github,
                                     target: "_blank",
                                     rel: "noopener noreferrer",
-                                    className: "card-shimmer-container group block",
+                                    className: "block p-5 transition-colors duration-200",
                                     style: {
-                                        background: 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)',
-                                        border: '1px solid rgba(255,255,255,0.12)',
-                                        borderLeft: '3px solid #fff',
-                                        padding: '20px',
-                                        transition: 'all 0.22s cubic-bezier(0.2,0.8,0.2,1)',
-                                        textDecoration: 'none',
-                                        overflow: 'hidden'
+                                        background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        borderLeft: '3px solid #cbd5e1',
+                                        textDecoration: 'none'
                                     },
                                     onMouseEnter: (e)=>{
-                                        e.currentTarget.style.background = '#fff';
-                                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0,0,0,0.7)';
-                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)';
                                     },
                                     onMouseLeave: (e)=>{
-                                        e.currentTarget.style.background = 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)';
-                                        e.currentTarget.style.boxShadow = 'none';
-                                        e.currentTarget.style.transform = 'none';
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                                        e.currentTarget.style.borderLeftColor = '#cbd5e1';
                                     },
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                 fontSize: '0.68rem',
-                                                color: 'rgba(255,255,255,0.45)',
+                                                color: 'rgba(255,255,255,0.4)',
                                                 letterSpacing: '0.3em',
                                                 textTransform: 'uppercase',
                                                 marginBottom: '6px'
                                             },
-                                            className: "group-hover:!text-black/50",
-                                            children: "◆ GITHUB REPOSITORIES"
+                                            children: "GITHUB"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 798,
+                                            lineNumber: 764,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                fontSize: '1.1rem',
+                                                fontSize: '1.05rem',
                                                 color: '#fff',
                                                 letterSpacing: '0.08em',
                                                 textTransform: 'uppercase'
                                             },
-                                            className: "group-hover:!text-black",
                                             children: "lokiverse-devil"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 808,
+                                            lineNumber: 776,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                 fontSize: '0.72rem',
-                                                color: 'rgba(255,255,255,0.6)',
+                                                color: 'rgba(255,255,255,0.5)',
                                                 textTransform: 'uppercase',
                                                 marginTop: '12px',
                                                 fontWeight: 700,
                                                 letterSpacing: '0.2em'
                                             },
-                                            className: "group-hover:!text-black/60",
-                                            children: "[ OPEN DOSSIER ↗ ]"
+                                            children: "[ VIEW REPOSITORIES ↗ ]"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 817,
+                                            lineNumber: 787,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 773,
+                                    lineNumber: 745,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                     href: USER_DATA.linkedin,
                                     target: "_blank",
                                     rel: "noopener noreferrer",
-                                    className: "card-shimmer-container group block",
+                                    className: "block p-5 transition-colors duration-200",
                                     style: {
-                                        background: 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)',
-                                        border: '1px solid rgba(255,255,255,0.12)',
-                                        borderLeft: '3px solid #0077B5',
-                                        padding: '20px',
-                                        transition: 'all 0.22s cubic-bezier(0.2,0.8,0.2,1)',
-                                        textDecoration: 'none',
-                                        overflow: 'hidden'
+                                        background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        borderLeft: '3px solid #94a3b8',
+                                        textDecoration: 'none'
                                     },
                                     onMouseEnter: (e)=>{
-                                        e.currentTarget.style.background = '#fff';
-                                        e.currentTarget.style.boxShadow = '0 12px 35px rgba(0,0,0,0.7), 0 0 20px rgba(0,119,181,0.2)';
-                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)';
                                     },
                                     onMouseLeave: (e)=>{
-                                        e.currentTarget.style.background = 'linear-gradient(135deg, #0e0e14 0%, #0a0a0f 100%)';
-                                        e.currentTarget.style.boxShadow = 'none';
-                                        e.currentTarget.style.transform = 'none';
+                                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                                        e.currentTarget.style.borderLeftColor = '#94a3b8';
                                     },
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                 fontSize: '0.68rem',
-                                                color: 'rgba(255,255,255,0.45)',
+                                                color: 'rgba(255,255,255,0.4)',
                                                 letterSpacing: '0.3em',
                                                 textTransform: 'uppercase',
                                                 marginBottom: '6px'
                                             },
-                                            className: "group-hover:!text-black/50",
-                                            children: "◐ LINKEDIN NETWORK"
+                                            children: "LINKEDIN"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 856,
+                                            lineNumber: 822,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                                fontSize: '1.1rem',
+                                                fontSize: '1.05rem',
                                                 color: '#fff',
                                                 letterSpacing: '0.08em',
                                                 textTransform: 'uppercase'
                                             },
-                                            className: "group-hover:!text-black",
                                             children: "Om Pandey"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 866,
+                                            lineNumber: 834,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             style: {
                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                 fontSize: '0.72rem',
-                                                color: 'rgba(255,255,255,0.6)',
+                                                color: 'rgba(255,255,255,0.5)',
                                                 textTransform: 'uppercase',
                                                 marginTop: '12px',
                                                 fontWeight: 700,
                                                 letterSpacing: '0.2em'
                                             },
-                                            className: "group-hover:!text-black/60",
-                                            children: "[ CONNECT ON NETWORK ↗ ]"
+                                            children: "[ CONNECT ON LINKEDIN ↗ ]"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 875,
+                                            lineNumber: 845,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 831,
+                                    lineNumber: 803,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/LandingPage.tsx",
-                            lineNumber: 692,
+                            lineNumber: 662,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/LandingPage.tsx",
-                    lineNumber: 618,
+                    lineNumber: 589,
                     columnNumber: 21
                 }, this);
             default:
@@ -3600,32 +2951,17 @@ function LandingPage() {
         style: {
             position: 'fixed',
             inset: 0,
-            background: 'radial-gradient(ellipse at 50% 0%, #111008 0%, #09090a 55%, #050505 100%)',
+            background: '#070709',
             overflow: 'hidden',
             zIndex: 100,
             userSelect: 'none'
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                style: {
-                    position: 'absolute',
-                    top: '-15%',
-                    left: '25%',
-                    width: '50%',
-                    height: '60%',
-                    background: 'radial-gradient(ellipse at center, rgba(200, 150, 20, 0.06) 0%, transparent 65%)',
-                    pointerEvents: 'none'
-                }
-            }, void 0, false, {
-                fileName: "[project]/components/LandingPage.tsx",
-                lineNumber: 908,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "heavy-vignette"
             }, void 0, false, {
                 fileName: "[project]/components/LandingPage.tsx",
-                lineNumber: 918,
+                lineNumber: 879,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
@@ -3635,14 +2971,13 @@ function LandingPage() {
                     left: 0,
                     right: 0,
                     padding: '0 32px',
-                    height: '60px',
+                    height: '58px',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     zIndex: 130,
-                    background: '#080807',
-                    borderBottom: '1px solid rgba(212,150,10,0.18)',
-                    boxShadow: '0 1px 0 rgba(212,150,10,0.06)'
+                    background: '#09090c',
+                    borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
                 },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3654,23 +2989,22 @@ function LandingPage() {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    width: '42px',
-                                    height: '42px',
-                                    background: '#0d0d0a',
-                                    border: '1px solid rgba(102,204,102,0.55)',
+                                    width: '38px',
+                                    height: '38px',
+                                    background: '#121216',
+                                    border: '1px solid rgba(255, 255, 255, 0.2)',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    fontFamily: 'Share Tech Mono,monospace',
-                                    fontSize: '1rem',
-                                    color: '#66CC66',
-                                    boxShadow: '0 0 10px rgba(102,204,102,0.2)',
+                                    fontFamily: 'Share Tech Mono, monospace',
+                                    fontSize: '0.95rem',
+                                    color: '#ffffff',
                                     flexShrink: 0
                                 },
                                 children: USER_DATA.rank
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 939,
+                                lineNumber: 900,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3678,60 +3012,40 @@ function LandingPage() {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
                                             fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                            fontSize: '1.2rem',
-                                            letterSpacing: '0.18em',
-                                            color: '#f0ede8',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: '10px'
+                                            fontSize: '1.15rem',
+                                            letterSpacing: '0.14em',
+                                            color: '#ffffff'
                                         },
-                                        children: [
-                                            USER_DATA.name,
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                style: {
-                                                    fontSize: '0.6rem',
-                                                    background: '#66CC66',
-                                                    color: '#000',
-                                                    padding: '2px 7px',
-                                                    fontWeight: 900,
-                                                    letterSpacing: '0.12em'
-                                                },
-                                                children: "PRO"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/LandingPage.tsx",
-                                                lineNumber: 967,
-                                                columnNumber: 29
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                        children: USER_DATA.name
+                                    }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 957,
+                                        lineNumber: 919,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
                                             fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                             fontSize: '0.7rem',
-                                            letterSpacing: '0.28em',
-                                            color: 'rgba(240,237,232,0.45)',
-                                            marginTop: '2px'
+                                            letterSpacing: '0.24em',
+                                            color: 'rgba(255, 255, 255, 0.45)',
+                                            marginTop: '1px'
                                         },
                                         children: USER_DATA.tagline
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 978,
+                                        lineNumber: 929,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 956,
+                                lineNumber: 918,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 937,
+                        lineNumber: 899,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3745,12 +3059,12 @@ function LandingPage() {
                                 className: "hidden sm:block",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(WantedStarsHUD, {}, void 0, false, {
                                     fileName: "[project]/components/LandingPage.tsx",
-                                    lineNumber: 994,
+                                    lineNumber: 946,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 993,
+                                lineNumber: 945,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3760,7 +3074,7 @@ function LandingPage() {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
-                                            fontFamily: 'Share Tech Mono,monospace',
+                                            fontFamily: 'Share Tech Mono, monospace',
                                             fontSize: '1.15rem',
                                             color: '#66CC66',
                                             letterSpacing: '0.04em',
@@ -3770,12 +3084,12 @@ function LandingPage() {
                                             target: USER_DATA.cash
                                         }, void 0, false, {
                                             fileName: "[project]/components/LandingPage.tsx",
-                                            lineNumber: 1006,
+                                            lineNumber: 960,
                                             columnNumber: 40
                                         }, this) : USER_DATA.cash
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 999,
+                                        lineNumber: 951,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3788,58 +3102,58 @@ function LandingPage() {
                                         },
                                         className: "hidden sm:block",
                                         children: [
-                                            "BANK: ",
+                                            "BANK:",
+                                            ' ',
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 style: {
-                                                    color: 'rgba(255,255,255,0.58)'
+                                                    color: 'rgba(255,255,255,0.55)'
                                                 },
                                                 children: mounted ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AnimatedCounter, {
                                                     target: USER_DATA.bank
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/LandingPage.tsx",
-                                                    lineNumber: 1016,
+                                                    lineNumber: 974,
                                                     columnNumber: 44
                                                 }, this) : USER_DATA.bank
                                             }, void 0, false, {
                                                 fileName: "[project]/components/LandingPage.tsx",
-                                                lineNumber: 1015,
-                                                columnNumber: 35
+                                                lineNumber: 973,
+                                                columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1008,
+                                        lineNumber: 962,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 998,
+                                lineNumber: 950,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    fontFamily: 'Share Tech Mono,monospace',
-                                    fontSize: '0.95rem',
+                                    fontFamily: 'Share Tech Mono, monospace',
+                                    fontSize: '0.92rem',
                                     letterSpacing: '0.08em',
-                                    color: 'rgba(240,237,232,0.75)',
-                                    borderLeft: '1px solid rgba(255,255,255,0.1)',
+                                    color: 'rgba(255, 255, 255, 0.75)',
+                                    borderLeft: '1px solid rgba(255, 255, 255, 0.1)',
                                     paddingLeft: '18px',
                                     minWidth: '68px'
                                 },
                                 children: time
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1022,
+                                lineNumber: 980,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: toggleAmbience,
-                                title: ambienceMuted ? 'Unmute Audio' : 'Mute Audio',
                                 style: {
                                     background: 'transparent',
-                                    border: `1px solid ${ambienceMuted ? 'rgba(255,255,255,0.15)' : 'rgba(102,204,102,0.35)'}`,
-                                    color: ambienceMuted ? 'rgba(255,255,255,0.25)' : 'rgba(102,204,102,0.85)',
+                                    border: `1px solid ${ambienceMuted ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.3)'}`,
+                                    color: ambienceMuted ? 'rgba(255,255,255,0.3)' : '#ffffff',
                                     padding: '4px 12px',
                                     cursor: 'pointer',
                                     fontSize: '0.66rem',
@@ -3848,22 +3162,22 @@ function LandingPage() {
                                     textTransform: 'uppercase',
                                     transition: 'all 0.18s ease'
                                 },
-                                children: ambienceMuted ? '⊗ MUTED' : '◉ AUDIO'
+                                children: ambienceMuted ? 'MUTED' : 'AUDIO'
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1035,
+                                lineNumber: 995,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 991,
+                        lineNumber: 944,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LandingPage.tsx",
-                lineNumber: 921,
+                lineNumber: 882,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3874,7 +3188,7 @@ function LandingPage() {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    padding: '80px 20px 48px',
+                    padding: '76px 20px 48px',
                     zIndex: 120
                 },
                 children: [
@@ -3884,157 +3198,89 @@ function LandingPage() {
                             flexWrap: 'wrap',
                             justifyContent: 'center',
                             gap: '1px',
-                            marginBottom: '12px',
+                            marginBottom: '10px',
                             zIndex: 125,
-                            maxWidth: '1200px',
+                            maxWidth: '1220px',
                             width: '100%',
-                            background: '#070706',
-                            borderBottom: '1px solid rgba(212,150,10,0.12)'
+                            background: '#09090c',
+                            borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
                         },
                         children: MENU_ITEMS.map((item)=>{
                             const isActive = activeItem === item.key;
                             return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: ()=>setActiveItem(item.key),
+                                onClick: ()=>handleTabChange(item.key),
                                 style: {
                                     fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
-                                    fontSize: 'clamp(0.78rem, 1.3vw, 1rem)',
-                                    letterSpacing: '0.2em',
+                                    fontSize: 'clamp(0.82rem, 1.25vw, 1rem)',
+                                    letterSpacing: '0.18em',
                                     textTransform: 'uppercase',
-                                    padding: '11px 22px',
-                                    background: isActive ? '#f0ede8' : 'transparent',
-                                    color: isActive ? '#080807' : 'rgba(240,237,232,0.45)',
+                                    padding: '11px 24px',
+                                    background: isActive ? '#ffffff' : 'transparent',
+                                    color: isActive ? '#000000' : 'rgba(255,255,255,0.45)',
                                     border: 'none',
-                                    borderTop: isActive ? '2px solid #d4960a' : '2px solid transparent',
                                     cursor: 'pointer',
                                     transition: 'all 0.15s ease',
-                                    boxShadow: isActive ? '0 0 30px rgba(240,237,232,0.08)' : 'none',
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '8px',
                                     flex: '1 1 auto',
                                     justifyContent: 'center'
                                 },
-                                onMouseEnter: (e)=>{
-                                    if (!isActive) {
-                                        e.currentTarget.style.color = '#f0ede8';
-                                        e.currentTarget.style.background = 'rgba(240,237,232,0.04)';
-                                        e.currentTarget.style.borderTopColor = 'rgba(212,150,10,0.35)';
-                                    }
-                                },
-                                onMouseLeave: (e)=>{
-                                    if (!isActive) {
-                                        e.currentTarget.style.color = 'rgba(240,237,232,0.45)';
-                                        e.currentTarget.style.background = 'transparent';
-                                        e.currentTarget.style.borderTopColor = 'transparent';
-                                    }
-                                },
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        style: {
-                                            fontSize: '0.9em',
-                                            opacity: isActive ? 0.7 : 0.3
-                                        },
-                                        children: item.icon
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1124,
-                                        columnNumber: 33
-                                    }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         children: item.label
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1130,
+                                        lineNumber: 1069,
                                         columnNumber: 33
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         style: {
-                                            fontSize: '0.6em',
-                                            opacity: 0.35,
-                                            background: 'rgba(255,255,255,0.07)',
-                                            padding: '1px 4px',
-                                            letterSpacing: '0.04em'
+                                            fontSize: '0.62em',
+                                            opacity: isActive ? 0.45 : 0.25,
+                                            background: isActive ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.08)',
+                                            padding: '1px 5px'
                                         },
                                         children: item.shortcut
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1131,
+                                        lineNumber: 1070,
                                         columnNumber: 33
                                     }, this)
                                 ]
                             }, item.key, true, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1087,
+                                lineNumber: 1048,
                                 columnNumber: 29
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 1070,
+                        lineNumber: 1031,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         ref: contentRef,
-                        className: "landing-content-panel corner-bracket",
                         style: {
                             width: 'min(96vw, 1220px)',
                             maxHeight: '72vh',
-                            background: '#0a0a08',
-                            borderTop: '1px solid rgba(212,150,10,0.35)',
-                            borderRight: '1px solid rgba(255,255,255,0.07)',
-                            borderBottom: '1px solid rgba(255,255,255,0.07)',
-                            borderLeft: '1px solid rgba(255,255,255,0.07)',
+                            background: '#09090c',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
                             padding: '24px 28px',
-                            boxShadow: '0 24px 80px rgba(0,0,0,0.9)',
+                            boxShadow: '0 24px 80px rgba(0,0,0,0.95)',
                             overflowY: 'auto',
                             position: 'relative'
                         },
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                style: {
-                                    position: 'absolute',
-                                    top: '-1px',
-                                    right: '-1px',
-                                    width: '14px',
-                                    height: '14px',
-                                    borderTop: '1px solid rgba(212,150,10,0.6)',
-                                    borderRight: '1px solid rgba(212,150,10,0.6)',
-                                    pointerEvents: 'none',
-                                    zIndex: 2
-                                }
-                            }, void 0, false, {
-                                fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1164,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                style: {
-                                    position: 'absolute',
-                                    bottom: '-1px',
-                                    left: '-1px',
-                                    width: '14px',
-                                    height: '14px',
-                                    borderBottom: '1px solid rgba(212,150,10,0.6)',
-                                    borderLeft: '1px solid rgba(212,150,10,0.6)',
-                                    pointerEvents: 'none',
-                                    zIndex: 2
-                                }
-                            }, void 0, false, {
-                                fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1175,
-                                columnNumber: 21
-                            }, this),
-                            renderContent()
-                        ]
-                    }, void 0, true, {
+                        children: renderContent()
+                    }, void 0, false, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 1146,
+                        lineNumber: 1086,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LandingPage.tsx",
-                lineNumber: 1057,
+                lineNumber: 1018,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -4043,7 +3289,7 @@ function LandingPage() {
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    height: '38px',
+                    height: '36px',
                     padding: '0 32px',
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -4052,10 +3298,10 @@ function LandingPage() {
                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                     fontSize: '0.65rem',
                     letterSpacing: '0.25em',
-                    color: 'rgba(240,237,232,0.28)',
+                    color: 'rgba(255,255,255,0.3)',
                     textTransform: 'uppercase',
-                    background: '#080807',
-                    borderTop: '1px solid rgba(212,150,10,0.1)'
+                    background: '#09090c',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.08)'
                 },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4066,24 +3312,24 @@ function LandingPage() {
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                children: "[KEYS 1-5: SELECT TABS]"
+                                children: "[KEYS 1-5: TABS]"
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1212,
+                                lineNumber: 1126,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "hidden sm:inline",
-                                children: "[CLICK ATTRIBUTES FOR INTEL]"
+                                children: "[SELECT ITEMS TO INSPECT]"
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1213,
+                                lineNumber: 1127,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 1211,
+                        lineNumber: 1125,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4101,17 +3347,15 @@ function LandingPage() {
                                 },
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "live-dot",
                                         style: {
-                                            width: '6px',
-                                            height: '6px',
+                                            width: '5px',
+                                            height: '5px',
                                             background: '#66CC66',
-                                            borderRadius: '50% !important',
-                                            boxShadow: '0 0 6px rgba(102,204,102,0.8)'
+                                            borderRadius: '50%'
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1219,
+                                        lineNumber: 1132,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -4119,71 +3363,51 @@ function LandingPage() {
                                             color: '#66CC66',
                                             fontWeight: 700
                                         },
-                                        children: "LIVE"
+                                        children: "ONLINE"
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1226,
+                                        lineNumber: 1140,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1218,
+                                lineNumber: 1131,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 style: {
-                                    color: 'rgba(255,255,255,0.2)'
+                                    color: 'rgba(255,255,255,0.15)'
                                 },
                                 children: "|"
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1228,
+                                lineNumber: 1142,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                children: "OM PANDEY // PORTFOLIO 2.0"
+                                children: "OM PANDEY // PORTFOLIO"
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1229,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                style: {
-                                    color: 'rgba(255,255,255,0.2)'
-                                },
-                                children: "|"
-                            }, void 0, false, {
-                                fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1230,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                style: {
-                                    color: 'rgba(245,166,35,0.6)'
-                                },
-                                children: "BUILD v2.0"
-                            }, void 0, false, {
-                                fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1231,
+                                lineNumber: 1143,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 1216,
+                        lineNumber: 1130,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LandingPage.tsx",
-                lineNumber: 1192,
+                lineNumber: 1104,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/LandingPage.tsx",
-        lineNumber: 897,
+        lineNumber: 869,
         columnNumber: 9
     }, this);
 }

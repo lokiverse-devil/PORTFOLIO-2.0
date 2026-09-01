@@ -24,11 +24,13 @@ function WarningScreen({ onComplete, sounds }) {
             if (cardRef.current) {
                 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].fromTo(cardRef.current, {
                     opacity: 0,
-                    scale: 0.98
+                    scale: 0.97,
+                    y: 10
                 }, {
                     opacity: 1,
                     scale: 1,
-                    duration: 1.0,
+                    y: 0,
+                    duration: 0.6,
                     ease: 'power3.out'
                 });
             }
@@ -39,6 +41,7 @@ function WarningScreen({ onComplete, sounds }) {
                     try {
                         if (sounds?.ambience) {
                             sounds.ambience.loop(true);
+                            sounds.ambience.volume(0.35);
                             sounds.ambience.play();
                         }
                     } catch (e) {
@@ -54,7 +57,7 @@ function WarningScreen({ onComplete, sounds }) {
                                     if (flashRef.current) {
                                         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].to(flashRef.current, {
                                             opacity: 0,
-                                            duration: 0.22,
+                                            duration: 0.25,
                                             ease: 'power2.out',
                                             onComplete
                                         });
@@ -100,64 +103,90 @@ function WarningScreen({ onComplete, sounds }) {
         style: {
             position: 'fixed',
             inset: 0,
-            background: '#000',
+            background: '#000000',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 100,
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
+            padding: '24px'
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "noise-overlay"
+                className: "heavy-vignette"
             }, void 0, false, {
                 fileName: "[project]/components/WarningScreen.tsx",
-                lineNumber: 93,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "crt-scanlines"
-            }, void 0, false, {
-                fileName: "[project]/components/WarningScreen.tsx",
-                lineNumber: 94,
+                lineNumber: 95,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 ref: cardRef,
                 style: {
-                    maxWidth: 760,
+                    maxWidth: 720,
+                    width: '92%',
                     textAlign: 'center',
-                    padding: '40px 30px',
+                    padding: '48px 40px',
                     zIndex: 110,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '40px'
+                    gap: '26px',
+                    background: 'rgba(8, 8, 10, 0.95)',
+                    backdropFilter: 'blur(24px)',
+                    WebkitBackdropFilter: 'blur(24px)',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    boxShadow: '0 35px 100px rgba(0, 0, 0, 0.98), 0 0 1px rgba(255, 255, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
                 },
                 children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                            fontSize: '0.85rem',
+                            letterSpacing: '0.35em',
+                            color: 'rgba(255, 255, 255, 0.5)',
+                            textTransform: 'uppercase'
+                        },
+                        children: "FAIR WARNING"
+                    }, void 0, false, {
+                        fileName: "[project]/components/WarningScreen.tsx",
+                        lineNumber: 118,
+                        columnNumber: 17
+                    }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         style: {
                             fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                            fontSize: 'clamp(0.95rem, 2vw, 1.2rem)',
-                            letterSpacing: '0.28em',
-                            lineHeight: 1.85,
-                            color: 'rgba(255, 255, 255, 0.75)',
-                            textTransform: 'uppercase'
+                            fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+                            letterSpacing: '0.22em',
+                            lineHeight: 1.7,
+                            color: '#ffffff',
+                            textTransform: 'uppercase',
+                            margin: 0
                         },
                         children: [
-                            "THIS IS A FICTIONAL INTERACTIVE DEVELOPER PORTFOLIO",
+                            "THIS INTERACTIVE EXPERIENCE SHOWCASES ME, MY REAL PROJECTS,",
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                 fileName: "[project]/components/WarningScreen.tsx",
-                                lineNumber: 120,
+                                lineNumber: 142,
                                 columnNumber: 21
                             }, this),
-                            "INSPIRED BY CINEMATIC OPEN-WORLD DESIGN"
+                            "ENGINEERING SKILLS & TECHNOLOGIES."
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/WarningScreen.tsx",
-                        lineNumber: 109,
+                        lineNumber: 130,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            width: '36px',
+                            height: '1px',
+                            background: 'rgba(255, 255, 255, 0.25)'
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/components/WarningScreen.tsx",
+                        lineNumber: 146,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -165,26 +194,30 @@ function WarningScreen({ onComplete, sounds }) {
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             style: {
                                 fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
-                                fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
-                                letterSpacing: '0.3em',
+                                fontSize: 'clamp(1.1rem, 2.4vw, 1.4rem)',
+                                letterSpacing: '0.24em',
                                 textTransform: 'uppercase',
-                                color: '#ffffff'
+                                color: '#000000',
+                                background: '#ffffff',
+                                padding: '10px 28px',
+                                display: 'inline-block',
+                                boxShadow: '0 4px 20px rgba(255, 255, 255, 0.2)'
                             },
                             children: "PRESS ENTER OR CLICK TO CONTINUE"
                         }, void 0, false, {
                             fileName: "[project]/components/WarningScreen.tsx",
-                            lineNumber: 125,
+                            lineNumber: 155,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/WarningScreen.tsx",
-                        lineNumber: 124,
+                        lineNumber: 154,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/WarningScreen.tsx",
-                lineNumber: 96,
+                lineNumber: 98,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -199,13 +232,13 @@ function WarningScreen({ onComplete, sounds }) {
                 }
             }, void 0, false, {
                 fileName: "[project]/components/WarningScreen.tsx",
-                lineNumber: 139,
+                lineNumber: 173,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/WarningScreen.tsx",
-        lineNumber: 79,
+        lineNumber: 80,
         columnNumber: 9
     }, this);
 }

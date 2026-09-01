@@ -12,13 +12,13 @@ export const getSounds = (): SoundEffects => {
         soundsInstance = {
             siren: new Howl({
                 src: ['/sounds/siren_loop.mp3'],
-                volume: 0.55,
+                volume: 0.5,
                 preload: true,
             }),
             ambience: new Howl({
                 src: ['/sounds/loading_ambience.mp3'],
                 loop: true,
-                volume: 0.4,
+                volume: 0.35,
                 preload: true,
             }),
             passed: new Howl({
