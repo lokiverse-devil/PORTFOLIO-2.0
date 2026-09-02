@@ -134,10 +134,10 @@ function DecisionPhase({ question = 1, onResult, sounds }) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         style: {
-                            fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                            fontSize: '0.85rem',
+                            fontFamily: 'Pricedown,ChaletComprime1960, "Barlow Condensed", sans-serif',
+                            fontSize: '1rem',
                             letterSpacing: '0.35em',
-                            color: 'rgba(255, 255, 255, 0.45)',
+                            color: 'rgba(236, 87, 87, 0.7)',
                             textTransform: 'uppercase',
                             marginBottom: '18px'
                         },

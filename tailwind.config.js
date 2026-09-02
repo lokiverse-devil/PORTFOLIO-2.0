@@ -10,6 +10,7 @@ module.exports = {
             fontFamily: {
                 chalet: ['ChaletLondon1960', 'Bebas Neue', 'Montserrat', 'sans-serif'],
                 'chalet-condensed': ['ChaletComprime1960', 'Barlow Condensed', 'Arial Narrow', 'sans-serif'],
+                pricedown: ['Pricedown', 'Russo One', 'Bebas Neue', 'sans-serif'],
             },
             colors: {
                 'gta-green': '#5af019',

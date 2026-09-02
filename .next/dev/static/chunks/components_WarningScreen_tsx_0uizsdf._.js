@@ -142,8 +142,8 @@ function WarningScreen({ onComplete, sounds }) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                            fontSize: '0.85rem',
+                            fontFamily: 'Pricedown, ChaletComprime1960, "Barlow Condensed", sans-serif',
+                            fontSize: '2rem',
                             letterSpacing: '0.35em',
                             color: 'rgba(255, 255, 255, 0.5)',
                             textTransform: 'uppercase'
@@ -199,9 +199,9 @@ function WarningScreen({ onComplete, sounds }) {
                                 textTransform: 'uppercase',
                                 color: '#000000',
                                 background: '#ffffff',
-                                padding: '10px 28px',
+                                padding: '9px 25px',
                                 display: 'inline-block',
-                                boxShadow: '0 4px 20px rgba(255, 255, 255, 0.2)'
+                                boxShadow: '0 4px 20px rgba(227, 10, 10, 0.2)'
                             },
                             children: "PRESS ENTER OR CLICK TO CONTINUE"
                         }, void 0, false, {
@@ -225,7 +225,7 @@ function WarningScreen({ onComplete, sounds }) {
                 style: {
                     position: 'absolute',
                     inset: 0,
-                    background: '#ffffff',
+                    background: '#be0808a0',
                     opacity: 0,
                     pointerEvents: 'none',
                     zIndex: 200

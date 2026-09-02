@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Howl } from 'howler'
 import gsap from 'gsap'
+import AcademicRadar from './AcademicRadar'
 import MapSection from './MapSection'
 import CharacterSection from './CharacterSection'
 
@@ -45,7 +46,7 @@ const USER_DATA: UserData = {
             category: 'REAL-TIME MESSAGING',
             desc: 'A fast, real-time messaging EMOJI-ONLY app built with Next.js and WebSockets for instant chat and media sharing.',
             tags: ['HTML', 'CSS', 'WEBSOCKETS', 'JAVASCRIPT'],
-            link: 'https://github.com/lokiverse-devil',
+            link: 'https://github.com/lokiverse-devil/VibeChat',
             status: 'COMPLETED',
             opNum: '01',
         },
@@ -54,7 +55,7 @@ const USER_DATA: UserData = {
             category: 'HOSTEL MANAGEMENT',
             desc: 'A digital portal that simplifies hostel room allotments, student records, and fee tracking.',
             tags: ['FULL STACK', 'POSTGRESQL', 'SUPABASE', 'NEXT.JS'],
-            link: 'https://github.com/lokiverse-devil',
+            link: 'https://github.com/lokiverse-devil/HtrackX-Smart-Hostel-Management-System-',
             status: 'COMPLETED',
             opNum: '02',
         },
@@ -63,12 +64,12 @@ const USER_DATA: UserData = {
             category: 'IOT AUTOMATION',
             desc: 'An automated classroom setup using IoT sensors to manage smart lighting, fans, and attendance.',
             tags: ['PYTHON', 'IOT', 'EMBEDDED', 'WEB PORTALS'],
-            link: 'https://github.com/lokiverse-devil',
+            link: 'https://github.com/lokiverse-devil/SmartClassX_Final',
             status: 'COMPLETED',
             opNum: '03',
         },
         {
-            title: 'AIMS',
+            title: 'AIMS - ACADEMIC INFRASTRUCTURE & MANAGEMENT SYSTEM',
             category: 'CAMPUS ASSET SUITE',
             desc: 'An infrastructure and asset tracking platform helping colleges manage lab inventory and staff requests.',
             tags: ['SYSTEM DESIGN', 'POSTGRESQL', 'SUPABASE', 'REST APIS'],
@@ -102,7 +103,7 @@ const MENU_ITEMS: { key: MenuItem; label: string; shortcut: string }[] = [
 
 // Animated cash counter
 function AnimatedCounter({ target, suffix = '' }: { target: string; suffix?: string }) {
-    const [display, setDisplay] = useState('₹0')
+    const [display, setDisplay] = useState('$0')
     const hasAnimated = useRef(false)
 
     useEffect(() => {
@@ -114,7 +115,7 @@ function AnimatedCounter({ target, suffix = '' }: { target: string; suffix?: str
             setDisplay(target)
             return
         }
-        const prefix = target.startsWith('₹') ? '₹' : target.startsWith('$') ? '$' : ''
+        const prefix = target.startsWith('₹') ? '₹' : ''
         let start = 0
         const duration = 1000
         const step = 16
@@ -233,7 +234,7 @@ export default function LandingPage() {
     const renderContent = () => {
         switch (activeItem) {
             case 'MAP':
-                return <MapSection />
+                return <AcademicRadar />
 
             case 'CHARACTER':
                 return <CharacterSection />
@@ -906,8 +907,8 @@ export default function LandingPage() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            fontFamily: 'Share Tech Mono, monospace',
-                            fontSize: '0.95rem',
+                            fontFamily: 'Pricedown, "Share Tech Mono", monospace',
+                            fontSize: '1.25rem',
                             color: '#ffffff',
                             flexShrink: 0,
                         }}
@@ -950,8 +951,8 @@ export default function LandingPage() {
                     <div style={{ textAlign: 'right' }}>
                         <div
                             style={{
-                                fontFamily: 'Share Tech Mono, monospace',
-                                fontSize: '1.15rem',
+                                fontFamily: 'Pricedown, "Share Tech Mono", monospace',
+                                fontSize: '1.35rem',
                                 color: '#66CC66',
                                 letterSpacing: '0.04em',
                                 lineHeight: 1.1,
@@ -970,7 +971,7 @@ export default function LandingPage() {
                             className="hidden sm:block"
                         >
                             BANK:{' '}
-                            <span style={{ color: 'rgba(255,255,255,0.55)' }}>
+                            <span style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Pricedown, "Share Tech Mono", monospace', fontSize: '0.85rem' }}>
                                 {mounted ? <AnimatedCounter target={USER_DATA.bank} /> : USER_DATA.bank}
                             </span>
                         </div>
@@ -996,9 +997,8 @@ export default function LandingPage() {
                         onClick={toggleAmbience}
                         style={{
                             background: 'transparent',
-                            border: `1px solid ${
-                                ambienceMuted ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.3)'
-                            }`,
+                            border: `1px solid ${ambienceMuted ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.3)'
+                                }`,
                             color: ambienceMuted ? 'rgba(255,255,255,0.3)' : '#ffffff',
                             padding: '4px 12px',
                             cursor: 'pointer',

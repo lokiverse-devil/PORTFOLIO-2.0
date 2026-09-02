@@ -87,7 +87,7 @@ __turbopack_context__.v((parentImport) => {
 
 __turbopack_context__.v((parentImport) => {
     return Promise.all([
-  "static/chunks/components_14tx82m._.js",
+  "static/chunks/components_0iz0u5a._.js",
   "static/chunks/node_modules_gsap_04cg7u0._.js",
   "static/chunks/components_LandingPage_tsx_19k9-ht._.js"
 ].map((chunk) => __turbopack_context__.l(chunk))).then(() => {

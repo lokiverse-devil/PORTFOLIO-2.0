@@ -1735,7 +1735,7 @@ const USER_DATA = {
                 'WEBSOCKETS',
                 'JAVASCRIPT'
             ],
-            link: 'https://github.com/lokiverse-devil',
+            link: 'https://github.com/lokiverse-devil/VibeChat',
             status: 'COMPLETED',
             opNum: '01'
         },
@@ -1749,7 +1749,7 @@ const USER_DATA = {
                 'SUPABASE',
                 'NEXT.JS'
             ],
-            link: 'https://github.com/lokiverse-devil',
+            link: 'https://github.com/lokiverse-devil/HtrackX-Smart-Hostel-Management-System-',
             status: 'COMPLETED',
             opNum: '02'
         },
@@ -1763,12 +1763,12 @@ const USER_DATA = {
                 'EMBEDDED',
                 'WEB PORTALS'
             ],
-            link: 'https://github.com/lokiverse-devil',
+            link: 'https://github.com/lokiverse-devil/SmartClassX_Final',
             status: 'COMPLETED',
             opNum: '03'
         },
         {
-            title: 'AIMS',
+            title: 'AIMS - ACADEMIC INFRASTRUCTURE & MANAGEMENT SYSTEM',
             category: 'CAMPUS ASSET SUITE',
             desc: 'An infrastructure and asset tracking platform helping colleges manage lab inventory and staff requests.',
             tags: [
@@ -1892,7 +1892,7 @@ const MENU_ITEMS = [
 // Animated cash counter
 function AnimatedCounter({ target, suffix = '' }) {
     _s();
-    const [display, setDisplay] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('₹0');
+    const [display, setDisplay] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('$0');
     const hasAnimated = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AnimatedCounter.useEffect": ()=>{
@@ -1904,7 +1904,7 @@ function AnimatedCounter({ target, suffix = '' }) {
                 setDisplay(target);
                 return;
             }
-            const prefix = target.startsWith('₹') ? '₹' : target.startsWith('$') ? '$' : '';
+            const prefix = target.startsWith('₹') ? '₹' : '';
             let start = 0;
             const duration = 1000;
             const step = 16;
@@ -1932,7 +1932,7 @@ function AnimatedCounter({ target, suffix = '' }) {
         children: display
     }, void 0, false);
 }
-_s(AnimatedCounter, "d6CZpIDdqkzx4pXc11G+rLVZbaM=");
+_s(AnimatedCounter, "gyArr6nnlj00i4KkGbK8W1eqowA=");
 _c = AnimatedCounter;
 // Subtle pure white wanted stars HUD
 function WantedStarsHUD() {
@@ -3231,7 +3231,7 @@ function LandingPage() {
                                         children: item.label
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1069,
+                                        lineNumber: 1068,
                                         columnNumber: 33
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3244,19 +3244,19 @@ function LandingPage() {
                                         children: item.shortcut
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1070,
+                                        lineNumber: 1069,
                                         columnNumber: 33
                                     }, this)
                                 ]
                             }, item.key, true, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1048,
+                                lineNumber: 1047,
                                 columnNumber: 29
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 1031,
+                        lineNumber: 1030,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3274,13 +3274,13 @@ function LandingPage() {
                         children: renderContent()
                     }, void 0, false, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 1086,
+                        lineNumber: 1085,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LandingPage.tsx",
-                lineNumber: 1018,
+                lineNumber: 1017,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -3315,7 +3315,7 @@ function LandingPage() {
                                 children: "[KEYS 1-5: TABS]"
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1126,
+                                lineNumber: 1125,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3323,13 +3323,13 @@ function LandingPage() {
                                 children: "[SELECT ITEMS TO INSPECT]"
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1127,
+                                lineNumber: 1126,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 1125,
+                        lineNumber: 1124,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3355,7 +3355,7 @@ function LandingPage() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1132,
+                                        lineNumber: 1131,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3366,13 +3366,13 @@ function LandingPage() {
                                         children: "ONLINE"
                                     }, void 0, false, {
                                         fileName: "[project]/components/LandingPage.tsx",
-                                        lineNumber: 1140,
+                                        lineNumber: 1139,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1131,
+                                lineNumber: 1130,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3382,26 +3382,26 @@ function LandingPage() {
                                 children: "|"
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1142,
+                                lineNumber: 1141,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: "OM PANDEY // PORTFOLIO"
                             }, void 0, false, {
                                 fileName: "[project]/components/LandingPage.tsx",
-                                lineNumber: 1143,
+                                lineNumber: 1142,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/LandingPage.tsx",
-                        lineNumber: 1130,
+                        lineNumber: 1129,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LandingPage.tsx",
-                lineNumber: 1104,
+                lineNumber: 1103,
                 columnNumber: 13
             }, this)
         ]

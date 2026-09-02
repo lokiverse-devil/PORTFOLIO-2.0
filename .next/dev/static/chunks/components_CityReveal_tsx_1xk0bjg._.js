@@ -126,7 +126,7 @@ function CityReveal({ onComplete }) {
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '4px',
-                    fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                    fontFamily: ',Pricedown, ChaletComprime1960, "Barlow Condensed", sans-serif',
                     textTransform: 'uppercase',
                     textShadow: '0 2px 8px rgba(0,0,0,0.9)'
                 },

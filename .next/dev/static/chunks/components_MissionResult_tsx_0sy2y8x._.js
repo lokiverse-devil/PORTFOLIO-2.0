@@ -210,8 +210,8 @@ function MissionResult({ type, onComplete, sounds }) {
                         ref: headlineRef,
                         className: "mission-headline",
                         style: {
-                            fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
-                            letterSpacing: '0.04em',
+                            fontFamily: 'Pricedown, ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
+                            letterSpacing: '0.06em',
                             textTransform: 'uppercase',
                             color: cfg.color,
                             lineHeight: 0.95,
@@ -288,10 +288,10 @@ function MissionResult({ type, onComplete, sounds }) {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
-                                            fontFamily: 'Share Tech Mono, monospace',
-                                            fontSize: '1rem',
+                                            fontFamily: 'Pricedown, "Share Tech Mono", monospace',
+                                            fontSize: '1.25rem',
                                             color: '#4ade80',
-                                            fontWeight: 700
+                                            letterSpacing: '0.05em'
                                         },
                                         children: cfg.rewardText
                                     }, void 0, false, {

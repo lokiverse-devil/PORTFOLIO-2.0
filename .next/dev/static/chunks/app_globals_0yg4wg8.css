@@ -487,26 +487,30 @@ img, video {
   transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
 
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, .2, 1);
+}
+
 @font-face {
   font-family: ChaletLondon1960;
-  src: url("/fonts/ChaletLondon1960.woff2") format("woff2"), local("Chalet London 1960"), local(Bebas Neue), local(Montserrat);
-  font-weight: normal;
+  src: url("/fonts/ChaletLondon1960.woff2") format("woff2"), url("/fonts/ChaletLondon1960.ttf") format("truetype"), url("/fonts/ChaletLondon1960.woff") format("woff"), url("/fonts/ChaletLondon1960.otf") format("opentype"), local("Chalet London 1960"), local(ChaletLondon1960);
+  font-weight: 500 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: ChaletComprime1960;
-  src: url("/fonts/ChaletComprime1960.woff2") format("woff2"), local("Chalet Comprime 1960"), local(Barlow Condensed), local(Arial Narrow);
-  font-weight: normal;
+  src: url("/fonts/ChaletComprime1960.ttf") format("truetype"), url("/fonts/ChaletComprime1960.woff2") format("woff2"), url("/fonts/ChaletComprime1960.woff") format("woff"), url("/fonts/ChaletComprime1960.otf") format("opentype"), local("Chalet Comprime 1960"), local(ChaletComprime1960), local("Chalet Comprimé 1960");
+  font-weight: 500 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: Pricedown;
-  src: url("/fonts/Pricedown.woff2") format("woff2"), local(Pricedown), local(Russo One), local(Bebas Neue);
-  font-weight: normal;
+  src: url("/fonts/Pricedown.otf") format("opentype"), url("/fonts/Pricedown.ttf") format("truetype"), url("/fonts/Pricedown.woff2") format("woff2"), local(Pricedown);
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }

@@ -174,8 +174,8 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
                     ref={headlineRef}
                     className="mission-headline"
                     style={{
-                        fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
-                        letterSpacing: '0.04em',
+                        fontFamily: 'Pricedown, ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
+                        letterSpacing: '0.06em',
                         textTransform: 'uppercase',
                         color: cfg.color,
                         lineHeight: 0.95,
@@ -231,7 +231,7 @@ export default function MissionResult({ type, onComplete, sounds }: MissionResul
                             <div style={{ fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em' }}>
                                 PAYOUT
                             </div>
-                            <div style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '1rem', color: '#4ade80', fontWeight: 700 }}>
+                            <div style={{ fontFamily: 'Pricedown, "Share Tech Mono", monospace', fontSize: '1.25rem', color: '#4ade80', letterSpacing: '0.05em' }}>
                                 {cfg.rewardText}
                             </div>
                         </div>

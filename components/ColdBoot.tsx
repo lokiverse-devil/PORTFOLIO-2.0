@@ -90,9 +90,9 @@ export default function ColdBoot({ onComplete }: ColdBootProps) {
 
                     <h1
                         style={{
-                            fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
-                            fontSize: 'clamp(2rem, 5vw, 3.4rem)',
-                            letterSpacing: '0.14em',
+                            fontFamily: 'Pricedown, ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
+                            fontSize: 'clamp(2.4rem, 6vw, 4rem)',
+                            letterSpacing: '0.08em',
                             color: '#ffffff',
                             textTransform: 'uppercase',
                             margin: 0,

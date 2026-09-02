@@ -20,11 +20,10 @@ const IMAGES = [
     '/images/loading_3.jpeg'
 ];
 const TIPS = [
-    'OM PANDEY // FULL STACK DEVELOPER & AI ENGINEER',
-    'CORE STACK: C++, JAVA, TYPESCRIPT, NEXT.JS, POSTGRESQL & SUPABASE',
+    'THE MAP IS INTRACTIVE: CLICK ON THE LOACTIONS TO VIEW',
+    'CHARACTER ABILITES ARE INTERACTABLE',
     'EXPLORE VIBECHAT, HTRACX & SMARTCLASS X IN THE OPERATIONS TAB',
     'USE THE RADAR MAP TO VIEW ACADEMIC MILESTONES & CREDENTIALS',
-    'EXPERIENCED WITH GEMINI AI TOOLS AND MODEL CONTEXT PROTOCOL (MCP)',
     'PRESS KEYS 1 TO 5 ON THE DASHBOARD TO SWITCH TABS ANYTIME'
 ];
 function LoadingFlow({ onComplete, sounds }) {
@@ -192,7 +191,7 @@ function LoadingFlow({ onComplete, sounds }) {
                 className: "heavy-vignette"
             }, void 0, false, {
                 fileName: "[project]/components/LoadingFlow.tsx",
-                lineNumber: 157,
+                lineNumber: 156,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -215,7 +214,7 @@ function LoadingFlow({ onComplete, sounds }) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 171,
+                        lineNumber: 170,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -229,13 +228,13 @@ function LoadingFlow({ onComplete, sounds }) {
                         children: "INITIALIZING // PORTFOLIO"
                     }, void 0, false, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 179,
+                        lineNumber: 178,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LoadingFlow.tsx",
-                lineNumber: 160,
+                lineNumber: 159,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -270,7 +269,7 @@ function LoadingFlow({ onComplete, sounds }) {
                             }
                         }, src, false, {
                             fileName: "[project]/components/LoadingFlow.tsx",
-                            lineNumber: 209,
+                            lineNumber: 208,
                             columnNumber: 21
                         }, this)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -282,13 +281,13 @@ function LoadingFlow({ onComplete, sounds }) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 230,
+                        lineNumber: 229,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LoadingFlow.tsx",
-                lineNumber: 193,
+                lineNumber: 192,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -328,12 +327,12 @@ function LoadingFlow({ onComplete, sounds }) {
                                     children: TIPS[tipIdx]
                                 }, tipIdx, false, {
                                     fileName: "[project]/components/LoadingFlow.tsx",
-                                    lineNumber: 263,
+                                    lineNumber: 262,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/LoadingFlow.tsx",
-                                lineNumber: 262,
+                                lineNumber: 261,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -357,7 +356,7 @@ function LoadingFlow({ onComplete, sounds }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/LoadingFlow.tsx",
-                                        lineNumber: 288,
+                                        lineNumber: 287,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -378,24 +377,24 @@ function LoadingFlow({ onComplete, sounds }) {
                                             strokeDasharray: "26 14"
                                         }, void 0, false, {
                                             fileName: "[project]/components/LoadingFlow.tsx",
-                                            lineNumber: 308,
+                                            lineNumber: 307,
                                             columnNumber: 29
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/LoadingFlow.tsx",
-                                        lineNumber: 298,
+                                        lineNumber: 297,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/LoadingFlow.tsx",
-                                lineNumber: 280,
+                                lineNumber: 279,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 254,
+                        lineNumber: 253,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -416,24 +415,24 @@ function LoadingFlow({ onComplete, sounds }) {
                             }
                         }, void 0, false, {
                             fileName: "[project]/components/LoadingFlow.tsx",
-                            lineNumber: 323,
+                            lineNumber: 322,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/LoadingFlow.tsx",
-                        lineNumber: 314,
+                        lineNumber: 313,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/LoadingFlow.tsx",
-                lineNumber: 241,
+                lineNumber: 240,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/LoadingFlow.tsx",
-        lineNumber: 141,
+        lineNumber: 140,
         columnNumber: 9
     }, this);
 }

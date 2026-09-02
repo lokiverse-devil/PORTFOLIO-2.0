@@ -117,8 +117,8 @@ export default function WarningScreen({ onComplete, sounds }: BasePhaseProps) {
             >
                 <div
                     style={{
-                        fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                        fontSize: '0.85rem',
+                        fontFamily: 'Pricedown, ChaletComprime1960, "Barlow Condensed", sans-serif',
+                        fontSize: '2rem',
                         letterSpacing: '0.35em',
                         color: 'rgba(255, 255, 255, 0.5)',
                         textTransform: 'uppercase',
@@ -160,9 +160,9 @@ export default function WarningScreen({ onComplete, sounds }: BasePhaseProps) {
                             textTransform: 'uppercase',
                             color: '#000000',
                             background: '#ffffff',
-                            padding: '10px 28px',
+                            padding: '9px 25px',
                             display: 'inline-block',
-                            boxShadow: '0 4px 20px rgba(255, 255, 255, 0.2)',
+                            boxShadow: '0 4px 20px rgba(227, 10, 10, 0.2)',
                         }}
                     >
                         PRESS ENTER OR CLICK TO CONTINUE
@@ -175,7 +175,7 @@ export default function WarningScreen({ onComplete, sounds }: BasePhaseProps) {
                 style={{
                     position: 'absolute',
                     inset: 0,
-                    background: '#ffffff',
+                    background: '#be0808a0',
                     opacity: 0,
                     pointerEvents: 'none',
                     zIndex: 200,

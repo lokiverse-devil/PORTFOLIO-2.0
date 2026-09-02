@@ -112,10 +112,10 @@ export default function DecisionPhase({ question = 1, onResult, sounds }: Decisi
             >
                 <p
                     style={{
-                        fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                        fontSize: '0.85rem',
+                        fontFamily: 'Pricedown,ChaletComprime1960, "Barlow Condensed", sans-serif',
+                        fontSize: '1rem',
                         letterSpacing: '0.35em',
-                        color: 'rgba(255, 255, 255, 0.45)',
+                        color: 'rgba(236, 87, 87, 0.7)',
                         textTransform: 'uppercase',
                         marginBottom: '18px',
                     }}
