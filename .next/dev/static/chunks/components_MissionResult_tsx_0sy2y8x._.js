@@ -29,16 +29,42 @@ const CONFIGS = {
         isPassed: true,
         rewardText: '+₹40,000 HEIST SHARE'
     },
+    'passed-robot': {
+        color: '#4ade80',
+        line1: 'MISSION PASSED',
+        line2: 'HUMAN VERIFIED — ACCESS GRANTED',
+        isPassed: true,
+        rewardText: '+₹25,000 VERIFICATION BONUS'
+    },
+    'passed-gained-life': {
+        color: '#4ade80',
+        line1: 'MISSION PASSED',
+        line2: '+1 LIFE RESTORED — WELCOME OPERATOR',
+        isPassed: true,
+        rewardText: '+1 EXTRA LIFE // +₹50,000 REDEMPTION SHARE'
+    },
     'failed-denied': {
         color: '#ef4444',
         line1: 'MISSION FAILED',
-        line2: 'ACCESS DENIED — RETRYING...',
+        line2: 'ACCESS DENIED — PROCEEDING TO QUERY 02',
         isPassed: false
     },
-    'failed-redirect': {
+    'failed-life-lost': {
+        color: '#f59e0b',
+        line1: '-1 LIFE DEDUCTED',
+        line2: 'CRITICAL WARNING: 1 LIFE REMAINING // SECONDARY PROTOCOL ENGAGED',
+        isPassed: false
+    },
+    'failed-robot': {
         color: '#ef4444',
-        line1: 'MISSION FAILED',
-        line2: 'REDIRECTING TO BRIEFING...',
+        line1: 'ACCESS DENIED',
+        line2: 'ROBOT DETECTED — FINAL VERIFICATION REQUIRED',
+        isPassed: false
+    },
+    'failed-debarred': {
+        color: '#dc2626',
+        line1: 'DEBARRED',
+        line2: 'YOU ARE GETTING DEBARRED // ALL LIVES EXHAUSTED',
         isPassed: false
     }
 };
@@ -51,12 +77,44 @@ function MissionResult({ type, onComplete, sounds }) {
     const lineRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const statsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const completedRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
+    const [countdown, setCountdown] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(5);
+    const isDebarred = type === 'failed-debarred';
     const cfg = type && CONFIGS[type] || CONFIGS['passed-access'];
     const triggerComplete = ()=>{
         if (completedRef.current) return;
         completedRef.current = true;
         onComplete();
     };
+    // Debarred countdown and redirect logic
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "MissionResult.useEffect": ()=>{
+            if (!isDebarred) return;
+            const redirectUrl = 'https://www.youtube.com/watch?v=2yJgwwDcgV8&list=RD2yJgwwDcgV8&start_radio=1';
+            const timer = setInterval({
+                "MissionResult.useEffect.timer": ()=>{
+                    setCountdown({
+                        "MissionResult.useEffect.timer": (prev)=>{
+                            if (prev <= 1) {
+                                clearInterval(timer);
+                                try {
+                                    window.location.href = redirectUrl;
+                                } catch (e) {
+                                    console.error('Redirect failed:', e);
+                                }
+                                return 0;
+                            }
+                            return prev - 1;
+                        }
+                    }["MissionResult.useEffect.timer"]);
+                }
+            }["MissionResult.useEffect.timer"], 1000);
+            return ({
+                "MissionResult.useEffect": ()=>clearInterval(timer)
+            })["MissionResult.useEffect"];
+        }
+    }["MissionResult.useEffect"], [
+        isDebarred
+    ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "MissionResult.useEffect": ()=>{
             try {
@@ -64,19 +122,29 @@ function MissionResult({ type, onComplete, sounds }) {
                     if (cfg.isPassed) {
                         sounds.passed?.play();
                     } else {
-                        sounds.failed?.play();
+                        if (isDebarred) {
+                            sounds.failed?.volume(0.25);
+                            sounds.failed?.play();
+                            if (sounds.laugh) {
+                                sounds.laugh.volume(1.0);
+                                sounds.laugh.play();
+                            }
+                        } else {
+                            sounds.failed?.volume(0.4);
+                            sounds.failed?.play();
+                        }
                     }
                 }
             } catch (e) {
                 console.warn('Audio notice in mission result:', e);
             }
             const tl = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].timeline({
-                onComplete: triggerComplete
+                onComplete: isDebarred ? undefined : triggerComplete
             });
             // Initial flash
             if (flashRef.current) {
                 tl.fromTo(flashRef.current, {
-                    opacity: 0.7,
+                    opacity: 0.75,
                     backgroundColor: cfg.color
                 }, {
                     opacity: 0,
@@ -87,7 +155,7 @@ function MissionResult({ type, onComplete, sounds }) {
             // Background dim
             if (overlayRef.current) {
                 tl.to(overlayRef.current, {
-                    backgroundColor: 'rgba(5, 5, 8, 0.95)',
+                    backgroundColor: 'rgba(5, 5, 8, 0.96)',
                     duration: 0.25
                 }, '-=0.25');
             }
@@ -139,15 +207,19 @@ function MissionResult({ type, onComplete, sounds }) {
                     ease: 'power2.out'
                 }, '-=0.1');
             }
-            tl.to({}, {
-                duration: 2.2
-            }); // Hold duration
-            if (overlayRef.current) {
-                tl.to(overlayRef.current, {
-                    opacity: 0,
-                    duration: 0.45,
-                    ease: 'power2.inOut'
-                });
+            if (!isDebarred) {
+                // For life lost, hold slightly longer to let user read the warning
+                const holdTime = type === 'failed-life-lost' ? 2.6 : 2.2;
+                tl.to({}, {
+                    duration: holdTime
+                }); // Hold duration
+                if (overlayRef.current) {
+                    tl.to(overlayRef.current, {
+                        opacity: 0,
+                        duration: 0.45,
+                        ease: 'power2.inOut'
+                    });
+                }
             }
             return ({
                 "MissionResult.useEffect": ()=>{
@@ -158,11 +230,17 @@ function MissionResult({ type, onComplete, sounds }) {
                     if (subtitleRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(subtitleRef.current);
                     if (lineRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(lineRef.current);
                     if (statsRef.current) __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].killTweensOf(statsRef.current);
+                    if (isDebarred && sounds?.laugh) {
+                        try {
+                            sounds.laugh.stop();
+                        } catch (_) {}
+                    }
                 }
             })["MissionResult.useEffect"];
         }
     }["MissionResult.useEffect"], [
-        cfg
+        cfg,
+        isDebarred
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: overlayRef,
@@ -188,14 +266,14 @@ function MissionResult({ type, onComplete, sounds }) {
                 }
             }, void 0, false, {
                 fileName: "[project]/components/MissionResult.tsx",
-                lineNumber: 161,
+                lineNumber: 240,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "heavy-vignette"
             }, void 0, false, {
                 fileName: "[project]/components/MissionResult.tsx",
-                lineNumber: 170,
+                lineNumber: 249,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -203,7 +281,8 @@ function MissionResult({ type, onComplete, sounds }) {
                     textAlign: 'center',
                     zIndex: 9002,
                     padding: '0 20px',
-                    maxWidth: '900px'
+                    maxWidth: isDebarred ? '750px' : '900px',
+                    width: '100%'
                 },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -216,12 +295,13 @@ function MissionResult({ type, onComplete, sounds }) {
                             color: cfg.color,
                             lineHeight: 0.95,
                             textShadow: `0 4px 30px rgba(0,0,0,0.95), 0 0 50px ${cfg.color}66`,
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            fontSize: isDebarred ? 'clamp(3rem, 7vw, 5.5rem)' : undefined
                         },
                         children: cfg.line1
                     }, void 0, false, {
                         fileName: "[project]/components/MissionResult.tsx",
-                        lineNumber: 173,
+                        lineNumber: 260,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -236,7 +316,7 @@ function MissionResult({ type, onComplete, sounds }) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/components/MissionResult.tsx",
-                        lineNumber: 189,
+                        lineNumber: 277,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -244,17 +324,147 @@ function MissionResult({ type, onComplete, sounds }) {
                         className: "mission-subtitle",
                         style: {
                             fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
-                            letterSpacing: '0.45em',
+                            letterSpacing: '0.35em',
                             textTransform: 'uppercase',
                             color: '#ffffff',
                             opacity: 0,
-                            textShadow: '0 2px 10px rgba(0,0,0,0.9)'
+                            textShadow: '0 2px 10px rgba(0,0,0,0.9)',
+                            fontSize: 'clamp(0.9rem, 2vw, 1.2rem)'
                         },
                         children: cfg.line2
                     }, void 0, false, {
                         fileName: "[project]/components/MissionResult.tsx",
-                        lineNumber: 201,
+                        lineNumber: 289,
                         columnNumber: 17
+                    }, this),
+                    isDebarred && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            marginTop: '36px',
+                            padding: '24px 32px',
+                            background: 'rgba(20, 10, 12, 0.88)',
+                            border: '1px solid rgba(220, 38, 38, 0.4)',
+                            boxShadow: '0 0 35px rgba(220, 38, 38, 0.25)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: '16px'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                                    fontSize: '0.85rem',
+                                    color: 'rgba(255, 255, 255, 0.7)',
+                                    letterSpacing: '0.25em',
+                                    textTransform: 'uppercase'
+                                },
+                                children: "ACCESS REVOKED // YOU AIN'T GETTING IN NOW"
+                            }, void 0, false, {
+                                fileName: "[project]/components/MissionResult.tsx",
+                                lineNumber: 320,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
+                                    fontSize: 'clamp(1.4rem, 3.2vw, 2.2rem)',
+                                    color: '#ffffff',
+                                    letterSpacing: '0.08em',
+                                    textTransform: 'uppercase'
+                                },
+                                children: [
+                                    "GO WATCH NYAN KITTY IN:",
+                                    ' ',
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            fontFamily: 'Pricedown, monospace',
+                                            color: '#ef4444',
+                                            fontSize: 'clamp(2rem, 4.5vw, 3rem)',
+                                            display: 'inline-block',
+                                            minWidth: '40px',
+                                            marginLeft: '8px',
+                                            textShadow: '0 0 15px rgba(239, 68, 68, 0.8)'
+                                        },
+                                        children: countdown
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/MissionResult.tsx",
+                                        lineNumber: 342,
+                                        columnNumber: 29
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/MissionResult.tsx",
+                                lineNumber: 332,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    display: 'flex',
+                                    gap: '10px',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                },
+                                children: [
+                                    5,
+                                    4,
+                                    3,
+                                    2,
+                                    1
+                                ].map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            width: '28px',
+                                            height: '28px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontFamily: 'Pricedown, monospace',
+                                            fontSize: '0.9rem',
+                                            borderRadius: '3px',
+                                            background: countdown <= s ? 'rgba(220, 38, 38, 0.3)' : 'rgba(255, 255, 255, 0.05)',
+                                            border: countdown === s ? '1px solid #ef4444' : '1px solid rgba(255, 255, 255, 0.1)',
+                                            color: countdown <= s ? '#ef4444' : 'rgba(255, 255, 255, 0.3)',
+                                            boxShadow: countdown === s ? '0 0 12px rgba(239, 68, 68, 0.6)' : 'none',
+                                            transform: countdown === s ? 'scale(1.15)' : 'scale(1)',
+                                            transition: 'all 0.2s ease'
+                                        },
+                                        children: s
+                                    }, s, false, {
+                                        fileName: "[project]/components/MissionResult.tsx",
+                                        lineNumber: 366,
+                                        columnNumber: 33
+                                    }, this))
+                            }, void 0, false, {
+                                fileName: "[project]/components/MissionResult.tsx",
+                                lineNumber: 357,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                href: "https://www.youtube.com/watch?v=2yJgwwDcgV8&list=RD2yJgwwDcgV8&start_radio=1",
+                                target: "_self",
+                                rel: "noopener noreferrer",
+                                style: {
+                                    marginTop: '8px',
+                                    fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                                    fontSize: '0.8rem',
+                                    color: 'rgba(255, 255, 255, 0.5)',
+                                    letterSpacing: '0.2em',
+                                    textDecoration: 'underline',
+                                    cursor: 'pointer',
+                                    transition: 'color 0.2s ease'
+                                },
+                                onMouseEnter: (e)=>e.currentTarget.style.color = '#ef4444',
+                                onMouseLeave: (e)=>e.currentTarget.style.color = 'rgba(255, 255, 255, 0.5)',
+                                children: "[ CLICK HERE IF NOT AUTOMATICALLY REDIRECTED ]"
+                            }, void 0, false, {
+                                fileName: "[project]/components/MissionResult.tsx",
+                                lineNumber: 397,
+                                columnNumber: 25
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/MissionResult.tsx",
+                        lineNumber: 307,
+                        columnNumber: 21
                     }, this),
                     cfg.isPassed && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         ref: statsRef,
@@ -283,7 +493,7 @@ function MissionResult({ type, onComplete, sounds }) {
                                         children: "PAYOUT"
                                     }, void 0, false, {
                                         fileName: "[project]/components/MissionResult.tsx",
-                                        lineNumber: 231,
+                                        lineNumber: 434,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -296,13 +506,13 @@ function MissionResult({ type, onComplete, sounds }) {
                                         children: cfg.rewardText
                                     }, void 0, false, {
                                         fileName: "[project]/components/MissionResult.tsx",
-                                        lineNumber: 234,
+                                        lineNumber: 444,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/MissionResult.tsx",
-                                lineNumber: 230,
+                                lineNumber: 433,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -312,7 +522,7 @@ function MissionResult({ type, onComplete, sounds }) {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/MissionResult.tsx",
-                                lineNumber: 239,
+                                lineNumber: 456,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -330,7 +540,7 @@ function MissionResult({ type, onComplete, sounds }) {
                                         children: "STATUS"
                                     }, void 0, false, {
                                         fileName: "[project]/components/MissionResult.tsx",
-                                        lineNumber: 242,
+                                        lineNumber: 459,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -343,35 +553,35 @@ function MissionResult({ type, onComplete, sounds }) {
                                         children: "GOLD MEDAL ★★★"
                                     }, void 0, false, {
                                         fileName: "[project]/components/MissionResult.tsx",
-                                        lineNumber: 245,
+                                        lineNumber: 469,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/MissionResult.tsx",
-                                lineNumber: 241,
+                                lineNumber: 458,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/MissionResult.tsx",
-                        lineNumber: 218,
+                        lineNumber: 421,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/MissionResult.tsx",
-                lineNumber: 172,
+                lineNumber: 251,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/MissionResult.tsx",
-        lineNumber: 147,
+        lineNumber: 226,
         columnNumber: 9
     }, this);
 }
-_s(MissionResult, "kyBvt6DBLXYWmxtAh3LTCh21M24=");
+_s(MissionResult, "I33PBF/wlX6p59mdDzuFoBnZyYs=");
 _c = MissionResult;
 var _c;
 __turbopack_context__.k.register(_c, "MissionResult");

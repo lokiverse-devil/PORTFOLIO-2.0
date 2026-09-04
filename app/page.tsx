@@ -15,21 +15,29 @@ const LandingPage = dynamic(() => import('@/components/LandingPage'), { ssr: fal
 export default function Home() {
     const [phase, setPhase] = useState<Phase>('COLD_BOOT')
     const [resultType, setResultType] = useState<ResultType | null>(null)
+    const [lives, setLives] = useState<number>(2)
     const soundsRef = useRef<SoundEffects | null>(null)
 
     useEffect(() => {
         let isMounted = true
-        import('howler').then(({ Howl }) => {
-            if (!isMounted) return
-            soundsRef.current = {
-                siren: new Howl({ src: ['/sounds/siren_loop.mp3'], volume: 0.5 }),
-                ambience: new Howl({ src: ['/sounds/loading_ambience.mp3'], loop: true, volume: 0.45 }),
-                passed: new Howl({ src: ['/sounds/mission_passed.mp3'], volume: 1.0 }),
-                failed: new Howl({ src: ['/sounds/mission_failed.mp3'], volume: 1.0 }),
-            }
-        }).catch((err) => {
-            console.warn('Howler load notice:', err)
-        })
+        import('howler')
+            .then(({ Howl }) => {
+                if (!isMounted) return
+                soundsRef.current = {
+                    siren: new Howl({ src: ['/sounds/siren_loop.mp3'], volume: 0.5 }),
+                    ambience: new Howl({
+                        src: ['/sounds/loading_ambience.mp3'],
+                        loop: true,
+                        volume: 0.45,
+                    }),
+                    passed: new Howl({ src: ['/sounds/mission_passed.mp3'], volume: 1.0 }),
+                    failed: new Howl({ src: ['/sounds/mission_failed.mp3'], volume: 0.5 }),
+                    laugh: new Howl({ src: ['/sounds/laugh.mp3'], volume: 1.0 }),
+                }
+            })
+            .catch((err) => {
+                console.warn('Howler load notice:', err)
+            })
 
         return () => {
             isMounted = false
@@ -45,10 +53,23 @@ export default function Home() {
 
     const handleDecisionResult = (type: ResultType) => {
         setResultType(type)
+
         if (type.startsWith('passed')) {
+            if (type === 'passed-gained-life') {
+                setLives(2)
+            }
             setPhase('RESULT_PASS')
-        } else {
-            setPhase(type === 'failed-denied' ? 'RESULT_FAIL_Q1' : 'RESULT_FAIL_Q2')
+        } else if (type === 'failed-denied') {
+            setPhase('RESULT_FAIL_Q1')
+        } else if (type === 'failed-life-lost') {
+            // Deduct 1 life: lives drop from 2 -> 1
+            setLives(1)
+            setPhase('RESULT_FAIL_Q2')
+        } else if (type === 'failed-robot') {
+            setPhase('RESULT_FAIL_Q3')
+        } else if (type === 'failed-debarred') {
+            setLives(0)
+            setPhase('RESULT_DEBARRED')
         }
     }
 
@@ -58,7 +79,15 @@ export default function Home() {
         } else if (phase === 'RESULT_FAIL_Q1') {
             setPhase('Q2')
         } else if (phase === 'RESULT_FAIL_Q2') {
-            setPhase('LOADING')
+            // Secondary Protocol begins with Question 3
+            setPhase('Q3')
+        } else if (phase === 'RESULT_FAIL_Q3') {
+            setPhase('Q4')
+        } else if (phase === 'RESULT_DEBARRED') {
+            try {
+                window.location.href =
+                    'https://www.youtube.com/watch?v=2yJgwwDcgV8&list=RD2yJgwwDcgV8&start_radio=1'
+            } catch (_) {}
         }
     }
 
@@ -108,6 +137,7 @@ export default function Home() {
             {phase === 'DECISION' && (
                 <DecisionPhase
                     question={1}
+                    lives={lives}
                     sounds={soundsRef.current}
                     onResult={handleDecisionResult}
                 />
@@ -116,6 +146,25 @@ export default function Home() {
             {phase === 'Q2' && (
                 <DecisionPhase
                     question={2}
+                    lives={lives}
+                    sounds={soundsRef.current}
+                    onResult={handleDecisionResult}
+                />
+            )}
+
+            {phase === 'Q3' && (
+                <DecisionPhase
+                    question={3}
+                    lives={lives}
+                    sounds={soundsRef.current}
+                    onResult={handleDecisionResult}
+                />
+            )}
+
+            {phase === 'Q4' && (
+                <DecisionPhase
+                    question={4}
+                    lives={lives}
                     sounds={soundsRef.current}
                     onResult={handleDecisionResult}
                 />
@@ -124,6 +173,7 @@ export default function Home() {
             {phase.startsWith('RESULT') && (
                 <MissionResult
                     type={resultType}
+                    lives={lives}
                     sounds={soundsRef.current}
                     onComplete={handleResultComplete}
                 />

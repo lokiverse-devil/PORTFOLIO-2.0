@@ -1247,7 +1247,7 @@ const CHARACTER_STATS = [
             'Technical Adaptability'
         ],
         projectProof: 'Built complex Next.js, IoT, and AI agent architectures with rapid turnaround.',
-        color: '#ffffff'
+        color: '#b42222ff'
     },
     {
         id: 'programming',
@@ -1264,7 +1264,7 @@ const CHARACTER_STATS = [
             'Data Structures & Algorithms'
         ],
         projectProof: 'Developed core systems, academic algorithms, and backend utilities during Diploma and B.Tech.',
-        color: '#cbd5e1'
+        color: '#094690ff'
     },
     {
         id: 'fullstack',
@@ -1282,7 +1282,7 @@ const CHARACTER_STATS = [
             'WebSockets',
             'REST APIs'
         ],
-        projectProof: 'Created VibeChat (real-time chat) and HTRACX (hostel management portal).',
+        projectProof: 'Created VibeChat (real-time chat), HTRACX (hostel management portal) and AIMS (Academic Infrastructure and management system).',
         color: '#66CC66'
     },
     {
@@ -1301,7 +1301,7 @@ const CHARACTER_STATS = [
             'Indexing'
         ],
         projectProof: 'Architected multi-table relational databases and automated integrity rules for AIMS and HTRACX.',
-        color: '#94a3b8'
+        color: '#a59805ff'
     },
     {
         id: 'iot',
@@ -1319,7 +1319,7 @@ const CHARACTER_STATS = [
             'Hardware-to-Cloud Sync'
         ],
         projectProof: 'Built SmartClass X to automate classroom lights, fans, and attendance tracking.',
-        color: '#a1a1aa'
+        color: '#05059bff'
     },
     {
         id: 'ai_mcp',
@@ -1337,14 +1337,14 @@ const CHARACTER_STATS = [
             'Structured JSON Output'
         ],
         projectProof: 'Implemented custom MCP servers and autonomous agent tool workflows for developer tools.',
-        color: '#e2e8f0'
+        color: '#78067cff'
     },
     {
         id: 'leadership',
         name: 'LEADERSHIP & MANAGEMENT',
         gameAlias: 'DRIVING // TEAM LEAD',
-        level: 92,
-        levelStr: '92%',
+        level: 99,
+        levelStr: '99%',
         category: 'MANAGEMENT',
         summary: 'Leading development teams, planning sprints, coordinating development, and presenting clear working prototypes to audiences.',
         skillsList: [
@@ -1518,7 +1518,7 @@ function CharacterSection() {
                                             color: '#fff',
                                             textTransform: 'uppercase'
                                         },
-                                        children: "CHARACTER DOSSIER // SKILLS & CAPABILITIES"
+                                        children: "SKILLS & CAPABILITIES"
                                     }, void 0, false, {
                                         fileName: "[project]/components/CharacterSection.tsx",
                                         lineNumber: 262,
@@ -2184,77 +2184,77 @@ const USER_DATA = {
             proficiency: '94%',
             profNum: 94,
             category: 'CORE',
-            color: '#ffffff'
+            color: '#cc0000ff'
         },
         {
             name: 'JAVA & OOP',
             proficiency: '90%',
             profNum: 90,
             category: 'CORE',
-            color: '#cbd5e1'
+            color: '#024aa2ff'
         },
         {
             name: 'DATA STRUCTURES & ALGORITHMS',
             proficiency: '92%',
             profNum: 92,
             category: 'CORE',
-            color: '#e2e8f0'
+            color: '#24c110ff'
         },
         {
             name: 'NEXT.JS',
             proficiency: '95%',
             profNum: 95,
             category: 'FRONTEND',
-            color: '#66CC66'
+            color: '#a88404ff'
         },
         {
             name: 'TYPESCRIPT',
             proficiency: '92%',
             profNum: 92,
             category: 'FRONTEND',
-            color: '#66CC66'
+            color: '#009a9dff'
         },
         {
             name: 'SQL & POSTGRESQL',
             proficiency: '92%',
             profNum: 92,
             category: 'DATABASE',
-            color: '#94a3b8'
+            color: '#2a0489ff'
         },
         {
             name: 'SUPABASE & BACKEND',
             proficiency: '90%',
             profNum: 90,
             category: 'DATABASE',
-            color: '#94a3b8'
+            color: '#9a0485ff'
         },
         {
             name: 'MODEL CONTEXT PROTOCOL (MCP)',
             proficiency: '95%',
             profNum: 95,
             category: 'AI TECH',
-            color: '#ffffff'
+            color: '#8e9100ff'
         },
         {
             name: 'USING AI MODELS',
             proficiency: '94%',
             profNum: 94,
             category: 'AI TECH',
-            color: '#cbd5e1'
+            color: '#003ea9ff'
         },
         {
             name: 'IOT & EMBEDDED SYSTEMS',
             proficiency: '88%',
             profNum: 88,
             category: 'HARDWARE',
-            color: '#a1a1aa'
+            color: '#04748dff'
         },
         {
             name: 'TEAM LEADERSHIP & DEMOS',
             proficiency: '92%',
             profNum: 92,
             category: 'LEADERSHIP',
-            color: '#4ade80'
+            color: '#a60404ff'
         }
     ]
 };
@@ -2497,7 +2497,7 @@ function LandingPage() {
                                                     style: {
                                                         width: '3px',
                                                         height: '14px',
-                                                        background: '#ffffff'
+                                                        background: '#ffffffff'
                                                     }
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/LandingPage.tsx",
@@ -2509,7 +2509,7 @@ function LandingPage() {
                                                         fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
                                                         fontSize: 'clamp(1.1rem, 2vw, 1.45rem)',
                                                         letterSpacing: '0.14em',
-                                                        color: '#fff',
+                                                        color: '#ffffffff',
                                                         textTransform: 'uppercase'
                                                     },
                                                     children: "OPERATIONS // COMPLETED PROJECTS"
@@ -2528,7 +2528,7 @@ function LandingPage() {
                                             style: {
                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                 fontSize: '0.78rem',
-                                                color: 'rgba(255,255,255,0.45)',
+                                                color: 'rgba(250, 250, 250, 0.45)',
                                                 letterSpacing: '0.22em',
                                                 textTransform: 'uppercase',
                                                 marginTop: '3px'
@@ -2549,9 +2549,9 @@ function LandingPage() {
                                     style: {
                                         fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                         fontSize: '0.72rem',
-                                        color: '#66CC66',
-                                        background: 'rgba(102,204,102,0.06)',
-                                        border: '1px solid rgba(102,204,102,0.3)',
+                                        color: '#00ed00ff',
+                                        background: 'rgba(0, 0, 0, 0.06)',
+                                        border: '1px solid rgba(124, 204, 102, 0.3)',
                                         padding: '4px 12px',
                                         letterSpacing: '0.2em',
                                         textTransform: 'uppercase',
@@ -2598,7 +2598,7 @@ function LandingPage() {
                                                             style: {
                                                                 fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                                 fontSize: '0.68rem',
-                                                                color: 'rgba(255,255,255,0.4)',
+                                                                color: 'rgba(255, 255, 255, 0.4)',
                                                                 letterSpacing: '0.3em',
                                                                 textTransform: 'uppercase',
                                                                 display: 'block'
@@ -2616,7 +2616,7 @@ function LandingPage() {
                                                             style: {
                                                                 fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
                                                                 fontSize: 'clamp(1.15rem, 2vw, 1.35rem)',
-                                                                color: '#fff',
+                                                                color: '#a1037fff',
                                                                 letterSpacing: '0.08em',
                                                                 textTransform: 'uppercase'
                                                             },
@@ -2816,8 +2816,8 @@ function LandingPage() {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         style: {
                                             fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                            fontSize: '0.72rem',
-                                            color: 'rgba(255,255,255,0.5)',
+                                            fontSize: '1rem',
+                                            color: 'rgba(243, 243, 243, 0.5)',
                                             letterSpacing: '0.2em',
                                             textTransform: 'uppercase'
                                         },
@@ -2853,7 +2853,7 @@ function LandingPage() {
                                                 style: {
                                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                     fontSize: '0.72rem',
-                                                    color: 'rgba(255,255,255,0.8)',
+                                                    color: 'rgba(255, 255, 255, 0.8)',
                                                     letterSpacing: '0.3em',
                                                     textTransform: 'uppercase',
                                                     fontWeight: 700
@@ -2904,7 +2904,7 @@ function LandingPage() {
                                                                 style: {
                                                                     fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
                                                                     fontSize: '0.9rem',
-                                                                    color: '#fff',
+                                                                    color: '#f5efefff',
                                                                     letterSpacing: '0.08em',
                                                                     textTransform: 'uppercase'
                                                                 },

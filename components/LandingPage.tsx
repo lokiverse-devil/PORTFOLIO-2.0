@@ -79,17 +79,17 @@ const USER_DATA: UserData = {
         },
     ],
     arsenal: [
-        { name: 'C / C++', proficiency: '94%', profNum: 94, category: 'CORE', color: '#ffffff' },
-        { name: 'JAVA & OOP', proficiency: '90%', profNum: 90, category: 'CORE', color: '#cbd5e1' },
-        { name: 'DATA STRUCTURES & ALGORITHMS', proficiency: '92%', profNum: 92, category: 'CORE', color: '#e2e8f0' },
-        { name: 'NEXT.JS', proficiency: '95%', profNum: 95, category: 'FRONTEND', color: '#66CC66' },
-        { name: 'TYPESCRIPT', proficiency: '92%', profNum: 92, category: 'FRONTEND', color: '#66CC66' },
-        { name: 'SQL & POSTGRESQL', proficiency: '92%', profNum: 92, category: 'DATABASE', color: '#94a3b8' },
-        { name: 'SUPABASE & BACKEND', proficiency: '90%', profNum: 90, category: 'DATABASE', color: '#94a3b8' },
-        { name: 'MODEL CONTEXT PROTOCOL (MCP)', proficiency: '95%', profNum: 95, category: 'AI TECH', color: '#ffffff' },
-        { name: 'USING AI MODELS', proficiency: '94%', profNum: 94, category: 'AI TECH', color: '#cbd5e1' },
-        { name: 'IOT & EMBEDDED SYSTEMS', proficiency: '88%', profNum: 88, category: 'HARDWARE', color: '#a1a1aa' },
-        { name: 'TEAM LEADERSHIP & DEMOS', proficiency: '92%', profNum: 92, category: 'LEADERSHIP', color: '#4ade80' },
+        { name: 'C / C++', proficiency: '94%', profNum: 94, category: 'CORE', color: '#cc0000ff' },
+        { name: 'JAVA & OOP', proficiency: '90%', profNum: 90, category: 'CORE', color: '#024aa2ff' },
+        { name: 'DATA STRUCTURES & ALGORITHMS', proficiency: '92%', profNum: 92, category: 'CORE', color: '#24c110ff' },
+        { name: 'NEXT.JS', proficiency: '95%', profNum: 95, category: 'FRONTEND', color: '#a88404ff' },
+        { name: 'TYPESCRIPT', proficiency: '92%', profNum: 92, category: 'FRONTEND', color: '#009a9dff' },
+        { name: 'SQL & POSTGRESQL', proficiency: '92%', profNum: 92, category: 'DATABASE', color: '#2a0489ff' },
+        { name: 'SUPABASE & BACKEND', proficiency: '90%', profNum: 90, category: 'DATABASE', color: '#9a0485ff' },
+        { name: 'MODEL CONTEXT PROTOCOL (MCP)', proficiency: '95%', profNum: 95, category: 'AI TECH', color: '#8e9100ff' },
+        { name: 'USING AI MODELS', proficiency: '94%', profNum: 94, category: 'AI TECH', color: '#003ea9ff' },
+        { name: 'IOT & EMBEDDED SYSTEMS', proficiency: '88%', profNum: 88, category: 'HARDWARE', color: '#04748dff' },
+        { name: 'TEAM LEADERSHIP & DEMOS', proficiency: '92%', profNum: 92, category: 'LEADERSHIP', color: '#a60404ff' },
     ],
 }
 
@@ -253,7 +253,7 @@ export default function LandingPage() {
                                         style={{
                                             width: '3px',
                                             height: '14px',
-                                            background: '#ffffff',
+                                            background: '#ffffffff',
                                         }}
                                     />
                                     <h3
@@ -261,7 +261,7 @@ export default function LandingPage() {
                                             fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
                                             fontSize: 'clamp(1.1rem, 2vw, 1.45rem)',
                                             letterSpacing: '0.14em',
-                                            color: '#fff',
+                                            color: '#ffffffff',
                                             textTransform: 'uppercase',
                                         }}
                                     >
@@ -272,7 +272,7 @@ export default function LandingPage() {
                                     style={{
                                         fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                         fontSize: '0.78rem',
-                                        color: 'rgba(255,255,255,0.45)',
+                                        color: 'rgba(250, 250, 250, 0.45)',
                                         letterSpacing: '0.22em',
                                         textTransform: 'uppercase',
                                         marginTop: '3px',
@@ -285,9 +285,9 @@ export default function LandingPage() {
                                 style={{
                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                     fontSize: '0.72rem',
-                                    color: '#66CC66',
-                                    background: 'rgba(102,204,102,0.06)',
-                                    border: '1px solid rgba(102,204,102,0.3)',
+                                    color: '#00ed00ff',
+                                    background: 'rgba(0, 0, 0, 0.06)',
+                                    border: '1px solid rgba(124, 204, 102, 0.3)',
                                     padding: '4px 12px',
                                     letterSpacing: '0.2em',
                                     textTransform: 'uppercase',
@@ -328,7 +328,7 @@ export default function LandingPage() {
                                                 style={{
                                                     fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                                     fontSize: '0.68rem',
-                                                    color: 'rgba(255,255,255,0.4)',
+                                                    color: 'rgba(255, 255, 255, 0.4)',
                                                     letterSpacing: '0.3em',
                                                     textTransform: 'uppercase',
                                                     display: 'block',
@@ -340,7 +340,7 @@ export default function LandingPage() {
                                                 style={{
                                                     fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
                                                     fontSize: 'clamp(1.15rem, 2vw, 1.35rem)',
-                                                    color: '#fff',
+                                                    color: '#a1037fff',
                                                     letterSpacing: '0.08em',
                                                     textTransform: 'uppercase',
                                                 }}
@@ -475,8 +475,8 @@ export default function LandingPage() {
                                 <span
                                     style={{
                                         fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
-                                        fontSize: '0.72rem',
-                                        color: 'rgba(255,255,255,0.5)',
+                                        fontSize: '1rem',
+                                        color: 'rgba(243, 243, 243, 0.5)',
                                         letterSpacing: '0.2em',
                                         textTransform: 'uppercase',
                                     }}
@@ -501,7 +501,7 @@ export default function LandingPage() {
                                         style={{
                                             fontFamily: 'ChaletComprime1960,"Barlow Condensed",sans-serif',
                                             fontSize: '0.72rem',
-                                            color: 'rgba(255,255,255,0.8)',
+                                            color: 'rgba(255, 255, 255, 0.8)',
                                             letterSpacing: '0.3em',
                                             textTransform: 'uppercase',
                                             fontWeight: 700,
@@ -542,7 +542,7 @@ export default function LandingPage() {
                                                     style={{
                                                         fontFamily: 'ChaletLondon1960,"Bebas Neue",Montserrat,sans-serif',
                                                         fontSize: '0.9rem',
-                                                        color: '#fff',
+                                                        color: '#f5efefff',
                                                         letterSpacing: '0.08em',
                                                         textTransform: 'uppercase',
                                                     }}

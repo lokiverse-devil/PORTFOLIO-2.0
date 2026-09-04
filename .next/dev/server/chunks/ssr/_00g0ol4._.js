@@ -88,6 +88,7 @@ const LandingPage = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_mod
 function Home() {
     const [phase, setPhase] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('COLD_BOOT');
     const [resultType, setResultType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [lives, setLives] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(2);
     const soundsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         let isMounted = true;
@@ -117,6 +118,12 @@ function Home() {
                     src: [
                         '/sounds/mission_failed.mp3'
                     ],
+                    volume: 0.5
+                }),
+                laugh: new Howl({
+                    src: [
+                        '/sounds/laugh.mp3'
+                    ],
                     volume: 1.0
                 })
             };
@@ -137,9 +144,21 @@ function Home() {
     const handleDecisionResult = (type)=>{
         setResultType(type);
         if (type.startsWith('passed')) {
+            if (type === 'passed-gained-life') {
+                setLives(2);
+            }
             setPhase('RESULT_PASS');
-        } else {
-            setPhase(type === 'failed-denied' ? 'RESULT_FAIL_Q1' : 'RESULT_FAIL_Q2');
+        } else if (type === 'failed-denied') {
+            setPhase('RESULT_FAIL_Q1');
+        } else if (type === 'failed-life-lost') {
+            // Deduct 1 life: lives drop from 2 -> 1
+            setLives(1);
+            setPhase('RESULT_FAIL_Q2');
+        } else if (type === 'failed-robot') {
+            setPhase('RESULT_FAIL_Q3');
+        } else if (type === 'failed-debarred') {
+            setLives(0);
+            setPhase('RESULT_DEBARRED');
         }
     };
     const handleResultComplete = ()=>{
@@ -148,7 +167,14 @@ function Home() {
         } else if (phase === 'RESULT_FAIL_Q1') {
             setPhase('Q2');
         } else if (phase === 'RESULT_FAIL_Q2') {
-            setPhase('LOADING');
+            // Secondary Protocol begins with Question 3
+            setPhase('Q3');
+        } else if (phase === 'RESULT_FAIL_Q3') {
+            setPhase('Q4');
+        } else if (phase === 'RESULT_DEBARRED') {
+            try {
+                window.location.href = 'https://www.youtube.com/watch?v=2yJgwwDcgV8&list=RD2yJgwwDcgV8&start_radio=1';
+            } catch (_) {}
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -164,14 +190,14 @@ function Home() {
                 className: "noise-overlay"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 75,
+                lineNumber: 104,
                 columnNumber: 13
             }, this),
             phase === 'COLD_BOOT' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ColdBoot, {
                 onComplete: ()=>setPhase('STARS')
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 78,
+                lineNumber: 107,
                 columnNumber: 17
             }, this),
             phase === 'STARS' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(WantedStars, {
@@ -179,14 +205,14 @@ function Home() {
                 onComplete: ()=>setPhase('CITY')
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 82,
+                lineNumber: 111,
                 columnNumber: 17
             }, this),
             phase === 'CITY' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(CityReveal, {
                 onComplete: ()=>setPhase('WARNING')
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 89,
+                lineNumber: 118,
                 columnNumber: 17
             }, this),
             phase === 'WARNING' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(WarningScreen, {
@@ -194,7 +220,7 @@ function Home() {
                 onComplete: ()=>setPhase('LOADING')
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 95,
+                lineNumber: 124,
                 columnNumber: 17
             }, this),
             phase === 'LOADING' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(LoadingFlow, {
@@ -202,45 +228,68 @@ function Home() {
                 onComplete: ()=>setPhase('DECISION')
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 102,
+                lineNumber: 131,
                 columnNumber: 17
             }, this),
             phase === 'DECISION' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DecisionPhase, {
                 question: 1,
+                lives: lives,
                 sounds: soundsRef.current,
                 onResult: handleDecisionResult
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 109,
+                lineNumber: 138,
                 columnNumber: 17
             }, this),
             phase === 'Q2' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DecisionPhase, {
                 question: 2,
+                lives: lives,
                 sounds: soundsRef.current,
                 onResult: handleDecisionResult
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 117,
+                lineNumber: 147,
+                columnNumber: 17
+            }, this),
+            phase === 'Q3' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DecisionPhase, {
+                question: 3,
+                lives: lives,
+                sounds: soundsRef.current,
+                onResult: handleDecisionResult
+            }, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 156,
+                columnNumber: 17
+            }, this),
+            phase === 'Q4' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DecisionPhase, {
+                question: 4,
+                lives: lives,
+                sounds: soundsRef.current,
+                onResult: handleDecisionResult
+            }, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 165,
                 columnNumber: 17
             }, this),
             phase.startsWith('RESULT') && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(MissionResult, {
                 type: resultType,
+                lives: lives,
                 sounds: soundsRef.current,
                 onComplete: handleResultComplete
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 125,
+                lineNumber: 174,
                 columnNumber: 17
             }, this),
             phase === 'LANDING' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(LandingPage, {}, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 132,
+                lineNumber: 182,
                 columnNumber: 37
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 66,
+        lineNumber: 95,
         columnNumber: 9
     }, this);
 }

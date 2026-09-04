@@ -32,7 +32,7 @@ export const CHARACTER_STATS: CharacterStat[] = [
         ],
         projectProof:
             'Built complex Next.js, IoT, and AI agent architectures with rapid turnaround.',
-        color: '#ffffff',
+        color: '#b42222ff',
     },
     {
         id: 'programming',
@@ -51,7 +51,7 @@ export const CHARACTER_STATS: CharacterStat[] = [
         ],
         projectProof:
             'Developed core systems, academic algorithms, and backend utilities during Diploma and B.Tech.',
-        color: '#cbd5e1',
+        color: '#094690ff',
     },
     {
         id: 'fullstack',
@@ -64,7 +64,7 @@ export const CHARACTER_STATS: CharacterStat[] = [
             'Building fast, responsive web applications with React, Next.js, and TypeScript that feel smooth, modern, and enjoyable to use.',
         skillsList: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'WebSockets', 'REST APIs'],
         projectProof:
-            'Created VibeChat (real-time chat) and HTRACX (hostel management portal).',
+            'Created VibeChat (real-time chat), HTRACX (hostel management portal) and AIMS (Academic Infrastructure and management system).',
         color: '#66CC66',
     },
     {
@@ -79,7 +79,7 @@ export const CHARACTER_STATS: CharacterStat[] = [
         skillsList: ['PostgreSQL', 'SQL', 'Supabase', 'Database Normalization', 'Indexing'],
         projectProof:
             'Architected multi-table relational databases and automated integrity rules for AIMS and HTRACX.',
-        color: '#94a3b8',
+        color: '#a59805ff',
     },
     {
         id: 'iot',
@@ -99,7 +99,7 @@ export const CHARACTER_STATS: CharacterStat[] = [
         ],
         projectProof:
             'Built SmartClass X to automate classroom lights, fans, and attendance tracking.',
-        color: '#a1a1aa',
+        color: '#05059bff',
     },
     {
         id: 'ai_mcp',
@@ -119,14 +119,14 @@ export const CHARACTER_STATS: CharacterStat[] = [
         ],
         projectProof:
             'Implemented custom MCP servers and autonomous agent tool workflows for developer tools.',
-        color: '#e2e8f0',
+        color: '#78067cff',
     },
     {
         id: 'leadership',
         name: 'LEADERSHIP & MANAGEMENT',
         gameAlias: 'DRIVING // TEAM LEAD',
-        level: 92,
-        levelStr: '92%',
+        level: 99,
+        levelStr: '99%',
         category: 'MANAGEMENT',
         summary:
             'Leading development teams, planning sprints, coordinating development, and presenting clear working prototypes to audiences.',
@@ -268,7 +268,7 @@ export default function CharacterSection() {
                                 textTransform: 'uppercase',
                             }}
                         >
-                            CHARACTER DOSSIER // SKILLS & CAPABILITIES
+                            SKILLS & CAPABILITIES
                         </h3>
                     </div>
                     <p

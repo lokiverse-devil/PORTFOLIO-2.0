@@ -14,7 +14,7 @@ var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
-function DecisionPhase({ question = 1, onResult, sounds }) {
+function DecisionPhase({ question = 1, lives = 2, onResult, sounds }) {
     _s();
     const qRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const buttonsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])([]);
@@ -59,7 +59,8 @@ function DecisionPhase({ question = 1, onResult, sounds }) {
             })["DecisionPhase.useEffect"];
         }
     }["DecisionPhase.useEffect"], [
-        sounds
+        sounds,
+        question
     ]);
     const handleAnswer = (answer, e)=>{
         const btn = e.currentTarget;
@@ -76,8 +77,12 @@ function DecisionPhase({ question = 1, onResult, sounds }) {
                     if (("TURBOPACK compile-time value", "object") !== 'undefined' && window.localStorage) {
                         if (question === 1) {
                             localStorage.setItem('programmerAnswer', answer);
-                        } else {
+                        } else if (question === 2) {
                             localStorage.setItem('profileInterest', answer);
+                        } else if (question === 3) {
+                            localStorage.setItem('robotAnswer', answer);
+                        } else if (question === 4) {
+                            localStorage.setItem('portfolioVisitAnswer', answer);
                         }
                     }
                 } catch (err) {
@@ -86,14 +91,26 @@ function DecisionPhase({ question = 1, onResult, sounds }) {
                 if (question === 1) {
                     const res = answer === 'yes' ? 'passed-access' : 'failed-denied';
                     onResult(res);
-                } else {
-                    const res = answer === 'yes' ? 'passed-portfolio' : 'failed-redirect';
+                } else if (question === 2) {
+                    // If both answered NO, deduct 1 life and initiate secondary protocol
+                    const res = answer === 'yes' ? 'passed-portfolio' : 'failed-life-lost';
+                    onResult(res);
+                } else if (question === 3) {
+                    // Q3: "are you a robot"
+                    // If YES -> access denied (failed-robot -> proceeds to Q4)
+                    // If NO -> mission passed (passed-robot -> landing)
+                    const res = answer === 'no' ? 'passed-robot' : 'failed-robot';
+                    onResult(res);
+                } else if (question === 4) {
+                    // Q4: "You really dont want to visit the portfolio...."
+                    // If NO -> mission passed gained life (+1 life -> landing)
+                    // If YES -> failed you are getting debared -> countdown redirect to Nyan Cat
+                    const res = answer === 'no' ? 'passed-gained-life' : 'failed-debarred';
                     onResult(res);
                 }
             }
         });
     };
-    const isQ1 = question === 1;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         style: {
             position: 'fixed',
@@ -111,81 +128,250 @@ function DecisionPhase({ question = 1, onResult, sounds }) {
                 className: "heavy-vignette"
             }, void 0, false, {
                 fileName: "[project]/components/DecisionPhase.tsx",
-                lineNumber: 91,
+                lineNumber: 106,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 ref: qRef,
                 style: {
-                    background: 'rgba(8, 8, 10, 0.95)',
+                    background: 'rgba(8, 8, 10, 0.96)',
                     backdropFilter: 'blur(24px)',
                     WebkitBackdropFilter: 'blur(24px)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    padding: '48px 56px',
+                    border: lives === 1 ? '1px solid rgba(239, 68, 68, 0.35)' : '1px solid rgba(255, 255, 255, 0.12)',
+                    padding: '38px 50px 48px 50px',
                     textAlign: 'center',
-                    maxWidth: '640px',
+                    maxWidth: '680px',
                     width: '92%',
-                    boxShadow: '0 40px 120px rgba(0, 0, 0, 0.98), 0 0 1px rgba(255, 255, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+                    boxShadow: lives === 1 ? '0 40px 120px rgba(0, 0, 0, 0.98), 0 0 35px rgba(239, 68, 68, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08)' : '0 40px 120px rgba(0, 0, 0, 0.98), 0 0 1px rgba(255, 255, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    zIndex: 110
+                    zIndex: 110,
+                    transition: 'border 0.3s ease, box-shadow 0.3s ease'
                 },
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
-                            fontFamily: 'Pricedown,ChaletComprime1960, "Barlow Condensed", sans-serif',
-                            fontSize: '1rem',
-                            letterSpacing: '0.35em',
-                            color: 'rgba(236, 87, 87, 0.7)',
-                            textTransform: 'uppercase',
-                            marginBottom: '18px'
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            width: '100%',
+                            paddingBottom: '16px',
+                            marginBottom: '26px',
+                            borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
                         },
                         children: [
-                            "QUESTION 0",
-                            question,
-                            " // 02"
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            display: 'inline-block',
+                                            width: '8px',
+                                            height: '8px',
+                                            borderRadius: '50%',
+                                            backgroundColor: lives === 1 ? '#ef4444' : '#22c55e',
+                                            boxShadow: lives === 1 ? '0 0 10px #ef4444' : '0 0 10px #22c55e'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/DecisionPhase.tsx",
+                                        lineNumber: 147,
+                                        columnNumber: 25
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            fontFamily: 'Pricedown, ChaletComprime1960, "Barlow Condensed", sans-serif',
+                                            fontSize: '0.82rem',
+                                            letterSpacing: '0.22em',
+                                            color: 'rgba(255, 255, 255, 0.65)',
+                                            textTransform: 'uppercase'
+                                        },
+                                        children: question <= 2 ? 'ROUND 01 // INITIAL PROTOCOL' : 'ROUND 02 // SECONDARY VERIFICATION'
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/DecisionPhase.tsx",
+                                        lineNumber: 157,
+                                        columnNumber: 25
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/DecisionPhase.tsx",
+                                lineNumber: 146,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            fontFamily: 'ChaletComprime1960, "Barlow Condensed", sans-serif',
+                                            fontSize: '0.78rem',
+                                            letterSpacing: '0.2em',
+                                            color: lives === 1 ? '#f87171' : 'rgba(255, 255, 255, 0.6)',
+                                            textTransform: 'uppercase'
+                                        },
+                                        children: lives === 1 ? 'CRITICAL LIVES:' : 'LIVES:'
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/DecisionPhase.tsx",
+                                        lineNumber: 172,
+                                        columnNumber: 25
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            display: 'flex',
+                                            gap: '6px',
+                                            alignItems: 'center'
+                                        },
+                                        children: [
+                                            1,
+                                            2
+                                        ].map((i)=>{
+                                            const active = i <= lives;
+                                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                style: {
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    width: '24px',
+                                                    height: '24px',
+                                                    borderRadius: '4px',
+                                                    background: active ? 'rgba(239, 68, 68, 0.22)' : 'rgba(255, 255, 255, 0.05)',
+                                                    border: active ? '1px solid #ef4444' : '1px solid rgba(255, 255, 255, 0.15)',
+                                                    boxShadow: active ? '0 0 10px rgba(239, 68, 68, 0.5)' : 'none',
+                                                    color: active ? '#ef4444' : 'rgba(255, 255, 255, 0.25)',
+                                                    fontSize: '13px',
+                                                    lineHeight: 1,
+                                                    fontWeight: 'bold',
+                                                    transition: 'all 0.3s ease'
+                                                },
+                                                children: active ? '♥' : '✕'
+                                            }, i, false, {
+                                                fileName: "[project]/components/DecisionPhase.tsx",
+                                                lineNumber: 187,
+                                                columnNumber: 37
+                                            }, this);
+                                        })
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/DecisionPhase.tsx",
+                                        lineNumber: 183,
+                                        columnNumber: 25
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            fontFamily: 'Pricedown, monospace',
+                                            fontSize: '0.95rem',
+                                            color: lives === 1 ? '#6e0404ff' : '#ffffff',
+                                            letterSpacing: '0.05em'
+                                        },
+                                        children: [
+                                            "[",
+                                            lives,
+                                            "/2]"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/DecisionPhase.tsx",
+                                        lineNumber: 215,
+                                        columnNumber: 25
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/DecisionPhase.tsx",
+                                lineNumber: 171,
+                                columnNumber: 21
+                            }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/DecisionPhase.tsx",
-                        lineNumber: 113,
+                        lineNumber: 135,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        style: {
+                            fontFamily: 'Pricedown, ChaletComprime1960, "Barlow Condensed", sans-serif',
+                            fontSize: '0.95rem',
+                            letterSpacing: '0.35em',
+                            color: lives === 1 ? '#f87171' : 'rgba(200, 200, 200, 0.7)',
+                            textTransform: 'uppercase',
+                            marginBottom: '16px'
+                        },
+                        children: [
+                            question === 1 && 'QUESTION 01 // 02',
+                            question === 2 && 'QUESTION 02 // 02',
+                            question === 3 && 'RECOVERY QUESTION 01 // 02',
+                            question === 4 && 'FINAL QUESTION 02 // 02 — LAST CHANCE'
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/DecisionPhase.tsx",
+                        lineNumber: 228,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                         style: {
                             fontFamily: 'ChaletLondon1960, "Bebas Neue", Montserrat, sans-serif',
-                            fontSize: 'clamp(2rem, 4.8vw, 3rem)',
+                            fontSize: question === 4 ? 'clamp(1.7rem, 3.8vw, 2.45rem)' : 'clamp(2rem, 4.8vw, 3rem)',
                             letterSpacing: '0.06em',
                             textTransform: 'uppercase',
                             color: '#ffffff',
-                            marginBottom: '44px',
-                            lineHeight: 1.08,
+                            marginBottom: '42px',
+                            lineHeight: 1.1,
                             textShadow: '0 4px 20px rgba(0, 0, 0, 0.9)'
                         },
-                        children: isQ1 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
-                            children: [
-                                "ARE YOU A",
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
-                                    fileName: "[project]/components/DecisionPhase.tsx",
-                                    lineNumber: 140,
-                                    columnNumber: 38
-                                }, this),
-                                "PROGRAMMER?"
-                            ]
-                        }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
-                            children: [
-                                "ARE YOU INTERESTED",
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
-                                    fileName: "[project]/components/DecisionPhase.tsx",
-                                    lineNumber: 145,
-                                    columnNumber: 47
-                                }, this),
-                                "IN MY PROFILE?"
-                            ]
-                        }, void 0, true)
-                    }, void 0, false, {
+                        children: [
+                            question === 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                children: [
+                                    "ARE YOU A",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                        fileName: "[project]/components/DecisionPhase.tsx",
+                                        lineNumber: 261,
+                                        columnNumber: 38
+                                    }, this),
+                                    "PROGRAMMER?"
+                                ]
+                            }, void 0, true),
+                            question === 2 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                children: [
+                                    "ARE YOU INTERESTED",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                        fileName: "[project]/components/DecisionPhase.tsx",
+                                        lineNumber: 267,
+                                        columnNumber: 47
+                                    }, this),
+                                    "IN MY PROFILE?"
+                                ]
+                            }, void 0, true),
+                            question === 3 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                children: [
+                                    "ARE YOU A",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                        fileName: "[project]/components/DecisionPhase.tsx",
+                                        lineNumber: 273,
+                                        columnNumber: 38
+                                    }, this),
+                                    "ROBOT?"
+                                ]
+                            }, void 0, true),
+                            question === 4 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                children: [
+                                    "YOU REALLY DON'T WANT",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                        fileName: "[project]/components/DecisionPhase.tsx",
+                                        lineNumber: 279,
+                                        columnNumber: 55
+                                    }, this),
+                                    "TO VISIT THE PORTFOLIO?"
+                                ]
+                            }, void 0, true)
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/components/DecisionPhase.tsx",
-                        lineNumber: 126,
+                        lineNumber: 244,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -228,7 +414,7 @@ function DecisionPhase({ question = 1, onResult, sounds }) {
                                 children: "[ YES ]"
                             }, void 0, false, {
                                 fileName: "[project]/components/DecisionPhase.tsx",
-                                lineNumber: 152,
+                                lineNumber: 286,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -264,25 +450,25 @@ function DecisionPhase({ question = 1, onResult, sounds }) {
                                 children: "[ NO ]"
                             }, void 0, false, {
                                 fileName: "[project]/components/DecisionPhase.tsx",
-                                lineNumber: 185,
+                                lineNumber: 319,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/DecisionPhase.tsx",
-                        lineNumber: 151,
+                        lineNumber: 285,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/DecisionPhase.tsx",
-                lineNumber: 94,
+                lineNumber: 109,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/DecisionPhase.tsx",
-        lineNumber: 78,
+        lineNumber: 93,
         columnNumber: 9
     }, this);
 }
