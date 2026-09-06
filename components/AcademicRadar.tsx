@@ -39,35 +39,35 @@ const WAYPOINTS: Waypoint[] = [
     lng: '79.6593° E',
     svgX: 310,
     svgY: 68,
-    year: '2019',
+    year: '2010-2015',
   },
   {
-    id: 2,
+    id: 4,
     code: 'WP-02',
     name: 'AURUM THE GLOBAL SCHOOL',
     city: 'Haldwani',
     state: 'Uttarakhand',
     level: 'Higher Secondary',
     status: 'COMPLETED',
-    statusLabel: 'COMPLETED // FIRST DIVISION',
+    statusLabel: 'COMPLETED ',
     description:
       'Advanced higher-secondary curriculum with a global outlook. Strengthened Science-PCM track while developing critical thinking and extracurricular presence.',
-    tags: ['HIGHER SECONDARY', 'PCM STREAM', 'GLOBAL'],
+    tags: ['HIGHER SECONDARY'],
     lat: '29.2183° N',
     lng: '79.5130° E',
     svgX: 268,
     svgY: 136,
-    year: '2021',
+    year: '2016-2023',
   },
   {
-    id: 3,
+    id: 18,
     code: 'WP-03',
     name: 'GOVT POLYTECHNIC KASHIPUR',
     city: 'Kashipur',
     state: 'Uttarakhand',
     level: 'Diploma in Engineering',
     status: 'COMPLETED',
-    statusLabel: 'COMPLETED // FIRST CLASS',
+    statusLabel: 'COMPLETED',
     description:
       'Government-run polytechnic delivering hands-on technical education. Earned a Diploma in Engineering, bridging theory with practical lab exposure in core engineering domains.',
     tags: ['DIPLOMA', 'ENGINEERING', 'POLYTECHNIC'],
@@ -75,17 +75,17 @@ const WAYPOINTS: Waypoint[] = [
     lng: '78.9618° E',
     svgX: 158,
     svgY: 148,
-    year: '2023',
+    year: '2023-2026',
   },
   {
-    id: 4,
+    id: 7,
     code: 'WP-04',
-    name: 'VMSBTU FOT DEHRADUN',
+    name: 'VMSBUTU FOT DEHRADUN',
     city: 'Dehradun',
     state: 'Uttarakhand',
     level: 'B.Tech / Undergraduate Degree',
     status: 'ACTIVE',
-    statusLabel: 'ACTIVE // IN PROGRESS',
+    statusLabel: 'ACTIVE | IN PROGRESS',
     description:
       'Currently pursuing B.Tech (Undergraduate) at Veer Madho Singh Bhandari Uttarakhand Technical University Faculty of Technology, Dehradun — the active operational zone of the academic journey.',
     tags: ['UNDERGRADUATE', 'B.TECH', 'ACTIVE OPS'],
@@ -456,11 +456,11 @@ export default function AcademicRadar() {
 
                 // Node color: bright green for active selection / current waypoint, clean white/slate for others
                 const nodeFill = isActive
-                  ? '#00ff66'
+                  ? '#55ff00ff'
                   : isHover
                   ? '#ffffff'
                   : isWpActiveStatus
-                  ? '#5af019'
+                  ? '#f01919ff'
                   : '#cbd5e1'
 
                 return (
@@ -581,7 +581,7 @@ export default function AcademicRadar() {
                 LAT: <span style={{ color: '#fff', fontWeight: 700 }}>{active.lat}</span> // LONG:{' '}
                 <span style={{ color: '#fff', fontWeight: 700 }}>{active.lng}</span>
               </div>
-              <div style={{ color: '#00ff66', fontWeight: 600 }}>
+              <div style={{ color: '#ff0000ff', fontWeight: 600 }}>
                 SECTOR: UKD-0{active.id}
               </div>
             </div>
@@ -595,7 +595,7 @@ export default function AcademicRadar() {
             style={{
               background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
               border: '1px solid rgba(255,255,255,0.1)',
-              borderLeft: `3px solid ${active.status === 'ACTIVE' ? '#00ff66' : '#cbd5e1'}`,
+              borderLeft: `3px solid ${active.status === 'ACTIVE' ? '#ff0000ff' : '#cbd5e1'}`,
               padding: '18px 20px',
               transition: 'border-left-color 0.3s ease',
             }}
@@ -794,7 +794,7 @@ export default function AcademicRadar() {
                       letterSpacing: '0.12em',
                       textTransform: 'uppercase',
                       textAlign: 'center',
-                      background: isSelected ? '#00ff66' : 'rgba(255,255,255,0.04)',
+                      background: isSelected ? '#77ff00ff' : 'rgba(255,255,255,0.04)',
                       color: isSelected ? '#000000' : 'rgba(255,255,255,0.5)',
                       border: `1px solid ${isSelected ? '#00ff66' : 'rgba(255,255,255,0.1)'}`,
                       cursor: 'pointer',

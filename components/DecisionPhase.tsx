@@ -276,8 +276,8 @@ export default function DecisionPhase({ question = 1, lives = 2, onResult, sound
                     )}
                     {question === 4 && (
                         <>
-                            YOU REALLY DON&apos;T WANT<br />
-                            TO VISIT THE PORTFOLIO?
+                            Are you sure you don't want<br />
+                            to visit the portfolio?
                         </>
                     )}
                 </h2>
