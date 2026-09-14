@@ -243,14 +243,15 @@ function RadarSweep() {
 _c2 = RadarSweep;
 function AcademicRadar() {
     _s();
-    const [activeId, setActiveId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(4);
+    const defaultWaypoint = WAYPOINTS.find((w)=>w.status === 'ACTIVE') ?? WAYPOINTS[3];
+    const [activeId, setActiveId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(defaultWaypoint.id);
     const [hoveredId, setHoveredId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [scanLine, setScanLine] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const [blinkOn, setBlinkOn] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
     const [bootText, setBootText] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('INITIALISING RADAR…');
     const animRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const lastTickRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(0);
-    const active = WAYPOINTS.find((w)=>w.id === activeId) ?? WAYPOINTS[3];
+    const active = WAYPOINTS.find((w)=>w.id === activeId) ?? defaultWaypoint;
     // Boot text sequence
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AcademicRadar.useEffect": ()=>{
@@ -360,10 +361,13 @@ function AcademicRadar() {
           0%, 100% { box-shadow: 0 0 10px rgba(0,255,102,0.25), inset 0 0 8px rgba(0,255,102,0.08); }
           50%      { box-shadow: 0 0 20px rgba(0,255,102,0.45), inset 0 0 14px rgba(0,255,102,0.18); }
         }
+        svg *:focus, svg *:focus-visible, g:focus, g:focus-visible {
+          outline: none !important;
+        }
       `
             }, void 0, false, {
                 fileName: "[project]/components/AcademicRadar.tsx",
-                lineNumber: 231,
+                lineNumber: 232,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -389,7 +393,7 @@ function AcademicRadar() {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 254,
+                                                lineNumber: 258,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -403,13 +407,13 @@ function AcademicRadar() {
                                                 children: "ACADEMIC TERRITORY RADAR // UTTARAKHAND SECTOR"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 262,
+                                                lineNumber: 266,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 253,
+                                        lineNumber: 257,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -424,13 +428,13 @@ function AcademicRadar() {
                                         children: "ALMORA ➔ HALDWANI ➔ KASHIPUR ➔ DEHRADUN // SELECT A WAYPOINT FOR INTEL"
                                     }, void 0, false, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 274,
+                                        lineNumber: 278,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                lineNumber: 252,
+                                lineNumber: 256,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -444,7 +448,7 @@ function AcademicRadar() {
                                         style: {
                                             width: '6px',
                                             height: '6px',
-                                            background: '#00ff66',
+                                            background: '#1aff00ff',
                                             borderRadius: '50%',
                                             boxShadow: '0 0 8px #00ff66',
                                             opacity: blinkOn ? 1 : 0.2,
@@ -452,7 +456,7 @@ function AcademicRadar() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 289,
+                                        lineNumber: 293,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -470,19 +474,19 @@ function AcademicRadar() {
                                         children: bootText
                                     }, void 0, false, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 300,
+                                        lineNumber: 304,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                lineNumber: 288,
+                                lineNumber: 292,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/AcademicRadar.tsx",
-                        lineNumber: 248,
+                        lineNumber: 252,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -511,7 +515,7 @@ function AcademicRadar() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 336,
+                                        lineNumber: 340,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -525,7 +529,7 @@ function AcademicRadar() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 348,
+                                        lineNumber: 352,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -542,12 +546,12 @@ function AcademicRadar() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 360,
+                                        lineNumber: 364,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(CRTOverlay, {}, void 0, false, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 374,
+                                        lineNumber: 378,
                                         columnNumber: 13
                                     }, this),
                                     corners.map((c, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -571,7 +575,7 @@ function AcademicRadar() {
                                             }
                                         }, i, false, {
                                             fileName: "[project]/components/AcademicRadar.tsx",
-                                            lineNumber: 378,
+                                            lineNumber: 382,
                                             columnNumber: 15
                                         }, this)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -589,7 +593,7 @@ function AcademicRadar() {
                                         children: "GPS RADAR // UTTARAKHAND GRID"
                                     }, void 0, false, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 402,
+                                        lineNumber: 406,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -605,12 +609,12 @@ function AcademicRadar() {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(RadarRings, {}, void 0, false, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 424,
+                                                lineNumber: 428,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(RadarSweep, {}, void 0, false, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 425,
+                                                lineNumber: 429,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("polyline", {
@@ -621,7 +625,7 @@ function AcademicRadar() {
                                                 strokeDasharray: "6 4"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 428,
+                                                lineNumber: 432,
                                                 columnNumber: 15
                                             }, this),
                                             WAYPOINTS.slice(0, -1).map((wp, i)=>{
@@ -636,12 +640,12 @@ function AcademicRadar() {
                                                         fill: "rgba(0,255,102,0.6)"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 444,
+                                                        lineNumber: 448,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, i, false, {
                                                     fileName: "[project]/components/AcademicRadar.tsx",
-                                                    lineNumber: 443,
+                                                    lineNumber: 447,
                                                     columnNumber: 19
                                                 }, this);
                                             }),
@@ -651,11 +655,12 @@ function AcademicRadar() {
                                                 const isWpActiveStatus = wp.status === 'ACTIVE';
                                                 const lit = isActive || isHover;
                                                 const labelY = wp.svgY > 170 ? wp.svgY + 20 : wp.svgY - 20;
-                                                // Node color: bright green for active selection / current waypoint, clean white/slate for others
-                                                const nodeFill = isActive ? '#55ff00ff' : isHover ? '#ffffff' : isWpActiveStatus ? '#f01919ff' : '#cbd5e1';
+                                                // Node color: bright green for active / hover / current waypoint, clean tactical cyan/slate for others
+                                                const nodeFill = isActive ? '#00ff66' : isHover ? '#00ff66' : isWpActiveStatus ? '#00ff66' : '#64748b';
                                                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("g", {
                                                     style: {
-                                                        cursor: 'pointer'
+                                                        cursor: 'pointer',
+                                                        outline: 'none'
                                                     },
                                                     onClick: ()=>setActiveId(wp.id),
                                                     onMouseEnter: ()=>setHoveredId(wp.id),
@@ -681,7 +686,7 @@ function AcademicRadar() {
                                                                 }
                                                             }, di, false, {
                                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                                lineNumber: 480,
+                                                                lineNumber: 484,
                                                                 columnNumber: 23
                                                             }, this)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
@@ -690,15 +695,15 @@ function AcademicRadar() {
                                                             width: "12",
                                                             height: "12",
                                                             fill: nodeFill,
-                                                            stroke: isActive ? '#00ff66' : 'rgba(0,0,0,0.8)',
+                                                            stroke: isActive || isHover ? '#00ff66' : 'rgba(0,0,0,0.8)',
                                                             strokeWidth: 1.5,
                                                             style: {
-                                                                filter: isActive ? 'drop-shadow(0 0 6px #00ff66) drop-shadow(0 0 12px rgba(0,255,102,0.5))' : isHover ? 'drop-shadow(0 0 6px #ffffff)' : 'drop-shadow(0 0 3px rgba(0,0,0,0.8))',
+                                                                filter: isActive ? 'drop-shadow(0 0 6px #00ff66) drop-shadow(0 0 12px rgba(0,255,102,0.5))' : isHover ? 'drop-shadow(0 0 8px rgba(0,255,102,0.8))' : 'drop-shadow(0 0 3px rgba(0,0,0,0.8))',
                                                                 transition: 'all 0.2s'
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AcademicRadar.tsx",
-                                                            lineNumber: 496,
+                                                            lineNumber: 500,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
@@ -708,7 +713,7 @@ function AcademicRadar() {
                                                             fill: "#09090c"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AcademicRadar.tsx",
-                                                            lineNumber: 514,
+                                                            lineNumber: 518,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("rect", {
@@ -717,11 +722,11 @@ function AcademicRadar() {
                                                             width: "44",
                                                             height: "15",
                                                             fill: "#060608",
-                                                            stroke: isActive ? '#00ff66' : isHover ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.15)',
+                                                            stroke: isActive ? '#00ff66' : isHover ? 'rgba(0,255,102,0.6)' : 'rgba(255,255,255,0.15)',
                                                             strokeWidth: "0.8"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AcademicRadar.tsx",
-                                                            lineNumber: 517,
+                                                            lineNumber: 521,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("text", {
@@ -729,14 +734,14 @@ function AcademicRadar() {
                                                             y: labelY + 2.5,
                                                             textAnchor: "middle",
                                                             fontSize: "7",
-                                                            fill: isActive ? '#00ff66' : '#ffffff',
+                                                            fill: isActive || isHover ? '#00ff66' : '#ffffff',
                                                             fontFamily: "'Share Tech Mono', monospace",
                                                             letterSpacing: "1",
                                                             fontWeight: isActive ? '700' : '400',
                                                             children: wp.code
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AcademicRadar.tsx",
-                                                            lineNumber: 526,
+                                                            lineNumber: 530,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("text", {
@@ -750,7 +755,7 @@ function AcademicRadar() {
                                                             children: wp.city.toUpperCase()
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AcademicRadar.tsx",
-                                                            lineNumber: 540,
+                                                            lineNumber: 544,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("text", {
@@ -762,20 +767,20 @@ function AcademicRadar() {
                                                             children: wp.lat
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/AcademicRadar.tsx",
-                                                            lineNumber: 553,
+                                                            lineNumber: 557,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, wp.id, true, {
                                                     fileName: "[project]/components/AcademicRadar.tsx",
-                                                    lineNumber: 467,
+                                                    lineNumber: 471,
                                                     columnNumber: 19
                                                 }, this);
                                             })
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 419,
+                                        lineNumber: 423,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -801,7 +806,7 @@ function AcademicRadar() {
                                                         children: active.lat
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 581,
+                                                        lineNumber: 585,
                                                         columnNumber: 22
                                                     }, this),
                                                     " // LONG:",
@@ -814,13 +819,13 @@ function AcademicRadar() {
                                                         children: active.lng
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 582,
+                                                        lineNumber: 586,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 580,
+                                                lineNumber: 584,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -834,19 +839,19 @@ function AcademicRadar() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 584,
+                                                lineNumber: 588,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 568,
+                                        lineNumber: 572,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                lineNumber: 323,
+                                lineNumber: 327,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -854,7 +859,7 @@ function AcademicRadar() {
                                 style: {
                                     background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
                                     border: '1px solid rgba(255,255,255,0.1)',
-                                    borderLeft: `3px solid ${active.status === 'ACTIVE' ? '#ff0000ff' : '#cbd5e1'}`,
+                                    borderLeft: '3px solid #00ff66',
                                     padding: '18px 20px',
                                     transition: 'border-left-color 0.3s ease'
                                 },
@@ -880,13 +885,13 @@ function AcademicRadar() {
                                                             marginBottom: '6px'
                                                         },
                                                         children: [
-                                                            "[ WAYPOINT 0",
-                                                            active.id,
+                                                            "[ WAYPOINT ",
+                                                            active.code.replace('WP-', ''),
                                                             " OF 04 ]"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 606,
+                                                        lineNumber: 610,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
@@ -901,7 +906,7 @@ function AcademicRadar() {
                                                         children: active.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 620,
+                                                        lineNumber: 624,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -920,13 +925,13 @@ function AcademicRadar() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 632,
+                                                        lineNumber: 636,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 605,
+                                                lineNumber: 609,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -951,7 +956,7 @@ function AcademicRadar() {
                                                         children: active.year
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 648,
+                                                        lineNumber: 652,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -970,13 +975,13 @@ function AcademicRadar() {
                                                         children: active.statusLabel
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 662,
+                                                        lineNumber: 666,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 647,
+                                                lineNumber: 651,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -996,13 +1001,13 @@ function AcademicRadar() {
                                                         children: active.level
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 690,
+                                                        lineNumber: 694,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 681,
+                                                lineNumber: 685,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1019,7 +1024,7 @@ function AcademicRadar() {
                                                 children: active.description
                                             }, void 0, false, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 694,
+                                                lineNumber: 698,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1042,12 +1047,12 @@ function AcademicRadar() {
                                                         children: tag
                                                     }, tag, false, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 712,
+                                                        lineNumber: 716,
                                                         columnNumber: 19
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 710,
+                                                lineNumber: 714,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1087,7 +1092,7 @@ function AcademicRadar() {
                                                                 children: label
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                                lineNumber: 747,
+                                                                lineNumber: 751,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1100,24 +1105,24 @@ function AcademicRadar() {
                                                                 children: value
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                                lineNumber: 757,
+                                                                lineNumber: 761,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, label, true, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 746,
+                                                        lineNumber: 750,
                                                         columnNumber: 19
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 731,
+                                                lineNumber: 735,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 603,
+                                        lineNumber: 607,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1141,7 +1146,7 @@ function AcademicRadar() {
                                                     letterSpacing: '0.12em',
                                                     textTransform: 'uppercase',
                                                     textAlign: 'center',
-                                                    background: isSelected ? '#77ff00ff' : 'rgba(255,255,255,0.04)',
+                                                    background: isSelected ? '#00ff66' : 'rgba(255,255,255,0.04)',
                                                     color: isSelected ? '#000000' : 'rgba(255,255,255,0.5)',
                                                     border: `1px solid ${isSelected ? '#00ff66' : 'rgba(255,255,255,0.1)'}`,
                                                     cursor: 'pointer',
@@ -1152,8 +1157,7 @@ function AcademicRadar() {
                                                     position: 'relative'
                                                 },
                                                 children: [
-                                                    "0",
-                                                    wp.id,
+                                                    wp.code,
                                                     wp.status === 'ACTIVE' && !isSelected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         style: {
                                                             position: 'absolute',
@@ -1167,43 +1171,43 @@ function AcademicRadar() {
                                                         }
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                                        lineNumber: 810,
+                                                        lineNumber: 814,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, wp.id, true, {
                                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                                lineNumber: 786,
+                                                lineNumber: 790,
                                                 columnNumber: 19
                                             }, this);
                                         })
                                     }, void 0, false, {
                                         fileName: "[project]/components/AcademicRadar.tsx",
-                                        lineNumber: 773,
+                                        lineNumber: 777,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/AcademicRadar.tsx",
-                                lineNumber: 593,
+                                lineNumber: 597,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/AcademicRadar.tsx",
-                        lineNumber: 319,
+                        lineNumber: 323,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/AcademicRadar.tsx",
-                lineNumber: 246,
+                lineNumber: 250,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true);
 }
-_s(AcademicRadar, "fGGjkXhiMQYlQREvzt3tSZECGss=");
+_s(AcademicRadar, "0LRNH2lEF4bz8IpY1uXzjXKKROI=");
 _c3 = AcademicRadar;
 var _c, _c1, _c2, _c3;
 __turbopack_context__.k.register(_c, "CRTOverlay");
@@ -2117,7 +2121,7 @@ const USER_DATA = {
     bank: '₹40,000',
     email: 'ompandey2341@gmail.com',
     github: 'https://github.com/lokiverse-devil',
-    linkedin: 'https://linkedin.com/in/om-pandey-1b3b3b3b3',
+    linkedin: 'https://www.linkedin.com/in/om-pandey-87b057328/',
     projects: [
         {
             title: 'VibeChat',

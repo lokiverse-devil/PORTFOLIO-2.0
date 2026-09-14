@@ -39,7 +39,7 @@ const USER_DATA: UserData = {
     bank: '₹40,000',
     email: 'ompandey2341@gmail.com',
     github: 'https://github.com/lokiverse-devil',
-    linkedin: 'https://linkedin.com/in/om-pandey-1b3b3b3b3',
+    linkedin: 'https://www.linkedin.com/in/om-pandey-87b057328/',
     projects: [
         {
             title: 'VibeChat',

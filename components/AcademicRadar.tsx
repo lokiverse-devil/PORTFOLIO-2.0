@@ -168,7 +168,8 @@ function RadarSweep() {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function AcademicRadar() {
-  const [activeId, setActiveId] = useState<number>(4)
+  const defaultWaypoint = WAYPOINTS.find((w) => w.status === 'ACTIVE') ?? WAYPOINTS[3]
+  const [activeId, setActiveId] = useState<number>(defaultWaypoint.id)
   const [hoveredId, setHoveredId] = useState<number | null>(null)
   const [scanLine, setScanLine] = useState<number>(0)
   const [blinkOn, setBlinkOn] = useState<boolean>(true)
@@ -176,7 +177,7 @@ export default function AcademicRadar() {
   const animRef = useRef<number | null>(null)
   const lastTickRef = useRef<number>(0)
 
-  const active = WAYPOINTS.find((w) => w.id === activeId) ?? WAYPOINTS[3]
+  const active = WAYPOINTS.find((w) => w.id === activeId) ?? defaultWaypoint
 
   // Boot text sequence
   useEffect(() => {
@@ -241,6 +242,9 @@ export default function AcademicRadar() {
           0%, 100% { box-shadow: 0 0 10px rgba(0,255,102,0.25), inset 0 0 8px rgba(0,255,102,0.08); }
           50%      { box-shadow: 0 0 20px rgba(0,255,102,0.45), inset 0 0 14px rgba(0,255,102,0.18); }
         }
+        svg *:focus, svg *:focus-visible, g:focus, g:focus-visible {
+          outline: none !important;
+        }
       `}</style>
 
       <div className="flex flex-col gap-4 w-full">
@@ -290,7 +294,7 @@ export default function AcademicRadar() {
               style={{
                 width: '6px',
                 height: '6px',
-                background: '#00ff66',
+                background: '#1aff00ff',
                 borderRadius: '50%',
                 boxShadow: '0 0 8px #00ff66',
                 opacity: blinkOn ? 1 : 0.2,
@@ -454,19 +458,19 @@ export default function AcademicRadar() {
                 const lit = isActive || isHover
                 const labelY = wp.svgY > 170 ? wp.svgY + 20 : wp.svgY - 20
 
-                // Node color: bright green for active selection / current waypoint, clean white/slate for others
+                // Node color: bright green for active / hover / current waypoint, clean tactical cyan/slate for others
                 const nodeFill = isActive
-                  ? '#55ff00ff'
+                  ? '#00ff66'
                   : isHover
-                  ? '#ffffff'
+                  ? '#00ff66'
                   : isWpActiveStatus
-                  ? '#f01919ff'
-                  : '#cbd5e1'
+                  ? '#00ff66'
+                  : '#64748b'
 
                 return (
                   <g
                     key={wp.id}
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer', outline: 'none' }}
                     onClick={() => setActiveId(wp.id)}
                     onMouseEnter={() => setHoveredId(wp.id)}
                     onMouseLeave={() => setHoveredId(null)}
@@ -499,13 +503,13 @@ export default function AcademicRadar() {
                       width="12"
                       height="12"
                       fill={nodeFill}
-                      stroke={isActive ? '#00ff66' : 'rgba(0,0,0,0.8)'}
+                      stroke={isActive || isHover ? '#00ff66' : 'rgba(0,0,0,0.8)'}
                       strokeWidth={1.5}
                       style={{
                         filter: isActive
                           ? 'drop-shadow(0 0 6px #00ff66) drop-shadow(0 0 12px rgba(0,255,102,0.5))'
                           : isHover
-                          ? 'drop-shadow(0 0 6px #ffffff)'
+                          ? 'drop-shadow(0 0 8px rgba(0,255,102,0.8))'
                           : 'drop-shadow(0 0 3px rgba(0,0,0,0.8))',
                         transition: 'all 0.2s',
                       }}
@@ -520,7 +524,7 @@ export default function AcademicRadar() {
                       width="44"
                       height="15"
                       fill="#060608"
-                      stroke={isActive ? '#00ff66' : isHover ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.15)'}
+                      stroke={isActive ? '#00ff66' : isHover ? 'rgba(0,255,102,0.6)' : 'rgba(255,255,255,0.15)'}
                       strokeWidth="0.8"
                     />
                     <text
@@ -528,7 +532,7 @@ export default function AcademicRadar() {
                       y={labelY + 2.5}
                       textAnchor="middle"
                       fontSize="7"
-                      fill={isActive ? '#00ff66' : '#ffffff'}
+                      fill={isActive || isHover ? '#00ff66' : '#ffffff'}
                       fontFamily="'Share Tech Mono', monospace"
                       letterSpacing="1"
                       fontWeight={isActive ? '700' : '400'}
@@ -595,7 +599,7 @@ export default function AcademicRadar() {
             style={{
               background: 'linear-gradient(135deg, #09090c 0%, #060608 100%)',
               border: '1px solid rgba(255,255,255,0.1)',
-              borderLeft: `3px solid ${active.status === 'ACTIVE' ? '#ff0000ff' : '#cbd5e1'}`,
+              borderLeft: '3px solid #00ff66',
               padding: '18px 20px',
               transition: 'border-left-color 0.3s ease',
             }}
@@ -615,7 +619,7 @@ export default function AcademicRadar() {
                     marginBottom: '6px',
                   }}
                 >
-                  [ WAYPOINT 0{active.id} OF 04 ]
+                  [ WAYPOINT {active.code.replace('WP-', '')} OF 04 ]
                 </span>
                 <h4
                   style={{
@@ -794,7 +798,7 @@ export default function AcademicRadar() {
                       letterSpacing: '0.12em',
                       textTransform: 'uppercase',
                       textAlign: 'center',
-                      background: isSelected ? '#77ff00ff' : 'rgba(255,255,255,0.04)',
+                      background: isSelected ? '#00ff66' : 'rgba(255,255,255,0.04)',
                       color: isSelected ? '#000000' : 'rgba(255,255,255,0.5)',
                       border: `1px solid ${isSelected ? '#00ff66' : 'rgba(255,255,255,0.1)'}`,
                       cursor: 'pointer',
@@ -805,7 +809,7 @@ export default function AcademicRadar() {
                       position: 'relative',
                     }}
                   >
-                    0{wp.id}
+                    {wp.code}
                     {wp.status === 'ACTIVE' && !isSelected && (
                       <span
                         style={{
